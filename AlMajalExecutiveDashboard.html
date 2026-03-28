@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Al Majal Group – Executive Performance Dashboard</title>
 <script>
+var password = prompt("Enter Password:");
+if (password !== "almajal2026") {
+    document.write("Access Denied");
+    document.body.style.display = "none";
+}
+</script>
+<script>
 /* ═══════════════════════════════════════════════════════════════════════
    INLINE CHART ENGINE v3 — No CDN, full Chart.js-compatible API
    Supports: bar, line, doughnut, pie, horizontalBar, mixed bar+line
