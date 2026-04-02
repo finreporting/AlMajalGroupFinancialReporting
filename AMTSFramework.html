@@ -4,8 +4,8 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;color:#1e293b;display:flex;min-height:100vh;}
-#sidebar{width:225px;min-width:225px;background:#1B3A5C;display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;overflow-y:auto;z-index:100;box-shadow:3px 0 12px rgba(0,0,0,.18);transform:translateX(0);transition:transform .3s ease;}
-#sidebar.open{transform:translateX(0);}
+#sidebar{width:225px;min-width:225px;background:#1B3A5C;display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;overflow-y:auto;z-index:100;box-shadow:3px 0 12px rgba(0,0,0,.18);transform:translateX(-225px);transition:transform .3s ease;}
+#sidebar:hover,#sidebar.open{transform:translateX(0);}
 .logo-area{padding:14px 14px 12px;background:#0D1B2A;border-bottom:3px solid #3A8FC2;display:flex;align-items:center;gap:0;}
 .nav-group{padding:4px 0 2px;}
 .nav-group+.nav-group{border-top:1px solid rgba(255,255,255,.08);}
@@ -15,7 +15,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;color:#1e293b;di
 .nav-item:hover{background:rgba(255,255,255,.08);color:#fff;}
 .nav-item.active{background:rgba(58,143,194,.25);color:#fff;border-left-color:#3A8FC2;font-weight:600;}
 .nav-divider{height:1px;background:rgba(255,255,255,.1);margin:3px 14px;}
-#main{margin-left:225px;flex:1;display:flex;flex-direction:column;transition:margin-left .3s ease;}
+#main{margin-left:0;flex:1;display:flex;flex-direction:column;transition:margin-left .3s ease;}
 #topbar{background:#1B3A5C;color:#fff;padding:0 22px;height:50px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:0 2px 8px rgba(0,0,0,.15);}
 #pg-title{font-size:15px;font-weight:700;}
 .menu-btn{background:none;border:2px solid rgba(255,255,255,.4);border-radius:6px;color:#fff;padding:6px 10px;cursor:pointer;font-size:16px;transition:all .2s;}
@@ -93,6 +93,12 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;color:#1e293b;di
 .insight-box-txt{color:#1a3450;font-size:11.5px;line-height:1.5;}
 #sidebar-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.3);z-index:99;}
 #sidebar-overlay.open{display:block;}
+#sidebar-trigger{position:fixed;top:0;left:0;width:18px;height:100vh;z-index:98;cursor:pointer;}
+#sidebar-trigger:hover~#sidebar,#sidebar-trigger:hover~#sidebar *{}
+#sidebar-tab{position:fixed;top:50%;left:0;transform:translateY(-50%);width:20px;height:60px;background:#1B3A5C;border-radius:0 8px 8px 0;z-index:98;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:2px 0 8px rgba(0,0,0,.15);transition:left .3s ease;}
+#sidebar-tab:hover{background:#3A8FC2;}
+#sidebar-tab svg{width:12px;height:12px;fill:#fff;}
+#sidebar.open~#sidebar-tab{left:225px;}
 @media(min-width:1200px){.kpi-grid{grid-template-columns:repeat(4,1fr);}}
 @media(max-width:1200px){.kpi-grid{grid-template-columns:repeat(3,1fr);}.three-col{grid-template-columns:1fr 1fr;}}
 @media(max-width:900px){.kpi-grid{grid-template-columns:repeat(2,1fr);}.two-col,.three-col{grid-template-columns:1fr;}}
@@ -165,6 +171,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;color:#1e293b;di
 
 </style></head><body>
 <div id="sidebar-overlay" onclick="toggleSidebar()"></div>
+<div id="sidebar-tab" onclick="toggleSidebar()" title="Open Menu"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 5l7 7-7 7" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 <div id="sidebar">
 <div class="logo-area">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 58" height="48" width="220">
@@ -4284,8 +4291,14 @@ Largest JV entity: AMS Score at $3,152K (39.6%).</div></div>
 function toggleSidebar(){
   var s=document.getElementById('sidebar');
   var o=document.getElementById('sidebar-overlay');
+  var t=document.getElementById('sidebar-tab');
   s.classList.toggle('open');
   o.classList.toggle('open');
+  if(s.classList.contains('open')){
+    if(t)t.style.left='225px';
+  }else{
+    if(t)t.style.left='0';
+  }
 }
 function show(id,el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -4298,6 +4311,8 @@ function show(id,el){
   // Auto-hide sidebar after selection
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('sidebar-overlay').classList.remove('open');
+  var tab=document.getElementById('sidebar-tab');
+  if(tab)tab.style.left='0';
   // Initialize period filters
   initPeriodFilters();
 }
