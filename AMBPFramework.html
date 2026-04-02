@@ -377,12 +377,12 @@ th.ytd{background:#f0d060!important;color:var(--navy)!important;}
 <!-- REVENUE BR BY CLIENT -->
 <div id="page-rev-br-client" class="page">
   <div class="sec-title">BR Revenue by Client <span class="badge">Jan &amp; Feb 2026 · USD</span></div>
-  <div class="insight-bar"><strong>BR Client Concentration:</strong> 2026 YTD revenue of $3.01M across 18 active clients, with top client representing 22.2% of revenue. MoM growth of 14.6% (Jan: $1.40M, Feb: $1.61M) shows building momentum.</div>
+  <div class="insight-bar"><strong>BR Client Concentration:</strong> 2026 YTD revenue of $3.01M across 18 active clients, with top client representing 22.2% of revenue. MoM Δ of -12.7% (Jan: $1.61M, Feb: $1.40M) — February correction after strong January.</div>
   <div class="kpi-grid">
-    <div class="kpi gold drill" onclick="drillClientKPI('BR','jan')"><span class="drill-badge">↗</span><div class="kl">Jan 2026 Total</div><div class="kv">$1.40M</div></div>
-    <div class="kpi gold drill" onclick="drillClientKPI('BR','feb')"><span class="drill-badge">↗</span><div class="kl">Feb 2026 Total</div><div class="kv">$1.61M</div></div>
+    <div class="kpi gold drill" onclick="drillClientKPI('BR','jan')"><span class="drill-badge">↗</span><div class="kl">Jan 2026 Total</div><div class="kv">$1.61M</div></div>
+    <div class="kpi gold drill" onclick="drillClientKPI('BR','feb')"><span class="drill-badge">↗</span><div class="kl">Feb 2026 Total</div><div class="kv">$1.40M</div></div>
     <div class="kpi green drill" onclick="drillClientKPI('BR','ytd')"><span class="drill-badge">↗</span><div class="kl">YTD Total</div><div class="kv">$3.01M</div></div>
-    <div class="kpi drill" onclick="drillClientKPI('BR','mom')"><span class="drill-badge">↗</span><div class="kl">MoM Growth</div><div class="kv">+14.6%</div></div>
+    <div class="kpi drill" onclick="drillClientKPI('BR','mom')"><span class="drill-badge">↗</span><div class="kl">MoM Growth</div><div class="kv">-12.7%</div></div>
     <div class="kpi drill" onclick="drillClientKPI('BR','clients')"><span class="drill-badge">↗</span><div class="kl">Active Clients</div><div class="kv">18</div></div>
     <div class="kpi drill" onclick="drillClientKPI('BR','top')"><span class="drill-badge">↗</span><div class="kl">Top Client Share</div><div class="kv">22.2%</div></div>
   </div>
@@ -396,12 +396,12 @@ th.ytd{background:#f0d060!important;color:var(--navy)!important;}
 <!-- REVENUE NR BY CLIENT -->
 <div id="page-rev-nr-client" class="page">
   <div class="sec-title">NR Revenue by Client <span class="badge">Jan &amp; Feb 2026 · USD</span></div>
-  <div class="insight-bar"><strong>NR Client Concentration:</strong> 2026 YTD revenue of $5.90M from 27 active clients, with TotalEnergies representing 37.7% of revenue. Feb growth of 15.2% vs Jan demonstrates strong momentum and contract expansion.</div>
+  <div class="insight-bar"><strong>NR Client Concentration:</strong> 2026 YTD revenue of $5.90M from 27 active clients, with TotalEnergies representing 37.7% of revenue. MoM Δ of -13.2% (Jan: $3.16M, Feb: $2.74M) — February normalisation after high January.</div>
   <div class="kpi-grid">
-    <div class="kpi gold drill" onclick="drillClientKPI('NR','jan')"><span class="drill-badge">↗</span><div class="kl">Jan 2026 Total</div><div class="kv">$2.74M</div></div>
-    <div class="kpi gold drill" onclick="drillClientKPI('NR','feb')"><span class="drill-badge">↗</span><div class="kl">Feb 2026 Total</div><div class="kv">$3.16M</div></div>
+    <div class="kpi gold drill" onclick="drillClientKPI('NR','jan')"><span class="drill-badge">↗</span><div class="kl">Jan 2026 Total</div><div class="kv">$3.16M</div></div>
+    <div class="kpi gold drill" onclick="drillClientKPI('NR','feb')"><span class="drill-badge">↗</span><div class="kl">Feb 2026 Total</div><div class="kv">$2.74M</div></div>
     <div class="kpi green drill" onclick="drillClientKPI('NR','ytd')"><span class="drill-badge">↗</span><div class="kl">YTD Total</div><div class="kv">$5.90M</div></div>
-    <div class="kpi drill" onclick="drillClientKPI('NR','mom')"><span class="drill-badge">↗</span><div class="kl">MoM Growth</div><div class="kv">+15.2%</div></div>
+    <div class="kpi drill" onclick="drillClientKPI('NR','mom')"><span class="drill-badge">↗</span><div class="kl">MoM Growth</div><div class="kv">-13.2%</div></div>
     <div class="kpi drill" onclick="drillClientKPI('NR','clients')"><span class="drill-badge">↗</span><div class="kl">Active Clients</div><div class="kv">27</div></div>
     <div class="kpi drill" onclick="drillClientKPI('NR','top')"><span class="drill-badge">↗</span><div class="kl">Top Client Share</div><div class="kv">37.7%</div></div>
   </div>
@@ -1150,21 +1150,21 @@ function buildISTable(tblId, rev, cogs, gp, dex, ebitda, depr, tax, np, gm, em, 
     });
     // Display in reverse order (YTD, 2025, 2024, ... 2015)
     const revCells = [
-      `<td class="ytd">${fmtM(vals[11])}</td>`,
-      ...Array.from({length:11},(_,i)=>`<td>${fmtM(vals[10-i])}</td>`)
+      ...Array.from({length:11},(_,i)=>`<td>${fmtM(vals[i])}</td>`),
+      `<td class="ytd">${fmtM(vals[11])}</td>`
     ];
     return `<tr class="${cls}"><td>${name}</td>${revCells.join('')}</tr>`;
   };
 
   const makePct = (name, vals, cls='mr') => {
     const revCells = [
-      `<td class="ytd">${fmtP(vals[11])}</td>`,
-      ...Array.from({length:11},(_,i)=>`<td>${fmtP(vals[10-i])}</td>`)
+      ...Array.from({length:11},(_,i)=>`<td>${fmtP(vals[i])}</td>`),
+      `<td class="ytd">${fmtP(vals[11])}</td>`
     ];
     return `<tr class="${cls}"><td>${name}</td>${revCells.join('')}</tr>`;
   };
 
-  const colHdrs = `<thead><tr><th>Line Item</th><th class="ytd">2026 YTD</th>${Array.from({length:11},(_,i)=>`<th>${2025-i}</th>`).join('')}</tr></thead>`;
+  const colHdrs = `<thead><tr><th>Line Item</th>${Array.from({length:11},(_,i)=>`<th>${2015+i}</th>`).join('')}<th class="ytd">2026 YTD</th></tr></thead>`;
   
   let rows = `
     <tr class="grp"><td>▶ REVENUE</td>${Array.from({length:12}).map(()=>'<td></td>').join('')}</tr>
@@ -1172,16 +1172,16 @@ function buildISTable(tblId, rev, cogs, gp, dex, ebitda, depr, tax, np, gm, em, 
     ${makePct('Revenue Growth %', Array.from({length:12},(_,i)=>i>0?(rev[i]-rev[i-1])/Math.abs(rev[i-1])*100:0))}
     <tr class="grp"><td>▶ COST OF GOODS SOLD</td>${Array.from({length:12}).map(()=>'<td></td>').join('')}</tr>
     ${makeRow('Total COGS', cogs)}
-    <tr class="tr"><td>GROSS PROFIT</td>${Array.from({length:12},(_,i)=>i===0?`<td class="ytd">${fmtM(gp[11])}</td>`:`<td>${fmtM(gp[10-i+1])}</td>`).join('')}</tr>
+    <tr class="tr"><td>GROSS PROFIT</td>${Array.from({length:12},(_,i)=>i===11?`<td class="ytd">${fmtM(gp[11])}</td>`:`<td>${fmtM(gp[i])}</td>`).join('')}</tr>
     ${makePct('Gross Margin %', gm)}
     <tr class="grp"><td>▶ OPERATING EXPENSES</td>${Array.from({length:12}).map(()=>'<td></td>').join('')}</tr>
     ${makeRow('Direct & Admin Expenses', dex)}
-    <tr class="tr"><td>EBITDA</td>${Array.from({length:12},(_,i)=>i===0?`<td class="ytd">${fmtM(ebitda[11])}</td>`:`<td>${fmtM(ebitda[10-i+1])}</td>`).join('')}</tr>
+    <tr class="tr"><td>EBITDA</td>${Array.from({length:12},(_,i)=>i===11?`<td class="ytd">${fmtM(ebitda[11])}</td>`:`<td>${fmtM(ebitda[i])}</td>`).join('')}</tr>
     ${makePct('EBITDA Margin %', em)}
     <tr class="grp"><td>▶ BELOW EBITDA</td>${Array.from({length:12}).map(()=>'<td></td>').join('')}</tr>
     ${makeRow('Depreciation', depr)}
     ${makeRow('Income Tax Provision', tax)}
-    <tr class="tr"><td>NET PROFIT</td>${Array.from({length:12},(_,i)=>i===0?`<td class="ytd">${fmtM(np[11])}</td>`:`<td>${fmtM(np[10-i+1])}</td>`).join('')}</tr>
+    <tr class="tr"><td>NET PROFIT</td>${Array.from({length:12},(_,i)=>i===11?`<td class="ytd">${fmtM(np[11])}</td>`:`<td>${fmtM(np[i])}</td>`).join('')}</tr>
     ${makePct('Net Margin %', nm)}
   `;
 
@@ -1191,10 +1191,10 @@ function buildISTable(tblId, rev, cogs, gp, dex, ebitda, depr, tax, np, gm, em, 
 // Build Revenue detail table with groupings
 function buildRevTable(tblId, groups, totalRow) {
   const camp = tblId.includes('_br') ? 'BR' : 'NR';
-  const yearLabels = ['2026 YTD','2025','2024','2023','2022','2021','2020','2019','2018','2017','2016','2015'];
+  const yearLabels = ['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025','2026 YTD'];
   const tbl = document.getElementById(tblId);
   if(!tbl) return;
-  const colHdrs = `<thead><tr><th>Line Item</th><th class="ytd">2026 YTD</th>${Array.from({length:11},(_,i)=>`<th>${2025-i}</th>`).join('')}</tr></thead>`;
+  const colHdrs = `<thead><tr><th>Line Item</th>${Array.from({length:11},(_,i)=>`<th>${2015+i}</th>`).join('')}<th class="ytd">2026 YTD</th></tr></thead>`;
 
   const mkCell = (name, amount, yearLabel, cls='') => {
     const disp = fmtM(amount);
@@ -1208,18 +1208,18 @@ function buildRevTable(tblId, groups, totalRow) {
     rows += `<tr class="grp"><td>▶ ${grp.group}</td>${Array.from({length:12}).map(()=>'<td></td>').join('')}</tr>`;
     for(const [name, vals] of grp.items) {
       rows += `<tr><td style="padding-left:20px">${name}</td>` +
+        Array.from({length:11},(_,i) => mkCell(name, vals[i], yearLabels[i])).join('') +
         mkCell(name, vals[11], '2026 YTD', ' class="ytd"') +
-        Array.from({length:11},(_,i) => mkCell(name, vals[10-i], yearLabels[i+1])).join('') +
         `</tr>`;
     }
     rows += `<tr class="sb"><td>↳ ${grp.group} Total</td>` +
+      Array.from({length:11},(_,i) => mkCell(grp.group+' Total', grp.subtotal[i], yearLabels[i])).join('') +
       mkCell(grp.group+' Total', grp.subtotal[11], '2026 YTD', ' class="ytd"') +
-      Array.from({length:11},(_,i) => mkCell(grp.group+' Total', grp.subtotal[10-i], yearLabels[i+1])).join('') +
       `</tr>`;
   }
   rows += `<tr class="tr"><td>TOTAL REVENUE</td>` +
+    Array.from({length:11},(_,i) => mkCell('Total Revenue', totalRow[i], yearLabels[i])).join('') +
     mkCell('Total Revenue', totalRow[11], '2026 YTD', ' class="ytd"') +
-    Array.from({length:11},(_,i) => mkCell('Total Revenue', totalRow[10-i], yearLabels[i+1])).join('') +
     `</tr>`;
 
   tbl.innerHTML = colHdrs + '<tbody>' + rows + '</tbody>';
@@ -1232,9 +1232,9 @@ function buildCombTable() {
   const CBcogs = CBrev.map((v,i)=>v-CBgp[i]);
   const CBdepr = BRdepr.map((v,i)=>v+NRdepr[i]);
   const CBtax  = BRtax.map((v,i)=>v+NRtax[i]);
-  const colHdrs = `<thead><tr><th>Line Item</th><th class="ytd">2026 YTD</th>${Array.from({length:11},(_,i)=>`<th>${2025-i}</th>`).join('')}</tr></thead>`;
-  const r = (n,v,cls='')=>`<tr class="${cls}"><td>${n}</td><td class="ytd">${fmtM(v[11])}</td>${Array.from({length:11},(_,i)=>`<td>${fmtM(v[10-i])}</td>`).join('')}</tr>`;
-  const p = (n,v)=>`<tr class="mr"><td>${n}</td><td class="ytd">${fmtP(v[11])}</td>${Array.from({length:11},(_,i)=>`<td>${fmtP(v[10-i])}</td>`).join('')}</tr>`;
+  const colHdrs = `<thead><tr><th>Line Item</th>${Array.from({length:11},(_,i)=>`<th>${2015+i}</th>`).join('')}<th class="ytd">2026 YTD</th></tr></thead>`;
+  const r = (n,v,cls='')=>`<tr class="${cls}"><td>${n}</td>${Array.from({length:11},(_,i)=>`<td>${fmtM(v[i])}</td>`).join('')}<td class="ytd">${fmtM(v[11])}</td></tr>`;
+  const p = (n,v)=>`<tr class="mr"><td>${n}</td>${Array.from({length:11},(_,i)=>`<td>${fmtP(v[i])}</td>`).join('')}<td class="ytd">${fmtP(v[11])}</td></tr>`;
   
   tbl.innerHTML = colHdrs + '<tbody>' +
     r('BR Revenue', BRrev) + r('NR Revenue', NRrev) +
@@ -1251,12 +1251,12 @@ function buildCombTable() {
 function buildRatiosTable() {
   const tbl = document.getElementById('tbl_ratios');
   if(!tbl) return;
-  const colHdrs = `<thead><tr><th>Ratio</th><th class="ytd">2026 YTD</th>${Array.from({length:11},(_,i)=>`<th>${2025-i}</th>`).join('')}</tr></thead>`;
+  const colHdrs = `<thead><tr><th>Ratio</th>${Array.from({length:11},(_,i)=>`<th>${2015+i}</th>`).join('')}<th class="ytd">2026 YTD</th></tr></thead>`;
   
   const r = (n,v,fmt=fmtP) => {
     const cells = [
-      `<td class="ytd">${v[11]?fmt(v[11]):'-'}</td>`,
-      ...Array.from({length:11},(_,i)=>`<td>${v[10-i]?fmt(v[10-i]):'-'}</td>`)
+      ...Array.from({length:11},(_,i)=>`<td>${v[i]?fmt(v[i]):'-'}</td>`),
+      `<td class="ytd">${v[11]?fmt(v[11]):'-'}</td>`
     ];
     return `<tr><td>${n}</td>${cells.join('')}</tr>`;
   };
@@ -1299,10 +1299,10 @@ function buildUETable(tblId, data) {
 function buildCFTable(tblId, np, depr, ocf, capex, ncf) {
   const tbl = document.getElementById(tblId);
   if(!tbl) return;
-  const colHdrs = `<thead><tr><th>Item</th><th class="ytd">2026 YTD</th>${Array.from({length:11},(_,i)=>`<th>${2025-i}</th>`).join('')}</tr></thead>`;
+  const colHdrs = `<thead><tr><th>Item</th>${Array.from({length:11},(_,i)=>`<th>${2015+i}</th>`).join('')}<th class="ytd">2026 YTD</th></tr></thead>`;
   
   const r = (n,v,cls='')=>{
-    const cells = [`<td class="ytd">${fmtM(v[11])}</td>`, ...Array.from({length:11},(_,i)=>`<td>${fmtM(v[10-i])}</td>`)];
+    const cells = [...Array.from({length:11},(_,i)=>`<td>${fmtM(v[i])}</td>`), `<td class="ytd">${fmtM(v[11])}</td>`];
     return `<tr class="${cls}"><td>${n}</td>${cells.join('')}</tr>`;
   };
   const sep = (n) => `<tr class="grp"><td>${n}</td>${Array.from({length:12}).map(()=>'<td></td>').join('')}</tr>`;
@@ -1382,67 +1382,67 @@ function buildPOTable() {
 // CLIENT REVENUE DATA (2026 Monthly)
 // =========================================
 const REV_BR_CLIENTS = [
-  {name:'Bonatti',          jan:318761,  feb:349010},
-  {name:'Wood',             jan:205666,  feb:254605},
-  {name:'CRG',              jan:127151,  feb:135285},
-  {name:'Lukoil',           jan:50578,   feb:79645},
-  {name:'Erinys',           jan:58523,   feb:61772},
-  {name:'RMSI',             jan:39176,   feb:45939},
-  {name:'RINA',             jan:39284,   feb:33893},
-  {name:'Ad-Hoc',           jan:33002,   feb:29076},
-  {name:'RSK',              jan:32592,   feb:26005},
-  {name:'BGC',              jan:24793,   feb:39287},
-  {name:'Ad-Hoc (Accom)',   jan:15252,   feb:21959},
-  {name:'Yokogawa',         jan:12109,   feb:11256},
-  {name:'Mitsui',           jan:11667,   feb:11667},
-  {name:'Siemens',          jan:3870,    feb:5490},
-  {name:'NES',              jan:4387,    feb:4387},
-  {name:'Stratum',          jan:2892,    feb:3917},
-  {name:'BHGE',             jan:0,       feb:3747},
-  {name:'Nippon Koei',      jan:2645,    feb:3565},
-  {name:'Champ',            jan:1916,    feb:1916},
-  {name:'G4S',              jan:1118,    feb:669},
-  {name:'IGCC',             jan:2520,    feb:270},
-  {name:'Petronas',         jan:456,     feb:298},
-  {name:'Rutledge',         jan:425,     feb:680},
+  {name:'Bonatti', jan:349010, feb:318761},
+  {name:'Wood', jan:254605, feb:205666},
+  {name:'CRG', jan:135285, feb:127151},
+  {name:'Lukoil', jan:79645, feb:50578},
+  {name:'Erinys', jan:61772, feb:58523},
+  {name:'RMSI', jan:45939, feb:39176},
+  {name:'RINA', jan:33893, feb:39284},
+  {name:'Ad-Hoc', jan:29076, feb:33002},
+  {name:'RSK', jan:26005, feb:32592},
+  {name:'BGC', jan:39287, feb:24793},
+  {name:'Ad-Hoc (Accom)', jan:21959, feb:15252},
+  {name:'Yokogawa', jan:11256, feb:12109},
+  {name:'Mitsui', jan:11667, feb:11667},
+  {name:'Siemens', jan:5490, feb:3870},
+  {name:'NES', jan:4387, feb:4387},
+  {name:'Stratum', jan:3917, feb:2892},
+  {name:'BHGE', jan:3747, feb:0},
+  {name:'Nippon Koei', jan:3565, feb:2645},
+  {name:'Champ', jan:1916, feb:1916},
+  {name:'G4S', jan:669, feb:1118},
+  {name:'IGCC', jan:270, feb:2520},
+  {name:'Petronas', jan:298, feb:456},
+  {name:'Rutledge', jan:680, feb:425},
 ];
-const REV_BR_CLIENT_TOTAL = {jan:1401126, feb:1605165};
+const REV_BR_CLIENT_TOTAL = {jan:1605165, feb:1401126};
 
 const REV_NR_CLIENTS = [
-  {name:'Total Energise',   jan:1057655, feb:1163975},
-  {name:'BHGE',             jan:303551,  feb:318415},
-  {name:'AMS',              jan:188406,  feb:317014},
-  {name:'EMC',              jan:135822,  feb:163269},
-  {name:'AL HUREA',         jan:122681,  feb:131197},
-  {name:'Bonatti',          jan:112458,  feb:127689},
-  {name:'Sulzer',           jan:110960,  feb:120523},
-  {name:'BGC',              jan:88200,   feb:97650},
-  {name:'AMTS',             jan:80602,   feb:84115},
-  {name:'AMOS',             jan:79228,   feb:86023},
-  {name:'CPP',              jan:79403,   feb:125981},
-  {name:'AKT',              jan:65424,   feb:72416},
-  {name:'AMDH',             jan:34157,   feb:26173},
-  {name:'WAM',              jan:36235,   feb:44039},
-  {name:'Wood',             jan:58922,   feb:82756},
-  {name:'AL HOLOL',         jan:26812,   feb:26629},
-  {name:'Al Murabit Group', jan:17414,   feb:17553},
-  {name:'Ad-hoc',           jan:16643,   feb:16792},
-  {name:'Defaf Al Khaleej', jan:20460,   feb:22545},
-  {name:'AMHR',             jan:12536,   feb:13007},
-  {name:'ENKA',             jan:10985,   feb:1900},
-  {name:'ISOS',             jan:14135,   feb:14945},
-  {name:'Emerson',          jan:22850,   feb:24350},
-  {name:'NBI',              jan:9896,    feb:9896},
-  {name:'Expro',            jan:9240,    feb:10230},
-  {name:'Intertek',         jan:9285,    feb:8565},
-  {name:'AMLS',             jan:2551,    feb:3014},
-  {name:'HQC',              jan:7134,    feb:18860},
-  {name:'AL WAHA',          jan:4568,    feb:5161},
-  {name:'Talia',            jan:569,     feb:569},
-  {name:'GIS',              jan:1450,    feb:1450},
-  {name:'GPA',              jan:500,     feb:555},
+  {name:'Total Energise', jan:1163975, feb:1057655},
+  {name:'BHGE', jan:318415, feb:303551},
+  {name:'AMS', jan:317014, feb:188406},
+  {name:'EMC', jan:163269, feb:135822},
+  {name:'AL HUREA', jan:131197, feb:122681},
+  {name:'Bonatti', jan:127689, feb:112458},
+  {name:'Sulzer', jan:120523, feb:110960},
+  {name:'BGC', jan:97650, feb:88200},
+  {name:'AMTS', jan:84115, feb:80602},
+  {name:'AMOS', jan:86023, feb:79228},
+  {name:'CPP', jan:125981, feb:79403},
+  {name:'AKT', jan:72416, feb:65424},
+  {name:'AMDH', jan:26173, feb:34157},
+  {name:'WAM', jan:44039, feb:36235},
+  {name:'Wood', jan:82756, feb:58922},
+  {name:'AL HOLOL', jan:26629, feb:26812},
+  {name:'Al Murabit Group', jan:17553, feb:17414},
+  {name:'Ad-hoc', jan:16792, feb:16643},
+  {name:'Defaf Al Khaleej', jan:22545, feb:20460},
+  {name:'AMHR', jan:13007, feb:12536},
+  {name:'ENKA', jan:1900, feb:10985},
+  {name:'ISOS', jan:14945, feb:14135},
+  {name:'Emerson', jan:24350, feb:22850},
+  {name:'NBI', jan:9896, feb:9896},
+  {name:'Expro', jan:10230, feb:9240},
+  {name:'Intertek', jan:8565, feb:9285},
+  {name:'AMLS', jan:3014, feb:2551},
+  {name:'HQC', jan:18860, feb:7134},
+  {name:'AL WAHA', jan:5161, feb:4568},
+  {name:'Talia', jan:569, feb:569},
+  {name:'GIS', jan:1450, feb:1450},
+  {name:'GPA', jan:555, feb:500},
 ];
-const REV_NR_CLIENT_TOTAL = {jan:2741107, feb:3157470};
+const REV_NR_CLIENT_TOTAL = {jan:3157470, feb:2741107};
 
 // =========================================
 // CLIENT REVENUE HISTORICAL DATA (Annual)
