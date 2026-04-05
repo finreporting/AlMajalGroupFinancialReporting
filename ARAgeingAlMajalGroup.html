@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Al Majal Group — AR Aging & Collection Intelligence</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;color:#1e293b;min-height:100vh;display:flex}
+
+/* Sidebar — auto-hide: collapsed by default, expands on hover */
+.sb{width:225px;background:#1B3D6E;position:fixed;top:0;left:-170px;height:100vh;overflow-y:auto;z-index:60;transition:left .3s ease}
+.sb:hover,.sb.pinned{left:0}
+.sb-logo{background:#fff;padding:14px 16px;border-bottom:3px solid #00B5B8;text-align:center}
+.sb-logo h2{color:#1B3D6E;font-size:13.5px;font-weight:800;line-height:1.3}
+.sb-logo span{font-size:9.5px;color:#64748b}
+.ng{padding:14px 0 4px}
+.ng-lbl{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:#7FBCD2;padding:0 16px 6px;font-weight:600}
+.ni{display:flex;align-items:center;gap:10px;padding:10px 16px;color:rgba(255,255,255,.7);font-size:12px;cursor:pointer;border-left:3px solid transparent;transition:all .2s}
+.ni:hover{background:rgba(255,255,255,.08);color:#fff}
+.ni.ac{border-left-color:#00B5B8;background:rgba(0,181,184,.15);color:#fff;font-weight:600}
+.ni-ic{font-size:14px;width:18px;text-align:center}
+
+/* Topbar */
+.tb{position:sticky;top:0;z-index:50;background:#1B3D6E;color:#fff;padding:0 22px;height:46px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.tb .pt{font-size:13.5px;font-weight:700}
+.tb-m{font-size:10.5px;color:#94a3b8}
+.hb{display:inline-block;background:none;border:none;color:#fff;font-size:22px;cursor:pointer;margin-right:10px}
+
+/* Main */
+.mn{margin-left:55px;flex:1;display:flex;flex-direction:column;min-height:100vh;transition:margin-left .3s ease}
+.sb:hover~.mn,.sb.pinned~.mn{margin-left:225px}
+.pg{display:none;padding:16px 20px 36px}.pg.ac{display:block}
+.ph{font-size:19px;font-weight:800;color:#1B3D6E;margin-bottom:3px}
+.ps{font-size:11px;color:#64748b;border-left:3px solid #00B5B8;padding-left:10px;margin-bottom:14px}
+
+/* Filter Bar */
+.fb{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:10px 16px;margin-bottom:14px;display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.fg{display:flex;flex-direction:column;gap:2px}
+.fg label{font-size:8.5px;text-transform:uppercase;letter-spacing:.5px;color:#64748b;font-weight:600}
+.fg select,.fg input{padding:6px 10px;border:1px solid #e2e8f0;border-radius:6px;font-size:11px;background:#fff;color:#1e293b;min-width:170px}
+.fg select:focus,.fg input:focus{outline:none;border-color:#00B5B8;box-shadow:0 0 0 2px rgba(0,181,184,.2)}
+.btn-r{padding:6px 14px;border:1px solid #e2e8f0;border-radius:6px;font-size:10.5px;font-weight:600;cursor:pointer;background:#f8fafc;color:#475569}.btn-r:hover{background:#e2e8f0}
+.filter-tag{display:inline-block;padding:3px 10px;border-radius:10px;font-size:10px;font-weight:600;background:#e0f2fe;color:#0369a1;margin-left:8px}
+
+/* KPI */
+.kg{display:grid;grid-template-columns:repeat(auto-fill,minmax(172px,1fr));gap:10px;margin-bottom:16px}
+.kp{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:12px 14px;border-top:4px solid #1B3D6E;box-shadow:0 1px 3px rgba(0,0,0,.04);cursor:pointer;transition:all .2s}
+.kp:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.kp.g{border-top-color:#16a34a}.kp.r{border-top-color:#dc2626}.kp.a{border-top-color:#f59e0b}.kp.b{border-top-color:#00B5B8}.kp.dr{border-top-color:#9b2c2c}
+.kl{font-size:9px;text-transform:uppercase;letter-spacing:.4px;color:#64748b;margin-bottom:2px}
+.kv{font-size:18px;font-weight:800;color:#1e293b}
+.kv.pos{color:#16a34a}.kv.neg{color:#dc2626}.kv.amb{color:#d97706}.kv.drc{color:#9b2c2c}
+.ks{font-size:9px;color:#94a3b8;margin-top:1px}
+
+/* Alert */
+.al{background:#fef2f2;border:1px solid #fecaca;border-left:4px solid #dc2626;border-radius:10px;padding:12px 16px;margin-bottom:16px;display:flex;gap:10px;align-items:flex-start}
+.al-ic{font-size:20px;flex-shrink:0}
+.al h4{font-size:12px;color:#991b1b;margin-bottom:3px}
+.al p{font-size:11px;color:#7f1d1d;line-height:1.6}
+
+/* Card */
+.cd{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.04);margin-bottom:14px}
+.ch{font-size:12.5px;font-weight:700;color:#1B3D6E;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center}
+.ch .dd{font-size:10px;color:#0369a1;cursor:pointer;border-bottom:2px dashed #0369a1;font-weight:600}
+.ch .dd:hover{background:rgba(3,105,161,.05)}
+.tc{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+/* Bars */
+.br{display:flex;align-items:center;gap:6px;margin-bottom:5px;font-size:11px}
+.bl{width:130px;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#475569;flex-shrink:0;font-size:10.5px}
+.bt{flex:1;height:20px;background:#f1f5f9;border-radius:4px;overflow:hidden}
+.bf{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:5px;font-size:9px;color:#fff;font-weight:600;transition:width .6s ease;min-width:fit-content}
+.bv{width:72px;text-align:right;font-weight:600;color:#1e293b;flex-shrink:0;font-size:10.5px}
+
+/* Tables */
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:#1B3D6E;color:#fff;font-size:9.5px;text-transform:uppercase;letter-spacing:.3px;padding:9px 10px;text-align:right;position:sticky;top:0;z-index:2}
+.tbl th.l{text-align:left}.tbl td.l{text-align:left}.tbl td.b{font-weight:700}
+.tbl td{padding:7px 10px;border-bottom:1px solid #f1f5f9;text-align:right}
+.tbl tr.a{background:#f8fafc}
+.tbl tr:hover{background:#eff6ff}
+.tbl tr.t{background:#1B3D6E;color:#fff;font-weight:700}.tbl tr.t td{border:none}
+.tbl .dm{color:#94a3b8}
+.st{max-height:520px;overflow-y:auto;border-radius:0 0 10px 10px}
+
+/* RAG */
+.rg{display:inline-block;padding:2px 9px;border-radius:10px;font-size:9.5px;font-weight:700}
+.rg-r{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+.rg-a{background:#fff7ed;color:#9a3412;border:1px solid #fed7aa}
+.rg-y{background:#fefce8;color:#854d0e;border:1px solid #fef08a}
+.rg-g{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0}
+
+/* RAG Items */
+.ri{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;border-left:4px solid;margin-bottom:8px}
+.rd{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+.rt{font-size:11.5px;font-weight:700}.rs{font-size:10px;margin-top:1px}
+
+/* Insight */
+.ib{border-radius:0 8px 8px 0;padding:11px 15px;margin-top:12px;margin-bottom:8px}
+.ib.bl{background:#e0f2fe;border-left:4px solid #0284c7}
+.ib.rd{background:#fef2f2;border-left:4px solid #dc2626}
+.ib.am{background:#fff7ed;border-left:4px solid #d97706}
+.ibh{font-size:11.5px;font-weight:700;margin-bottom:4px}
+.ibt{font-size:11px;line-height:1.7}
+
+/* Drilldown text */
+.dd-t{border-bottom:2px dashed #0369a1;cursor:pointer;color:#0369a1;font-weight:600}.dd-t:hover{background:rgba(3,105,161,.05)}
+
+/* Modal */
+.mo{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:200;justify-content:center;align-items:center;backdrop-filter:blur(2px)}
+.mo.op{display:flex}
+.md{background:#fff;border-radius:12px;max-width:980px;width:95%;max-height:85vh;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.3);animation:mIn .25s ease}
+@keyframes mIn{from{opacity:0;transform:scale(.96)translateY(16px)}to{opacity:1;transform:scale(1)translateY(0)}}
+.mh{background:#f8fafc;padding:16px 22px;border-bottom:2px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5}
+.mh h3{font-size:14px;color:#1B3D6E;font-weight:700}
+.mx{background:none;border:none;font-size:20px;color:#64748b;cursor:pointer;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center}.mx:hover{background:#f1f5f9}
+.mb{padding:18px 22px;max-height:calc(85vh - 56px);overflow-y:auto}
+.mk{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:9px;margin-bottom:14px}
+.mkc{background:#f0f4f8;border-radius:8px;padding:10px;text-align:center}
+.mkv{font-size:16px;font-weight:800;color:#1B3D6E}
+.mkl{font-size:9px;color:#64748b;margin-top:1px}
+.mtbl{width:100%;border-collapse:collapse;font-size:10.5px}
+.mtbl th{background:#f1f5f9;color:#1B3D6E;padding:7px 9px;text-align:right;font-size:9px;text-transform:uppercase;letter-spacing:.3px}
+.mtbl th.l{text-align:left}.mtbl td.l{text-align:left}.mtbl td.b{font-weight:700}
+.mtbl td{padding:6px 9px;border-bottom:1px solid #f1f5f9;text-align:right}
+.mtbl tr.a{background:#f8fafc}.mtbl tr:hover{background:#eff6ff}
+.mtbl tr.t{background:#1B3D6E;color:#fff;font-weight:700}.mtbl tr.t td{border:none}
+
+@media(max-width:900px){.sb{left:-225px}.sb:hover,.sb.pinned{left:0}.mn{margin-left:0}.sb:hover~.mn,.sb.pinned~.mn{margin-left:0}.tc{grid-template-columns:1fr}}
+@media(max-width:600px){.kg{grid-template-columns:repeat(2,1fr)}.pg{padding:10px 12px 28px}.bl{width:85px;font-size:9.5px}}
+@media print{.sb,.hb,.fb{display:none!important}.mn{margin-left:0}.pg{display:block!important;page-break-after:always}th,.t{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+
+<nav class="sb" id="sb">
+<div class="sb-logo"><h2>AL MAJAL GROUP</h2><span>AR Aging Intelligence</span><button onclick="document.getElementById('sb').classList.toggle('pinned')" style="position:absolute;top:8px;right:8px;background:none;border:none;color:#94a3b8;cursor:pointer;font-size:14px" title="Pin/Unpin sidebar">&#128204;</button></div>
+<div class="ng"><div class="ng-lbl">Dashboard</div>
+<a class="ni ac" onclick="nav('overview',this)"><span class="ni-ic">&#9679;</span>Overview</a>
+<a class="ni" onclick="nav('collection',this)"><span class="ni-ic">&#9733;</span>Collection Priority</a>
+<a class="ni" onclick="nav('top15',this)"><span class="ni-ic">&#9650;</span>Top 15 Receivables</a>
+</div>
+<div class="ng"><div class="ng-lbl">Aging Periods</div>
+<a class="ni" onclick="nav('pfut',this)"><span class="ni-ic">&#9654;</span>Future Remit</a>
+<a class="ni" onclick="nav('p030',this)"><span class="ni-ic">&#9679;</span>0–30 Days</a>
+<a class="ni" onclick="nav('p3160',this)"><span class="ni-ic">&#9679;</span>31–60 Days</a>
+<a class="ni" onclick="nav('p61',this)"><span class="ni-ic">&#9888;</span>61–90 Days</a>
+<a class="ni" onclick="nav('p91',this)"><span class="ni-ic">&#9888;</span>91–120 Days</a>
+<a class="ni" onclick="nav('p121',this)"><span class="ni-ic">&#10006;</span>Over 121 Days</a>
+</div>
+<div class="ng"><div class="ng-lbl">Views</div>
+<a class="ni" onclick="nav('company',this)"><span class="ni-ic">&#9632;</span>By Company</a>
+<a class="ni" onclick="nav('insights',this)"><span class="ni-ic">&#9733;</span>Insights & Actions</a>
+</div>
+</nav>
+
+<div class="mn">
+<div class="tb">
+<div style="display:flex;align-items:center"><button class="hb" onclick="document.getElementById('sb').classList.toggle('pinned')" style="display:inline-block!important">&#9776;</button><span class="pt" id="pt">Overview</span></div>
+<div class="tb-m">As of April 5, 2026</div>
+</div>
+
+<!-- Global Filter -->
+<div class="fb" style="margin:14px 20px 0;position:sticky;top:46px;z-index:40">
+<div class="fg"><label>Company</label><select id="fC" onchange="refresh()"><option value="">All Companies (Overall)</option></select></div>
+<div class="fg"><label>Client Search</label><input type="text" id="fCl" placeholder="Search client..." oninput="refresh()"></div>
+<div class="fg"><label>Min Balance</label><select id="fMin" onchange="refresh()"><option value="0">All Balances</option><option value="10000">$10K+</option><option value="50000">$50K+</option><option value="100000">$100K+</option><option value="500000">$500K+</option></select></div>
+<button class="btn-r" onclick="resetF()">Reset Filters</button>
+<span class="filter-tag" id="fTag">Showing: All Data</span>
+</div>
+
+<div class="pg ac" id="pg-overview"></div>
+<div class="pg" id="pg-collection"></div>
+<div class="pg" id="pg-top15"></div>
+<div class="pg" id="pg-pfut"></div>
+<div class="pg" id="pg-p030"></div>
+<div class="pg" id="pg-p3160"></div>
+<div class="pg" id="pg-p61"></div>
+<div class="pg" id="pg-p91"></div>
+<div class="pg" id="pg-p121"></div>
+<div class="pg" id="pg-company"></div>
+<div class="pg" id="pg-insights"></div>
+</div>
+
+<div class="mo" id="mo" onclick="if(event.target===this)cM()">
+<div class="md"><div class="mh"><h3 id="mT"></h3><button class="mx" onclick="cM()">&times;</button></div><div class="mb" id="mB"></div></div>
+</div>
+
+<script>
+const D=[{"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Urbacon construction company UCC", "balance": 254032.86, "future": 220177.24, "d0_30": 26208.32, "d31_60": 6363.64, "d61_90": 615.5, "d91_120": 668.16, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Ghabet El Iraq LLC", "balance": 178930.84, "future": 6754.42, "d0_30": 148896.42, "d31_60": 0.0, "d61_90": 18120.0, "d91_120": 0.0, "d121": 5160.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "The United Iraqi Company for Airports and Ground Handling Services Limited", "balance": 84529.44, "future": 3500.0, "d0_30": 3855.44, "d31_60": 77174.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Zhongman Petroleum And Natural Gas Group", "balance": 71782.77, "future": 61027.77, "d0_30": 8085.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 2670.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Al-Majal For Oil and Energy Services LTD", "balance": 70441.28, "future": 70441.28, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Watania for Seaports Services", "balance": 46297.35, "future": 0.0, "d0_30": 6047.35, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 40250.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Al-Holoul for Oil Services CO. LTD", "balance": 28220.82, "future": 28220.82, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "PEG Engineering & Contracting FZCO", "balance": 25516.66, "future": 0.0, "d0_30": 6500.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 19016.66, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Iraq Logistics Venture", "balance": 19807.46, "future": 19807.46, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Best Solutions Trading And Services For Oil & Gas Equipment, LLC", "balance": 19803.02, "future": 1421.03, "d0_30": 13681.99, "d31_60": 4700.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "International Free Company (IFC)", "balance": 18139.02, "future": 0.0, "d0_30": 891.0, "d31_60": 7451.52, "d61_90": 0.0, "d91_120": 0.0, "d121": 9796.5}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Diamond LOFT Design & Constructions", "balance": 17621.14, "future": 0.0, "d0_30": 13832.9, "d31_60": 0.0, "d61_90": 3788.24, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Dserv", "balance": 17120.0, "future": 0.0, "d0_30": 3040.0, "d31_60": 7360.0, "d61_90": 6720.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "METS", "balance": 15421.56, "future": 10281.04, "d0_30": 5140.52, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Rafid Al Zab Company (RAZ)", "balance": 12158.49, "future": 12158.49, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Bonati SPA-Iraq Branch", "balance": 12099.11, "future": 4309.9, "d0_30": 7789.21, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Basra Gateway Terminal", "balance": 11701.76, "future": 9129.79, "d0_30": 2208.33, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 363.64}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Ecommerce Sales", "balance": 9625.86, "future": 9080.86, "d0_30": 545.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "General Electric Global Services Gmbh- IZ Baghdad, Branch ( GE Vernova", "balance": 9425.0, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 350.0, "d91_120": 0.0, "d121": 9075.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Tekfen Construction And Installation Co.Inc", "balance": 8271.21, "future": 0.0, "d0_30": 2829.92, "d31_60": 2237.22, "d61_90": 3204.07, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "CMA CGM TERMINALS IRAQ (CCTI)", "balance": 7885.24, "future": 0.0, "d0_30": 1401.52, "d31_60": 6483.72, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Al Wahaa company Iraq", "balance": 5565.52, "future": 3681.8, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 1883.72}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "RSK Environment LLC-SPC", "balance": 4788.0, "future": 4788.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Experts Facilities Specialized for Infrastructure Management and Services LLC", "balance": 4123.1, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 4123.1}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "JGC Corporation", "balance": 3450.0, "future": 180.0, "d0_30": 3270.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "GE Healthcare FZE Iraq Branch", "balance": 3443.45, "future": 693.45, "d0_30": 2750.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Arab Bank Iraq", "balance": 2420.45, "future": 0.0, "d0_30": 0.0, "d31_60": 2420.45, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Aujan-Injaz Iraq", "balance": 2382.57, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 2382.57}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Al Majal Technical Services", "balance": 2365.0, "future": 2365.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Fastforward Shipping Agency", "balance": 2000.0, "future": 400.0, "d0_30": 400.0, "d31_60": 400.0, "d61_90": 400.0, "d91_120": 400.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Sardkar for Beverage Industry", "balance": 1859.08, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 1859.08}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "IRATRAC", "balance": 1517.04, "future": 0.0, "d0_30": 0.0, "d31_60": 1517.04, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Al Majal Human Resources", "balance": 1320.0, "future": 1320.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Prime Support For General Trading And Contracting, Supply,Transportation, Catering", "balance": 744.0, "future": 237.0, "d0_30": 507.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Alexmar Energy Solutions", "balance": 720.0, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 360.0, "d91_120": 360.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "ADAD Engineering Services", "balance": 598.48, "future": 0.0, "d0_30": 598.48, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "TSI Location: West Qurna Oil Field", "balance": 545.45, "future": 0.0, "d0_30": 545.45, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Erinys Group Ltd", "balance": 532.0, "future": 0.0, "d0_30": 0.0, "d31_60": 532.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "AlAnmaa for Construction Materials Production Ltd.", "balance": 472.8, "future": 0.0, "d0_30": 472.8, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Al Majal Sulzer Rotating Equipment Services", "balance": 460.0, "future": 230.0, "d0_30": 0.0, "d31_60": 230.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Toolmart Visa", "balance": 453.91, "future": 453.91, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "ELEGANCIA CONTRACTING - IRAQ", "balance": 428.93, "future": 0.0, "d0_30": 428.93, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Stratum Reservoir (Norway) AS", "balance": 375.0, "future": 0.0, "d0_30": 375.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Coca-Cola Icecek", "balance": 219.75, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 219.75}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Exterran Eastern Hemisphere\u2013Iraq", "balance": 100.0, "future": 0.0, "d0_30": 0.0, "d31_60": 100.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AL MAJAL LOGISTIC SERVICES (AMLS)", "client": "Aloreen Company for Investment LLC", "balance": 22.73, "future": 22.73, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Al-Holoul for Oil Services LTD", "client": "Schlumberger Middle East,S.A.-Iraqi Branch", "balance": 153195.0, "future": 0, "d0_30": 0.0, "d31_60": 6105.0, "d61_90": 0.0, "d91_120": 2027.8, "d121": 145062.2}, {"company": "Al-Holoul for Oil Services LTD", "client": "Bohai Drilling And Engineering Limited", "balance": 134316.0, "future": 0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 134316.0}, {"company": "Al-Holoul for Oil Services LTD", "client": "Anton Oil", "balance": 70676.0, "future": 0, "d0_30": 0.0, "d31_60": 15123.0, "d61_90": 18863.0, "d91_120": 0.0, "d121": 36690.0}, {"company": "Al-Holoul for Oil Services LTD", "client": "Great Wall Drilling Company (GWDC)", "balance": 49582.14, "future": 0, "d0_30": 0.0, "d31_60": 5694.4, "d61_90": 22649.56, "d91_120": 18623.18, "d121": 2615.0}, {"company": "Al-Holoul for Oil Services LTD", "client": "Zhongman Petroleum and Natural Gas Group Corp., Ltd Iraq Branch", "balance": 14479.0, "future": 0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 3904.0, "d91_120": 0.0, "d121": 10575.0}, {"company": "Al-Holoul for Oil Services LTD", "client": "Daqing Petroleum Administration Bureau Co. Ltd Iraq Branch", "balance": 1530.0, "future": 0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 1530.0}, {"company": "Al Majal Human Resources", "client": "CNOOC Iraq Limited", "balance": 5945572.78, "future": 3194142.37, "d0_30": 1283569.35, "d31_60": 0.0, "d61_90": 1224752.49, "d91_120": 0.0, "d121": 243108.57}, {"company": "Al Majal Human Resources", "client": "RSK Environment LLC - SPC", "balance": 616235.73, "future": 301970.0, "d0_30": 314265.73, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Human Resources", "client": "IOTA", "balance": 275744.38, "future": 31363.56, "d0_30": 57585.36, "d31_60": 47246.41, "d61_90": 38571.94, "d91_120": 0.0, "d121": 100977.11}, {"company": "Al Majal Human Resources", "client": "STAT Marine Ltd", "balance": 242695.31, "future": 3484.84, "d0_30": 42018.06, "d31_60": 37449.47, "d61_90": 42549.47, "d91_120": 55618.86, "d121": 61574.61}, {"company": "Al Majal Human Resources", "client": "TotalEnergies EP Ratawi Hub SAS", "balance": 207651.99, "future": 0.0, "d0_30": 11200.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 57476.09, "d121": 138975.9}, {"company": "Al Majal Human Resources", "client": "Synapsco LLC FZ", "balance": 184519.74, "future": 0.0, "d0_30": 53163.27, "d31_60": 72120.64, "d61_90": 58974.49, "d91_120": 0.0, "d121": 261.34}, {"company": "Al Majal Human Resources", "client": "Crane", "balance": 167850.06, "future": 142467.93, "d0_30": 12667.98, "d31_60": 12714.15, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Human Resources", "client": "Ethos Energy", "balance": 111297.0, "future": 15625.0, "d0_30": 20295.0, "d31_60": 19795.0, "d61_90": 19480.0, "d91_120": 14435.0, "d121": 21667.0}, {"company": "Al Majal Human Resources", "client": "Prevensure", "balance": 81606.66, "future": 5097.85, "d0_30": 9836.86, "d31_60": 5470.15, "d61_90": 6214.73, "d91_120": 5874.26, "d121": 49112.81}, {"company": "Al Majal Human Resources", "client": "TECHMA FZCO", "balance": 74675.58, "future": 3484.84, "d0_30": 11996.63, "d31_60": 18794.54, "d61_90": 2100.0, "d91_120": 11615.35, "d121": 26684.22}, {"company": "Al Majal Human Resources", "client": "Yokogawa Middle East & Africa B.S.C.", "balance": 53043.46, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 53043.46}, {"company": "Al Majal Human Resources", "client": "MPH Global Services DMCC", "balance": 41485.27, "future": 13939.36, "d0_30": 27545.91, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Human Resources", "client": "JGC Corporation", "balance": 39299.89, "future": 39299.89, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Human Resources", "client": "Intech Process Automation FZCO", "balance": 26936.0, "future": 14430.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 12506.0}, {"company": "Al Majal Human Resources", "client": "GISMIC", "balance": 24582.4, "future": 6969.68, "d0_30": 9914.32, "d31_60": 7698.4, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Human Resources", "client": "Dubai Chambers", "balance": 14039.2, "future": 7019.6, "d0_30": 0.0, "d31_60": 7019.6, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Human Resources", "client": "ETS Arts and Science for Environment", "balance": 13406.46, "future": 5300.0, "d0_30": 5300.0, "d31_60": 2806.46, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Human Resources", "client": "Expro Worldwide B.V. \u2013 Iraq Branch", "balance": 8210.0, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 8210.0}, {"company": "Al Majal Human Resources", "client": "Neeyamo Inc", "balance": 7900.0, "future": 0.0, "d0_30": 4300.0, "d31_60": 1800.0, "d61_90": 1800.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Human Resources", "client": "Systems Engineering Services", "balance": 6816.42, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 6816.42}, {"company": "Al Majal Human Resources", "client": "Al-Majal For Oil and Energy Services LTD", "balance": 5765.76, "future": 4903.56, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 862.2, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Human Resources", "client": "Baker Hughes Asia Pacific Ltd.", "balance": 5000.0, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 5000.0}, {"company": "Al Majal Human Resources", "client": "PEG Engineering & Contracting DMCC", "balance": 4600.0, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 4600.0}, {"company": "Al Majal Human Resources", "client": "ANOTECH ENERGY SAS", "balance": 3737.42, "future": 1742.42, "d0_30": 0.0, "d31_60": 1496.0, "d61_90": 499.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Human Resources", "client": "The Orion Group", "balance": 3732.22, "future": 1742.42, "d0_30": 397.95, "d31_60": 397.95, "d61_90": 397.95, "d91_120": 397.95, "d121": 398.0}, {"company": "Al Majal Human Resources", "client": "RPS Energy LTD", "balance": 3000.0, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 3000.0, "d121": 0.0}, {"company": "Al Majal Human Resources", "client": "Abu Ali Market", "balance": 2875.0, "future": 0.0, "d0_30": 2875.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Human Resources", "client": "lhassa", "balance": 1376.82, "future": 0.0, "d0_30": 0.0, "d31_60": 400.0, "d61_90": 976.82, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Human Resources", "client": "Menard FZE", "balance": 741.58, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 741.58}, {"company": "Al Majal Score For Energy Equipment", "client": "BP Iraq NV  Rumaila Operating Organization", "balance": 1126593.0, "future": 1037931.0, "d0_30": 88662.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Score For Energy Equipment", "client": "Basrah GAS COMPANY", "balance": 938357.29, "future": 0.0, "d0_30": 202226.84, "d31_60": 271138.49, "d61_90": 77061.37, "d91_120": 321403.0, "d121": 66527.59}, {"company": "Al Majal Score For Energy Equipment", "client": "PetroChina", "balance": 106562.0, "future": 46928.0, "d0_30": 28314.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 31320.0, "d121": 0.0}, {"company": "Al Majal Score For Energy Equipment", "client": "TAAM Engineering", "balance": 34803.42, "future": 0.0, "d0_30": 26228.42, "d31_60": 8575.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Score For Energy Equipment", "client": "Sulzer Rotating Equipment FZCO", "balance": 31391.95, "future": 0.0, "d0_30": 15601.55, "d31_60": 0.0, "d61_90": 15790.4, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Score For Energy Equipment", "client": "JGC Corporation", "balance": 23698.52, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 23698.52}, {"company": "Al Majal Score For Energy Equipment", "client": "GE Oil & Gas India Private Limited", "balance": 16807.37, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 6320.37, "d121": 10487.0}, {"company": "Al Majal Score For Energy Equipment", "client": "PEARL PETROLEUM COMPANY LIMITED", "balance": 15933.6, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 15933.6, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Score For Energy Equipment", "client": "Bonati SPA-Iraq Branch", "balance": 11429.0, "future": 0.0, "d0_30": 11429.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Score For Energy Equipment", "client": "Themar Alfayhaa Company for General Trading LTD.", "balance": 6316.5, "future": 0.0, "d0_30": 6316.5, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Score For Energy Equipment", "client": "BEINIT ENERGY DMCC", "balance": 5274.0, "future": 0.0, "d0_30": 0.0, "d31_60": 5274.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Score For Energy Equipment", "client": "Al Majal Sulzer Rotating Equipment Services", "balance": 4634.7, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 4634.7, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Score For Energy Equipment", "client": "TotalEnergies EP Ratawi Hub SAS", "balance": 4584.6, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 4584.6, "d121": 0.0}, {"company": "Al Majal Score For Energy Equipment", "client": "Bezhan Pet Co. For Oil Refining LTD", "balance": 3764.28, "future": 0.0, "d0_30": 0.0, "d31_60": 3764.28, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Score For Energy Equipment", "client": "PEG Engineering & Contracting DMCC", "balance": 2351.7, "future": 0.0, "d0_30": 2351.7, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Score For Energy Equipment", "client": "Kuwait Energy Company", "balance": 781.64, "future": 0.0, "d0_30": 0.0, "d31_60": 781.64, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Technical Services (AMTS)", "client": "Kuwait Energy Basra Limited", "balance": 1244597.64, "future": 0, "d0_30": 25912.96, "d31_60": 104090.93, "d61_90": 219384.99, "d91_120": 895208.76, "d121": 0.0}, {"company": "Al Majal Technical Services (AMTS)", "client": "Schlumberger Middle East SA", "balance": 722781.63, "future": 0, "d0_30": 84975.55, "d31_60": 121097.08, "d61_90": 181421.0, "d91_120": 99618.0, "d121": 235670.0}, {"company": "Al Majal Technical Services (AMTS)", "client": "ZFOD - ENI Iraq Bv", "balance": 598115.95, "future": 0, "d0_30": 157575.0, "d31_60": 57431.1, "d61_90": 28661.0, "d91_120": 354448.85, "d121": 0.0}, {"company": "Al Majal Technical Services (AMTS)", "client": "GAZPROM NEFT BADRA B.V.", "balance": 422816.63, "future": 0, "d0_30": 50826.05, "d31_60": 49123.73, "d61_90": 0.0, "d91_120": 322866.85, "d121": 0.0}, {"company": "Al Majal Technical Services (AMTS)", "client": "Kuwait Energy Company", "balance": 398049.02, "future": 0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 166881.38, "d121": 231167.64}, {"company": "Al Majal Technical Services (AMTS)", "client": "KCA Deutag Enterprises Ltd. Iraq Branch", "balance": 265179.66, "future": 0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 1936.0, "d121": 263243.66}, {"company": "Al Majal Technical Services (AMTS)", "client": "TotalEnergies EP Ratawi Hub SAS", "balance": 210969.88, "future": 0, "d0_30": 66509.88, "d31_60": 49980.0, "d61_90": 5705.0, "d91_120": 22820.0, "d121": 65955.0}, {"company": "Al Majal Technical Services (AMTS)", "client": "Basrah Gas Company", "balance": 204600.0, "future": 0, "d0_30": 0.0, "d31_60": 204600.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Technical Services (AMTS)", "client": "Best Solutions Trading And Services For Oil & Gas Equipment, LLC", "balance": 178932.0, "future": 0, "d0_30": 47000.0, "d31_60": 28985.0, "d61_90": 60285.0, "d91_120": 27417.0, "d121": 15245.0}, {"company": "Al Majal Technical Services (AMTS)", "client": "Basra Energy Company Limited", "balance": 131111.05, "future": 0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 126769.6, "d121": 4341.45}, {"company": "Al Majal Technical Services (AMTS)", "client": "Ethos Energy", "balance": 127163.97, "future": 0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 62165.0, "d121": 64998.97}, {"company": "Al Majal Technical Services (AMTS)", "client": "Al Majal Score For Energy Equipment Maintenance And General Trade LLC.", "balance": 67096.09, "future": 0, "d0_30": 66148.97, "d31_60": 947.12, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Technical Services (AMTS)", "client": "Zhongman Petroleum Engineering Technology Services (Hong Kong) Co. Limited Iraq Branch", "balance": 49151.0, "future": 0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 49151.0}, {"company": "Al Majal Technical Services (AMTS)", "client": "Oil Pipe line Company", "balance": 47019.31, "future": 0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 47019.31}, {"company": "Al Majal Technical Services (AMTS)", "client": "Baker Hughes Asia Pacific Ltd.", "balance": 44075.0, "future": 0, "d0_30": 0.0, "d31_60": 3406.0, "d61_90": 3668.0, "d91_120": 18292.0, "d121": 18709.0}, {"company": "Al Majal Technical Services (AMTS)", "client": "Basrah Oil Company", "balance": 36303.31, "future": 0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 36303.31}, {"company": "Al Majal Technical Services (AMTS)", "client": "Halliburton Worldwide Limited", "balance": 34451.82, "future": 0, "d0_30": 11050.0, "d31_60": 3360.0, "d61_90": 0.0, "d91_120": 3500.0, "d121": 16541.82}, {"company": "Al Majal Technical Services (AMTS)", "client": "Ghabat AI-Majal for Operation and Maintenance of Energy Projects Co. LTD", "balance": 28968.0, "future": 0, "d0_30": 28968.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Technical Services (AMTS)", "client": "Lukoil Overseas Iraq Exploration B.V", "balance": 27655.11, "future": 0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 27655.11}, {"company": "Al Majal Technical Services (AMTS)", "client": "Bohai Drilling And Engineering Limited", "balance": 19863.0, "future": 0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 19863.0}, {"company": "Al Majal Technical Services (AMTS)", "client": "Weatherford Oil Tools Middle East Lts.", "balance": 9610.0, "future": 0, "d0_30": 0.0, "d31_60": 900.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 8710.0}, {"company": "Al Majal Technical Services (AMTS)", "client": "Veolia Water Systems Gulf-FZC", "balance": 7021.0, "future": 0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 7021.0, "d121": 0.0}, {"company": "Al Majal Technical Services (AMTS)", "client": "Al-Majal For Oil and Energy Services LTD", "balance": 5220.0, "future": 0, "d0_30": 5220.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Technical Services (AMTS)", "client": "NOVOMET", "balance": 4706.0, "future": 0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 4706.0}, {"company": "Al Majal Technical Services (AMTS)", "client": "Kentech Gulf Holdings Limited Iraq Branch", "balance": 3416.0, "future": 0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 3416.0}, {"company": "Al Majal Technical Services (AMTS)", "client": "AL Khorayef Petroleum Company", "balance": 1988.0, "future": 0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 552.0, "d121": 1436.0}, {"company": "Al Majal Technical Services (AMTS)", "client": "Tenaris Global Services S.A", "balance": 1970.0, "future": 0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 1970.0}, {"company": "Al Majal Technical Services (AMTS)", "client": "Nahj Al Basra", "balance": 1870.0, "future": 0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 1870.0}, {"company": "Al Majal Technical Services (AMTS)", "client": "Merla", "balance": 1546.5, "future": 0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 1546.5}, {"company": "Al Majal Technical Services (AMTS)", "client": "Score Middle East FZE", "balance": 1154.86, "future": 0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 1154.86}, {"company": "Al Majal Technical Services (AMTS)", "client": "ITT Industries", "balance": 850.0, "future": 0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 850.0}, {"company": "Al Majal Technical Services (AMTS)", "client": "LUKOIL MID-EAST LIMITED", "balance": 298.72, "future": 0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 298.72}, {"company": "Al Majal Sulzer Rotating Equipment", "client": "Basra Energy Company Limited", "balance": 302810.0, "future": 0, "d0_30": 94715.71, "d31_60": 119352.65, "d61_90": 63629.64, "d91_120": 0.0, "d121": 25112.0}, {"company": "Al Majal Sulzer Rotating Equipment", "client": "PETRONAS Carigali Iraq Holding B.V", "balance": 192415.13, "future": 0, "d0_30": 0.0, "d31_60": 80394.0, "d61_90": 0.0, "d91_120": 85047.64, "d121": 26973.49}, {"company": "Al Majal Sulzer Rotating Equipment", "client": "PetroChina", "balance": 189552.8, "future": 0, "d0_30": 67786.4, "d31_60": 44316.4, "d61_90": 0.0, "d91_120": 77450.0, "d121": 0.0}, {"company": "Al Majal Sulzer Rotating Equipment", "client": "Basrah Gas Company", "balance": 143670.57, "future": 0, "d0_30": 13700.0, "d31_60": 56135.1, "d61_90": 9950.0, "d91_120": 63885.47, "d121": 0.0}, {"company": "Al Majal Sulzer Rotating Equipment", "client": "Kuwait Energy Company", "balance": 76286.14, "future": 0, "d0_30": 0.0, "d31_60": 18995.6, "d61_90": 0.0, "d91_120": 0.0, "d121": 57290.54}, {"company": "Al Majal Sulzer Rotating Equipment", "client": "TotalEnergies EP Ratawi Hub SAS", "balance": 35646.0, "future": 0, "d0_30": 0.0, "d31_60": 35646.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Al Majal Sulzer Rotating Equipment", "client": "Raban Alsafina", "balance": 8400.0, "future": 0, "d0_30": 8400.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Iraq Logistics Ventures LTD", "client": "RINA Consulting S.p.A", "balance": 134901.27, "future": 39283.83, "d0_30": 33892.81, "d31_60": 31748.81, "d61_90": 29975.82, "d91_120": 0.0, "d121": 0.0}, {"company": "Iraq Logistics Ventures LTD", "client": "RSK Environment LLC", "balance": 58597.1, "future": 0.0, "d0_30": 32592.2, "d31_60": 26004.9, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Iraq Logistics Ventures LTD", "client": "Nippon\u00a0Koei\u00a0,Hartha\u00a0Power\u00a0Station", "balance": 2645.0, "future": 0.0, "d0_30": 2645.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "Field Energy for General Trading", "client": "Tenaris Global Services S.A", "balance": 1243623.6, "future": 0.0, "d0_30": 133895.22, "d31_60": 1109728.38, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "ARIF ALSHEKANI /ARBEEL", "balance": 255736.77, "future": 0.0, "d0_30": 0.0, "d31_60": 116494.5, "d61_90": 0.0, "d91_120": 72540.0, "d121": 66702.27}, {"company": "NGK Spare Parts", "client": "SAAD & ALI", "balance": 73346.63, "future": 33448.53, "d0_30": 8559.0, "d31_60": 31339.1, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "ALI   AL-DERAWEE", "balance": 52395.88, "future": 42710.5, "d0_30": 9685.38, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "ABO SHAHAD", "balance": 49872.12, "future": 51310.12, "d0_30": 0.0, "d31_60": -1438.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "Ahmed Alkhateb Office", "balance": 48169.45, "future": 50250.0, "d0_30": 0.0, "d31_60": -2080.55, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "MOHANED AL-RUBAIEE", "balance": 33670.0, "future": 4744.0, "d0_30": 28926.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "SALAH AL-NOAEMY", "balance": 24081.5, "future": 24081.5, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "MOHAMMED AL-BAGHDADEE NAJAF", "balance": 21813.0, "future": 856.0, "d0_30": 20957.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "KHALED MOHAMMED DAHAM- ARBEL", "balance": 21475.5, "future": 17092.5, "d0_30": 4581.0, "d31_60": -198.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "CHALAK/MULLA YOUSIF / ARBIL", "balance": 20670.0, "future": 20670.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "RAEED & WASEEM", "balance": 20057.7, "future": 20057.7, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "ABO TARIQ RAMADY", "balance": 19591.0, "future": 19575.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 16.0}, {"company": "NGK Spare Parts", "client": "MURTATHA", "balance": 18039.0, "future": 3498.0, "d0_30": 14541.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "ALAA BOSH", "balance": 17730.51, "future": 14591.5, "d0_30": 3139.01, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "Cash Customer", "balance": 15528.04, "future": 15519.04, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 9.0}, {"company": "NGK Spare Parts", "client": "MOHAMED AL-MASOODY", "balance": 15499.0, "future": 10012.5, "d0_30": 4162.5, "d31_60": 1324.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "THAER HASAN QURNA", "balance": 15362.5, "future": 0.0, "d0_30": 15362.5, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "FIRAS MICHAEL", "balance": 12379.74, "future": 2800.0, "d0_30": 9579.74, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "MUSTAFA BAKER", "balance": 12246.5, "future": 4350.0, "d0_30": 7896.5, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "AL-AMEER OFFICE", "balance": 12190.43, "future": 4327.5, "d0_30": 7487.7, "d31_60": 375.23, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "RAFEEDEN OFFICE", "balance": 11439.13, "future": 5450.0, "d0_30": 6176.13, "d31_60": -187.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "HAJI SABTEY OFFICE", "balance": 9668.25, "future": 7380.0, "d0_30": 2288.25, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "KAKA SARDAR ARBIL", "balance": 9525.0, "future": 9525.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "AL-RAEED OFFICE", "balance": 9230.8, "future": 6014.0, "d0_30": 3216.8, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "ABO MAHDY KARBALAA", "balance": 8486.14, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 8486.14}, {"company": "NGK Spare Parts", "client": "Al-Oulla office", "balance": 7881.5, "future": 7881.5, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "ANWAR AL BASRAH", "balance": 7154.88, "future": 412.5, "d0_30": 0.0, "d31_60": 6742.38, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "ABO MANSOR ALBASRAH", "balance": 6992.5, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 6992.5}, {"company": "NGK Spare Parts", "client": "Adam Office", "balance": 6723.0, "future": 0.0, "d0_30": 0.0, "d31_60": 6723.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "Husam Al-Samaraye Office", "balance": 5154.05, "future": 3439.5, "d0_30": 1710.3, "d31_60": 4.25, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "Basim/Ahmed / Nasyria", "balance": 4998.75, "future": 0.0, "d0_30": 4998.75, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "FARIS DEHAAM OFFICE", "balance": 4942.62, "future": 3127.5, "d0_30": 1815.12, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "ABO ADIL OFFICE", "balance": 4830.0, "future": 3350.0, "d0_30": 1480.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "Sama Baghdad", "balance": 4677.35, "future": 4037.0, "d0_30": 640.35, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "AL-FURKHAN OFFICE", "balance": 4617.4, "future": 3645.0, "d0_30": 972.4, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "AL-Husam Stations", "balance": 4003.0, "future": 4003.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "Abd Al-Ameer Al-Zuhairi", "balance": 3855.0, "future": 1350.0, "d0_30": 0.0, "d31_60": 2505.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "Basim Nasyria", "balance": 3690.0, "future": 3690.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "AHMED SALMAN", "balance": 3622.6, "future": 1792.5, "d0_30": 1662.5, "d31_60": 167.6, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "HASAN BAKER", "balance": 3539.0, "future": 862.5, "d0_30": 2676.5, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "MOHAMMAD AL RAWI", "balance": 3342.5, "future": 3342.5, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "HAYTHAM", "balance": 3177.54, "future": 787.5, "d0_30": 2390.04, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "Mohamed Al-Rubayee", "balance": 3045.45, "future": 3045.45, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "Sayed Hayder Al - hajjar", "balance": 2572.5, "future": 1440.0, "d0_30": 1132.5, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "Hayder Al-Thiqa", "balance": 2490.0, "future": 2490.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "HAJI BAKER", "balance": 2472.5, "future": 2472.5, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "Mohamed aboody", "balance": 2262.9, "future": 2262.9, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "Oil Line Office", "balance": 1855.0, "future": 0.0, "d0_30": 1855.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "Fouad Ali", "balance": 1775.0, "future": 1775.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "SAYED ABD ALAMEER BASRAH", "balance": 1694.0, "future": 1694.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "HASAN  AL-MAWADA OFFICE", "balance": 1336.0, "future": 1336.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "Sayed Mohamed Al - hajjar", "balance": 1330.5, "future": 0.0, "d0_30": 1330.5, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "AL-RAYAA AL-BAYDAA", "balance": 1182.5, "future": 220.0, "d0_30": 862.5, "d31_60": 0.0, "d61_90": 100.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "ABU JALEL", "balance": 1140.0, "future": 1140.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "Tariq Samara", "balance": 1138.5, "future": 1138.5, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "Sayed Wafaa Najaf", "balance": 1116.0, "future": 945.0, "d0_30": 171.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "MENAS OFFICE", "balance": 862.5, "future": 862.5, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "REDHWAN", "balance": 742.5, "future": 517.5, "d0_30": 225.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "Omar Al-Mousi", "balance": 692.5, "future": 0.0, "d0_30": 675.0, "d31_60": 0.0, "d61_90": 17.5, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "Hussien AlNuaimy", "balance": 675.0, "future": 675.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "MUSTAFA AL-MAMOORY", "balance": 485.3, "future": 485.3, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "Methal - Abu Fadi", "balance": 400.0, "future": 0.0, "d0_30": 180.0, "d31_60": 0.0, "d61_90": 220.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "JAMAL AL-MASOODY", "balance": 389.5, "future": 389.5, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "ToolMart", "balance": 273.5, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 16.5, "d91_120": 187.0, "d121": 70.0}, {"company": "NGK Spare Parts", "client": "Nashwan & Gazawan", "balance": 72.0, "future": 72.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "ToolMart", "balance": 57.0, "future": 16.0, "d0_30": 41.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "NGK Spare Parts", "client": "Maher Al Joboury", "balance": 35.0, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 35.0}, {"company": "AMDH", "client": "Iraq Drilling Company", "balance": 6521633.11, "future": 1269043.83, "d0_30": 207032.16, "d31_60": 781048.33, "d61_90": 738851.94, "d91_120": 221896.31, "d121": 3303760.54}, {"company": "AMDH", "client": "Zhongman Petroleum And Natural Gas Group", "balance": 1861582.2, "future": 362359.4, "d0_30": 557997.35, "d31_60": 463614.8, "d61_90": 14030.85, "d91_120": 208889.6, "d121": 254690.2}, {"company": "AMDH", "client": "Anton Oilfield Services DMCC", "balance": 799276.8, "future": 56854.95, "d0_30": 65743.65, "d31_60": 15572.6, "d61_90": 98314.57, "d91_120": 78799.1, "d121": 483991.93}, {"company": "AMDH", "client": "Schlumberger Middle East SA", "balance": 703632.49, "future": 333054.69, "d0_30": 184878.2, "d31_60": 110884.0, "d61_90": 38930.6, "d91_120": 25700.0, "d121": 10185.0}, {"company": "AMDH", "client": "KOG Oil and Gaz", "balance": 315689.1, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 315689.1}, {"company": "AMDH", "client": "Halliburton Worldwide Limited", "balance": 173812.78, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 54737.5, "d91_120": 0.0, "d121": 119075.28}, {"company": "AMDH", "client": "United Company For Development S.A.L  U.C.D (Off-Shore)", "balance": 117148.03, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 117148.03}, {"company": "AMDH", "client": "DQE International Iraq Branch", "balance": 81185.6, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 81185.6}, {"company": "AMDH", "client": "CNPC Bohai Drilling Engineering Limited Iraq Brance", "balance": 41050.0, "future": 22300.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 6650.0, "d91_120": 0.0, "d121": 12100.0}, {"company": "AMDH", "client": "Kuwait Energy Company", "balance": 34155.0, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 34155.0, "d121": 0.0}, {"company": "AMDH", "client": "Eriell Oilfield Services B.V", "balance": 32540.0, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 32540.0}, {"company": "AMDH", "client": "NOV PRODUCTS MIDDLE EAST \u2013 FZE", "balance": 31050.0, "future": 0.0, "d0_30": 0.0, "d31_60": 31050.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMDH", "client": "Core Laboratories International", "balance": 15468.46, "future": 15468.46, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMDH", "client": "COSL Middle East FZE", "balance": 2929.0, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 2929.0}, {"company": "AMDH", "client": "Kerui Oil Field", "balance": 2750.0, "future": 0.0, "d0_30": 2750.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMDH", "client": "Weatherford Oil Tools Middle East Lts.", "balance": 2560.0, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 2560.0}, {"company": "AMOS", "client": "Schlumberger Middle East SA", "balance": 998600.67, "future": 350874.0, "d0_30": 229747.75, "d31_60": 125459.0, "d61_90": 204876.42, "d91_120": 29618.0, "d121": 58025.5}, {"company": "AMOS", "client": "Daqing Petroleum Administration Bureau Co. Ltd", "balance": 930808.99, "future": 606146.54, "d0_30": 298103.0, "d31_60": 5370.0, "d61_90": 7140.0, "d91_120": 0.0, "d121": 14049.45}, {"company": "AMOS", "client": "Anton Oilfield Services DMCC", "balance": 558959.23, "future": 315110.23, "d0_30": 73710.0, "d31_60": 143642.0, "d61_90": 12527.0, "d91_120": 0.0, "d121": 13970.0}, {"company": "AMOS", "client": "Oil Technology For Equipment And Oilfield Services LLC", "balance": 362740.2, "future": 293347.1, "d0_30": 69393.1, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMOS", "client": "Kerui Oil Field", "balance": 310545.36, "future": 0.0, "d0_30": 0.0, "d31_60": 17460.0, "d61_90": 178899.0, "d91_120": 0.0, "d121": 114186.36}, {"company": "AMOS", "client": "Halliburton Worldwide Limited", "balance": 277304.63, "future": 0.0, "d0_30": 0.0, "d31_60": 93856.95, "d61_90": 18000.0, "d91_120": 139.35, "d121": 165308.33}, {"company": "AMOS", "client": "Zhongman Petroleum And Natural Gas Group", "balance": 82560.0, "future": 0.0, "d0_30": 60300.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 22260.0}, {"company": "AMOS", "client": "Greatwall Drilling Company (Iraq Branch)", "balance": 8515.0, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 8515.0}, {"company": "AMBP NR", "client": "TotalEnergies EP Ratawi Hub SAS", "balance": 5084743.03, "future": 90977.94, "d0_30": 3183044.61, "d31_60": 1382071.22, "d61_90": 104239.15, "d91_120": 219769.97, "d121": 104640.14}, {"company": "AMBP NR", "client": "Bonati SPA-Iraq Branch", "balance": 989528.95, "future": 456859.66, "d0_30": 506210.29, "d31_60": 6039.2, "d61_90": 0.0, "d91_120": 250.0, "d121": 20169.8}, {"company": "AMBP NR", "client": "Ghabet El Iraq LLC", "balance": 919098.65, "future": 0.0, "d0_30": 689731.36, "d31_60": 206732.0, "d61_90": 5537.29, "d91_120": 0.0, "d121": 17098.0}, {"company": "AMBP NR", "client": "Egyptian Maintenance Company", "balance": 685802.88, "future": 138296.5, "d0_30": 156428.0, "d31_60": 304084.38, "d61_90": 86994.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Basrah Gas Company", "balance": 376232.0, "future": 113760.0, "d0_30": 138152.0, "d31_60": 0.0, "d61_90": 124320.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Al Majal Sulzer Rotating Equipment Services", "balance": 250842.46, "future": 111439.73, "d0_30": 139402.73, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Erinys Group Ltd", "balance": 250272.52, "future": 0.0, "d0_30": 250272.52, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Siemens Energy Global GmbH & Co. KG", "balance": 161269.32, "future": 40532.76, "d0_30": 117977.69, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 2758.87}, {"company": "AMBP NR", "client": "CNPC Chuanqing Drilling Engineering Company Iraq Branch", "balance": 159134.8, "future": 34781.0, "d0_30": 101328.6, "d31_60": 23025.2, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Abu Khema Petroleum Company Limited", "balance": 154559.73, "future": 0.0, "d0_30": 37459.16, "d31_60": 55389.32, "d61_90": 61711.25, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Lukoil Overseas Iraq Exploration B.V", "balance": 140024.5, "future": 54385.0, "d0_30": 85639.5, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Tekfen Construction And Installation Co.Inc", "balance": 128020.0, "future": 0.0, "d0_30": 61409.0, "d31_60": 66611.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Al Hurea", "balance": 122680.8, "future": 0.0, "d0_30": 122680.8, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "PEG Engineering & Contracting DMCC", "balance": 120915.0, "future": 56895.0, "d0_30": 64020.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Schlumberger Middle East SA", "balance": 119817.5, "future": 18114.0, "d0_30": 39427.0, "d31_60": 19319.0, "d61_90": 10892.0, "d91_120": 900.0, "d121": 31165.5}, {"company": "AMBP NR", "client": "Baker Hughes Asia Pacific Ltd.", "balance": 85961.31, "future": 23475.03, "d0_30": 62486.28, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "China Petroleum Pipeline Engineering Company Limited-Iraq", "balance": 79403.12, "future": 79403.12, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Expro", "balance": 74276.27, "future": 21751.27, "d0_30": 14209.7, "d31_60": 13435.27, "d61_90": 0.0, "d91_120": 0.0, "d121": 24880.03}, {"company": "AMBP NR", "client": "Defaf Al Khaleej Co", "balance": 65550.0, "future": 0.0, "d0_30": 20460.0, "d31_60": 22545.0, "d61_90": 22545.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "AKT Oil Services", "balance": 65424.0, "future": 0.0, "d0_30": 65424.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Best Solutions Trading And Services For Oil & Gas Equipment, LLC", "balance": 64019.98, "future": 0.0, "d0_30": 2350.07, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 33125.0, "d121": 28544.91}, {"company": "AMBP NR", "client": "Talia (Iraq) Limited", "balance": 57939.0, "future": 0.0, "d0_30": 34607.0, "d31_60": 875.0, "d61_90": 0.0, "d91_120": 21207.0, "d121": 1250.0}, {"company": "AMBP NR", "client": "KBR Abr Al-bihar General Services And Contracting LLC", "balance": 52000.0, "future": 15600.0, "d0_30": 18200.0, "d31_60": 18200.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Progetti Europa & Global SpA", "balance": 45585.0, "future": 0.0, "d0_30": 20460.0, "d31_60": 25125.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Sinopec International Petroleum Services Corparation Irqp Branch(SIPSC)", "balance": 32187.0, "future": 0.0, "d0_30": 32187.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Yokogawa Engineering Middle East & Africa FZE", "balance": 29802.1, "future": 0.0, "d0_30": 24742.1, "d31_60": 3410.0, "d61_90": 1650.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Beinit Energy DMCC", "balance": 21890.0, "future": 0.0, "d0_30": 6005.0, "d31_60": 8000.0, "d61_90": 7885.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Al Murabit Group", "balance": 17414.0, "future": 0.0, "d0_30": 17414.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "KCA Deutag Enterprises Ltd. Iraq Branch", "balance": 15482.0, "future": 15482.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Iraq Gates Contracting Co.", "balance": 14428.71, "future": 0.0, "d0_30": 2520.0, "d31_60": 270.0, "d61_90": 1938.71, "d91_120": 3290.0, "d121": 6410.0}, {"company": "AMBP NR", "client": "Intech Process Automation FZCO", "balance": 9366.25, "future": 0.0, "d0_30": 8910.0, "d31_60": 456.25, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Intertek Global (Iraq) Limited", "balance": 9285.0, "future": 0.0, "d0_30": 9285.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Cape Regional Services DMCC", "balance": 8400.0, "future": 850.0, "d0_30": 5850.0, "d31_60": 850.0, "d61_90": 850.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Renwa Group", "balance": 6480.0, "future": 0.0, "d0_30": 2016.0, "d31_60": 2232.0, "d61_90": 2232.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Drillmec SPA", "balance": 6450.0, "future": 0.0, "d0_30": 1200.0, "d31_60": 1650.0, "d61_90": 900.0, "d91_120": 1950.0, "d121": 750.0}, {"company": "AMBP NR", "client": "RMSI Iraq LLC.", "balance": 6261.0, "future": 0.0, "d0_30": 6261.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Stratum Reservoir (Norway) AS", "balance": 4596.0, "future": 0.0, "d0_30": 4596.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Al Wahaa company Iraq", "balance": 4568.0, "future": 0.0, "d0_30": 4568.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Energy Oil Investment Offshore S.A.L", "balance": 3689.7, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 3689.7}, {"company": "AMBP NR", "client": "Abraj Al Diyar Contracting Company", "balance": 3600.0, "future": 0.0, "d0_30": 3600.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Rutledge Omni Services Pte Ltd", "balance": 3400.0, "future": 0.0, "d0_30": 425.0, "d31_60": 680.0, "d61_90": 2125.0, "d91_120": 170.0, "d121": 0.0}, {"company": "AMBP NR", "client": "National Bank Of Iraq", "balance": 3333.33, "future": 0.0, "d0_30": 3333.33, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Field Core A GE Company", "balance": 3222.0, "future": 0.0, "d0_30": 1490.0, "d31_60": -88.0, "d61_90": 1820.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Bureau Veritas", "balance": 3125.0, "future": 0.0, "d0_30": 0.0, "d31_60": 2625.0, "d61_90": 500.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Dar Ibtikar Al Iraq For General Services And General Trade", "balance": 2674.0, "future": 0.0, "d0_30": 350.0, "d31_60": 0.0, "d61_90": 2324.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Championx Gulf Limited", "balance": 1981.5, "future": 0.0, "d0_30": 1981.5, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "GULF INDUSTRIAL SUPPLY FZE", "balance": 1450.0, "future": 0.0, "d0_30": 1450.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "DERRAA ALRUMAILA SECURITY SERVICES", "balance": 1450.0, "future": 0.0, "d0_30": 1450.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Enerflex", "balance": 1430.0, "future": 0.0, "d0_30": 0.0, "d31_60": 660.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 770.0}, {"company": "AMBP NR", "client": "G4S Security Solutions Iraq Limited", "balance": 1153.0, "future": 1153.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Socar AOS", "balance": 1035.0, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 1035.0}, {"company": "AMBP NR", "client": "ANI INTEGRATED SERVICES MIDDLE EAST FZE", "balance": 875.0, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 875.0}, {"company": "AMBP NR", "client": "Olive Group-Constellis", "balance": 720.0, "future": 0.0, "d0_30": 720.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "COSL Middle East FZE", "balance": 625.0, "future": 0.0, "d0_30": 0.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 625.0}, {"company": "AMBP NR", "client": "PETRONAS Carigali Iraq Holding B.V", "balance": 490.0, "future": 0.0, "d0_30": 490.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Guardia Systems", "balance": 200.0, "future": 0.0, "d0_30": 200.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "AL Khorayef Petroleum Company", "balance": 145.0, "future": 0.0, "d0_30": 145.0, "d31_60": 0.0, "d61_90": 0.0, "d91_120": 0.0, "d121": 0.0}, {"company": "AMBP NR", "client": "Control Risks Group Limited", "balance": -222511.09, "future": 0.0, "d0_30": -12632.46, "d31_60": 52986.63, "d61_90": 4269.43, "d91_120": 9067.05, "d121": -276201.74}];
+
+// Helpers
+function $(id){return document.getElementById(id)}
+function fm(n){return n?'$'+n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,','):'$0.00'}
+function fs(n){return n?'$'+n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,','):'$0.00'}
+function pc(n,d){return d?(n/d*100).toFixed(1)+'%':'0.0%'}
+function pn(n,d){return d?n/d*100:0}
+
+// Populate company filter
+const comps=[...new Set(D.map(d=>d.company))].sort();
+const fSel=$('fC');
+comps.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;fSel.appendChild(o)});
+
+// Filter
+function getF(){
+ let r=[...D];
+ const c=$('fC').value,cl=$('fCl').value.toLowerCase(),mn=+$('fMin').value;
+ if(c)r=r.filter(d=>d.company===c);
+ if(cl)r=r.filter(d=>d.client.toLowerCase().includes(cl));
+ if(mn)r=r.filter(d=>d.balance>=mn);
+ // Update tag
+ let tag='Showing: ';
+ if(!c&&!cl&&!mn)tag+='All Data ('+D.length+' clients)';
+ else{
+  if(c)tag+=c;else tag+='All Companies';
+  if(cl)tag+=' | "'+$('fCl').value+'"';
+  if(mn)tag+=' | $'+mn.toLocaleString()+'+';
+  tag+=' ('+r.length+' clients)';
+ }
+ $('fTag').textContent=tag;
+ return r;
+}
+function resetF(){$('fC').value='';$('fCl').value='';$('fMin').value='0';refresh()}
+
+// Totals
+function tot(data){
+ const t={balance:0,future:0,d0_30:0,d31_60:0,d61_90:0,d91_120:0,d121:0,count:data.length};
+ data.forEach(d=>{for(const k in t)if(k!=='count')t[k]+=d[k]||0});
+ t.overdue=t.d61_90+t.d91_120+t.d121;
+ t.companies=new Set(data.map(d=>d.company)).size;
+ return t;
+}
+
+// Company aggregation
+function byComp(data){
+ const m={};
+ data.forEach(d=>{
+  if(!m[d.company])m[d.company]={balance:0,future:0,d0_30:0,d31_60:0,d61_90:0,d91_120:0,d121:0,count:0,ov_clients:0};
+  const c=m[d.company];
+  ['balance','future','d0_30','d31_60','d61_90','d91_120','d121'].forEach(k=>c[k]+=d[k]||0);
+  c.count++;
+  if(d.d61_90>0||d.d91_120>0||d.d121>0)c.ov_clients++;
+ });
+ return Object.entries(m).sort((a,b)=>b[1].balance-a[1].balance);
+}
+
+// Bars builder
+function bars(items,color,maxV){
+ if(!maxV)maxV=items[0]?.[1]||1;
+ return items.map(([lbl,val,pctTxt])=>{
+  const w=val/maxV*100;
+  const sn=lbl.length>26?lbl.slice(0,26)+'...':lbl;
+  return `<div class="br"><div class="bl" title="${lbl}">${sn}</div><div class="bt"><div class="bf" style="width:${w.toFixed(0)}%;background:${color}">${pctTxt||''}</div></div><div class="bv">${fs(val)}</div></div>`;
+ }).join('');
+}
+
+// KPI card builder
+function kpi(cls,label,value,sub,drillKey){
+ return `<div class="kp ${cls}" onclick="drill('${drillKey}')"><div class="kl">${label}</div><div class="kv ${cls==='g'?'pos':cls==='r'?'neg':cls==='a'?'amb':cls==='dr'?'drc':''}">${value}</div><div class="ks">${sub}</div></div>`;
+}
+
+// Table row
+function tr(cells,cls){
+ return `<tr class="${cls||''}">${cells.map((c,i)=>`<td${i<2?' class="l"':''}${c.b?' class="b"':''}${c.s?' style="'+c.s+'"':''}>${c.v}</td>`).join('')}</tr>`;
+}
+
+// ══════════════════════════════════════════════
+// MODAL
+// ══════════════════════════════════════════════
+function oM(title,html){$('mT').textContent=title;$('mB').innerHTML=html;$('mo').classList.add('op')}
+function cM(){$('mo').classList.remove('op')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')cM()});
+
+// Drill function — builds modal content dynamically from current filtered data
+function drill(key){
+ const data=getF();
+ const t=tot(data);
+ let h='';
+
+ if(key.startsWith('period_')){
+  const pk=key.replace('period_','');
+  const label={future:'Future Remit',d0_30:'0-30 Days',d31_60:'31-60 Days',d61_90:'61-90 Days',d91_120:'91-120 Days',d121:'Over 121 Days'}[pk];
+  const color={future:'#3b82f6',d0_30:'#16a34a',d31_60:'#eab308',d61_90:'#d97706',d91_120:'#dc2626',d121:'#9b2c2c'}[pk];
+  const clients=data.filter(d=>d[pk]>0).sort((a,b)=>b[pk]-a[pk]);
+  const ptot=clients.reduce((s,d)=>s+d[pk],0);
+  const bc={};clients.forEach(d=>{bc[d.company]=(bc[d.company]||0)+d[pk]});
+  const sc=Object.entries(bc).sort((a,b)=>b[1]-a[1]);
+
+  h+=`<div class="mk">`;
+  h+=`<div class="mkc"><div class="mkv" style="color:${color}">${fs(ptot)}</div><div class="mkl">Period Total</div></div>`;
+  h+=`<div class="mkc"><div class="mkv">${clients.length}</div><div class="mkl">Clients</div></div>`;
+  h+=`<div class="mkc"><div class="mkv">${sc.length}</div><div class="mkl">Companies</div></div>`;
+  h+=`<div class="mkc"><div class="mkv">${fs(ptot/clients.length||0)}</div><div class="mkl">Avg / Client</div></div></div>`;
+
+  const mx=sc[0]?.[1]||1;
+  sc.slice(0,6).forEach(([n,v])=>{
+   const w=v/mx*100;const sn=n.length>26?n.slice(0,26)+'...':n;
+   h+=`<div class="br"><div class="bl">${sn}</div><div class="bt"><div class="bf" style="width:${w.toFixed(0)}%;background:${color}">${pc(v,ptot)}</div></div><div class="bv">${fs(v)}</div></div>`;
+  });
+
+  h+=`<table class="mtbl"><thead><tr><th class="l">Company</th><th class="l">Client</th><th>Amount</th><th>Balance</th><th>%</th></tr></thead><tbody>`;
+  clients.forEach((d,i)=>{
+   h+=`<tr class="${i%2?'a':''}"><td class="l" style="font-size:10px">${d.company}</td><td class="l">${d.client}</td><td class="b">${fm(d[pk])}</td><td>${fm(d.balance)}</td><td>${pc(d[pk],ptot)}</td></tr>`;
+  });
+  h+=`<tr class="t"><td class="l" colspan="2">TOTAL (${clients.length})</td><td>${fm(ptot)}</td><td></td><td>100%</td></tr></tbody></table>`;
+  oM(label+' — Full Breakdown',h);
+ }
+ else if(key==='overdue'){
+  const oc=data.filter(d=>(d.d61_90+d.d91_120+d.d121)>0).map(d=>({...d,ov:d.d61_90+d.d91_120+d.d121})).sort((a,b)=>b.ov-a.ov);
+  const otot=oc.reduce((s,d)=>s+d.ov,0);
+  h+=`<div class="mk"><div class="mkc"><div class="mkv" style="color:#dc2626">${fs(otot)}</div><div class="mkl">Total Overdue</div></div><div class="mkc"><div class="mkv">${oc.length}</div><div class="mkl">Clients</div></div><div class="mkc"><div class="mkv">${pc(otot,t.balance)}</div><div class="mkl">% of AR</div></div></div>`;
+  h+=`<table class="mtbl"><thead><tr><th class="l">Company</th><th class="l">Client</th><th>Overdue</th><th>61-90</th><th>91-120</th><th>121+</th><th>%</th></tr></thead><tbody>`;
+  oc.forEach((d,i)=>{h+=`<tr class="${i%2?'a':''}"><td class="l" style="font-size:10px">${d.company}</td><td class="l">${d.client}</td><td class="b">${fm(d.ov)}</td><td>${fm(d.d61_90)}</td><td>${fm(d.d91_120)}</td><td>${fm(d.d121)}</td><td>${pc(d.ov,otot)}</td></tr>`});
+  h+=`<tr class="t"><td class="l" colspan="2">TOTAL (${oc.length})</td><td>${fm(otot)}</td><td>${fm(oc.reduce((s,d)=>s+d.d61_90,0))}</td><td>${fm(oc.reduce((s,d)=>s+d.d91_120,0))}</td><td>${fm(oc.reduce((s,d)=>s+d.d121,0))}</td><td>100%</td></tr></tbody></table>`;
+  oM('Overdue Clients (>60 Days)',h);
+ }
+ else if(key==='dso'){
+  const periods=[['Future Remit',t.future,0,'#3b82f6'],['0-30 Days',t.d0_30,15,'#16a34a'],['31-60 Days',t.d31_60,45,'#eab308'],['61-90 Days',t.d61_90,75,'#d97706'],['91-120 Days',t.d91_120,105,'#dc2626'],['Over 121 Days',t.d121,150,'#9b2c2c']];
+  const dso=t.balance?Math.round(periods.reduce((s,p)=>s+p[1]*p[2],0)/t.balance):0;
+  h+=`<div class="mk"><div class="mkc"><div class="mkv">${dso} days</div><div class="mkl">Weighted DSO</div></div><div class="mkc"><div class="mkv">${fs(t.balance)}</div><div class="mkl">Total AR</div></div></div>`;
+  h+=`<table class="mtbl"><thead><tr><th class="l">Period</th><th>Amount</th><th>% of Total</th><th>Midpoint</th><th>Wtd Days</th></tr></thead><tbody>`;
+  periods.forEach((p,i)=>{h+=`<tr class="${i%2?'a':''}"><td class="l" style="color:${p[3]};font-weight:600">${p[0]}</td><td class="b">${fm(p[1])}</td><td>${pc(p[1],t.balance)}</td><td style="text-align:center">${p[2]}</td><td style="text-align:center">${t.balance?(p[1]*p[2]/t.balance).toFixed(1):'0'}</td></tr>`});
+  h+=`<tr class="t"><td class="l">WEIGHTED DSO</td><td>${fm(t.balance)}</td><td>100%</td><td></td><td style="text-align:center">${dso} days</td></tr></tbody></table>`;
+  h+=`<div class="ib bl" style="margin-top:14px"><div class="ibh" style="color:#0c4a6e">DSO Interpretation</div><div class="ibt" style="color:#1e3a5f">A weighted DSO of ${dso} days indicates ${dso>90?'significant':'moderate'} collection delays. Target DSO should be under 60 days. The 121+ bucket (${pc(t.d121,t.balance)}) is the primary driver.</div></div>`;
+  oM('Weighted DSO Analysis',h);
+ }
+ else if(key==='critical'){
+  const cr=data.filter(d=>(d.d61_90+d.d91_120+d.d121)>100000).map(d=>({...d,ov:d.d61_90+d.d91_120+d.d121})).sort((a,b)=>b.ov-a.ov);
+  const ctot=cr.reduce((s,d)=>s+d.ov,0);
+  h+=`<div class="mk"><div class="mkc"><div class="mkv" style="color:#9b2c2c">${cr.length}</div><div class="mkl">Critical Clients</div></div><div class="mkc"><div class="mkv">${fs(ctot)}</div><div class="mkl">Total Critical</div></div></div>`;
+  h+=`<table class="mtbl"><thead><tr><th class="l">Company</th><th class="l">Client</th><th>Overdue</th><th>61-90</th><th>91-120</th><th>121+</th></tr></thead><tbody>`;
+  cr.forEach((d,i)=>{h+=`<tr class="${i%2?'a':''}"><td class="l" style="font-size:10px">${d.company}</td><td class="l">${d.client}</td><td class="b">${fm(d.ov)}</td><td>${fm(d.d61_90)}</td><td>${fm(d.d91_120)}</td><td>${fm(d.d121)}</td></tr>`});
+  h+=`<tr class="t"><td class="l" colspan="2">TOTAL (${cr.length})</td><td>${fm(ctot)}</td><td></td><td></td><td></td></tr></tbody></table>`;
+  oM('Critical Clients — Over $100K Overdue',h);
+ }
+ else if(key==='top10'){
+  const oc=data.filter(d=>(d.d61_90+d.d91_120+d.d121)>0).map(d=>({...d,ov:d.d61_90+d.d91_120+d.d121,sc:d.d121*3+d.d91_120*2+d.d61_90})).sort((a,b)=>b.sc-a.sc).slice(0,10);
+  const s10=oc.reduce((s,d)=>s+d.ov,0);
+  h+=`<div class="mk"><div class="mkc"><div class="mkv" style="color:#d97706">${fs(s10)}</div><div class="mkl">Top 10 Total</div></div><div class="mkc"><div class="mkv">${pc(s10,t.overdue)}</div><div class="mkl">% of All Overdue</div></div></div>`;
+  h+=`<table class="mtbl"><thead><tr><th>#</th><th class="l">Company</th><th class="l">Client</th><th>Overdue</th><th>61-90</th><th>91-120</th><th>121+</th></tr></thead><tbody>`;
+  oc.forEach((d,i)=>{h+=`<tr class="${i%2?'a':''}"><td>${i+1}</td><td class="l" style="font-size:10px">${d.company}</td><td class="l">${d.client}</td><td class="b">${fm(d.ov)}</td><td>${fm(d.d61_90)}</td><td>${fm(d.d91_120)}</td><td>${fm(d.d121)}</td></tr>`});
+  h+=`<tr class="t"><td></td><td class="l" colspan="2">TOP 10 TOTAL</td><td>${fm(s10)}</td><td></td><td></td><td></td></tr></tbody></table>`;
+  h+=`<div class="ib bl" style="margin-top:12px"><div class="ibh" style="color:#0c4a6e">Recovery Impact</div><div class="ibt" style="color:#1e3a5f">Collecting from these 10 clients recovers ${fs(s10)} (${pc(s10,t.overdue)} of all overdue).</div></div>`;
+  oM('Top 10 Recovery Targets',h);
+ }
+ else if(key==='top15'){
+  const t15=data.sort((a,b)=>b.balance-a.balance).slice(0,15);
+  h+=`<table class="mtbl"><thead><tr><th>#</th><th class="l">Company</th><th class="l">Client</th><th>Balance</th><th>Future</th><th>0-30</th><th>31-60</th><th>61-90</th><th>91-120</th><th>121+</th></tr></thead><tbody>`;
+  t15.forEach((d,i)=>{h+=`<tr class="${i%2?'a':''}"><td>${i+1}</td><td class="l" style="font-size:10px">${d.company}</td><td class="l">${d.client}</td><td class="b">${fm(d.balance)}</td><td>${fm(d.future)}</td><td>${fm(d.d0_30)}</td><td>${fm(d.d31_60)}</td><td>${fm(d.d61_90)}</td><td>${fm(d.d91_120)}</td><td>${fm(d.d121)}</td></tr>`});
+  const tb=t15.reduce((s,d)=>s+d.balance,0);
+  h+=`<tr class="t"><td></td><td class="l" colspan="2">TOP 15</td><td>${fm(tb)}</td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table>`;
+  oM('Top 15 Receivables — Full Detail',h);
+ }
+ else if(key.startsWith('comp_')){
+  const cn=key.replace('comp_','');
+  const recs=data.filter(d=>d.company===cn).sort((a,b)=>b.balance-a.balance);
+  const ct=tot(recs);
+  h+=`<div class="mk"><div class="mkc"><div class="mkv">${fs(ct.balance)}</div><div class="mkl">Total AR</div></div><div class="mkc"><div class="mkv">${recs.length}</div><div class="mkl">Clients</div></div><div class="mkc"><div class="mkv" style="color:#dc2626">${fs(ct.overdue)}</div><div class="mkl">Overdue</div></div><div class="mkc"><div class="mkv">${pc(ct.overdue,ct.balance)}</div><div class="mkl">% Overdue</div></div></div>`;
+  h+=`<table class="mtbl"><thead><tr><th class="l">Client</th><th>Balance</th><th>Future</th><th>0-30</th><th>31-60</th><th>61-90</th><th>91-120</th><th>121+</th></tr></thead><tbody>`;
+  recs.forEach((d,i)=>{h+=`<tr class="${i%2?'a':''}"><td class="l">${d.client}</td><td class="b">${fm(d.balance)}</td><td>${fm(d.future)}</td><td>${fm(d.d0_30)}</td><td>${fm(d.d31_60)}</td><td>${fm(d.d61_90)}</td><td${d.d91_120>0?' style="color:#dc2626;font-weight:600"':''}>${fm(d.d91_120)}</td><td${d.d121>0?' style="color:#9b2c2c;font-weight:600"':''}>${fm(d.d121)}</td></tr>`});
+  h+=`<tr class="t"><td class="l">TOTAL</td><td>${fm(ct.balance)}</td><td>${fm(ct.future)}</td><td>${fm(ct.d0_30)}</td><td>${fm(ct.d31_60)}</td><td>${fm(ct.d61_90)}</td><td>${fm(ct.d91_120)}</td><td>${fm(ct.d121)}</td></tr></tbody></table>`;
+  oM(cn+' — Client Detail',h);
+ }
+ else if(key.startsWith('client_')){
+  const cn=key.replace('client_','');
+  const recs=data.filter(d=>d.client===cn);if(!recs.length)return;const r=recs[0];
+  const ov=r.d61_90+r.d91_120+r.d121;
+  h+=`<div class="mk"><div class="mkc"><div class="mkv">${fs(r.balance)}</div><div class="mkl">Balance</div></div><div class="mkc"><div class="mkv">${fs(r.future)}</div><div class="mkl">Future</div></div><div class="mkc"><div class="mkv pos">${fs(r.d0_30)}</div><div class="mkl">0-30</div></div><div class="mkc"><div class="mkv">${fs(r.d31_60)}</div><div class="mkl">31-60</div></div><div class="mkc"><div class="mkv amb">${fs(r.d61_90)}</div><div class="mkl">61-90</div></div><div class="mkc"><div class="mkv neg">${fs(r.d91_120)}</div><div class="mkl">91-120</div></div><div class="mkc"><div class="mkv drc">${fs(r.d121)}</div><div class="mkl">121+</div></div></div>`;
+  h+=`<div style="margin:8px 0;font-size:12px"><strong>Company:</strong> ${r.company}</div>`;
+  const segs=[['Future',r.future,'#3b82f6'],['0-30',r.d0_30,'#16a34a'],['31-60',r.d31_60,'#eab308'],['61-90',r.d61_90,'#d97706'],['91-120',r.d91_120,'#dc2626'],['121+',r.d121,'#9b2c2c']];
+  h+='<div style="display:flex;height:24px;border-radius:6px;overflow:hidden;margin:10px 0">';
+  segs.forEach(s=>{const w=r.balance?s[1]/r.balance*100:0;if(w>0)h+=`<div style="width:${w}%;background:${s[2]};display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px;font-weight:600" title="${s[0]}: ${fs(s[1])}">${w>8?pc(s[1],r.balance):''}</div>`});
+  h+='</div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px">';
+  segs.forEach(s=>{if(s[1]>0)h+=`<span style="font-size:10px;display:flex;align-items:center;gap:3px"><span style="width:9px;height:9px;background:${s[2]};border-radius:2px;display:inline-block"></span>${s[0]}: ${fs(s[1])}</span>`});
+  h+='</div>';
+  if(ov>0){
+   const act=ov>200000?'Immediate management escalation and formal legal notice':ov>50000?'Senior collector with weekly follow-up':ov>10000?'Regular follow-up calls':'Email reminders';
+   h+=`<div class="ib rd"><div class="ibh" style="color:#991b1b">Collection Recommendation</div><div class="ibt" style="color:#7f1d1d">Overdue: ${fs(ov)} (${pc(ov,r.balance)} of balance). <strong>Action:</strong> ${act}.</div></div>`;
+  }
+  oM(cn+' — Aging Profile',h);
+ }
+}
+
+// ══════════════════════════════════════════════
+// PAGE RENDERERS (all dynamic from filtered data)
+// ══════════════════════════════════════════════
+
+function renderOverview(){
+ const data=getF(),t=tot(data),gt=tot(D);
+ const dso=t.balance?Math.round((t.future*0+t.d0_30*15+t.d31_60*45+t.d61_90*75+t.d91_120*105+t.d121*150)/t.balance):0;
+ const oc=data.filter(d=>(d.d61_90+d.d91_120+d.d121)>0);
+ const crit=oc.filter(d=>(d.d61_90+d.d91_120+d.d121)>100000);
+
+ let h=`<div class="ph">AR Aging — Executive Overview</div><div class="ps">Group-level receivables aging across ${t.companies} ${t.companies===1?'company':'companies'} | ${t.count} clients</div>`;
+
+ h+=`<div class="kg">`
+  +kpi('b','Total AR Balance',fs(t.balance),t.count+' clients | '+t.companies+' companies','period_balance')
+  +kpi('','Future Remit',fs(t.future),pc(t.future,t.balance)+' of total','period_future')
+  +kpi('g','Current (0-30)',fs(t.d0_30),pc(t.d0_30,t.balance)+' of total','period_d0_30')
+  +kpi('','31-60 Days',fs(t.d31_60),pc(t.d31_60,t.balance)+' of total','period_d31_60')
+  +kpi('a','61-90 Days',fs(t.d61_90),pc(t.d61_90,t.balance)+' | '+data.filter(d=>d.d61_90>0).length+' clients','period_d61_90')
+  +kpi('r','91-120 Days',fs(t.d91_120),pc(t.d91_120,t.balance)+' | '+data.filter(d=>d.d91_120>0).length+' clients','period_d91_120')
+  +kpi('dr','Over 121 Days',fs(t.d121),pc(t.d121,t.balance)+' | '+data.filter(d=>d.d121>0).length+' clients','period_d121')
+  +kpi('r','Total Overdue (>60d)',fs(t.overdue),pc(t.overdue,t.balance)+' of total AR','overdue')
+  +kpi('','Weighted DSO',dso+' days','Estimated days outstanding','dso')
+  +`</div>`;
+
+ // Alert
+ if(t.overdue>0){
+  const topOvComp=byComp(data).sort((a,b)=>(b[1].d61_90+b[1].d91_120+b[1].d121)-(a[1].d61_90+a[1].d91_120+a[1].d121))[0];
+  const topOvVal=topOvComp?topOvComp[1].d61_90+topOvComp[1].d91_120+topOvComp[1].d121:0;
+  h+=`<div class="al"><div class="al-ic">&#9888;</div><div><h4>${pc(t.overdue,t.balance)} of AR is Overdue (>60 Days) — ${fs(t.overdue)}</h4><p><strong>Top Risk:</strong> ${topOvComp?topOvComp[0]:'N/A'} carries ${fs(topOvVal)} overdue (${pc(topOvVal,t.overdue)} of all overdue). <strong>Action:</strong> ${crit.length} clients with >$100K overdue need escalation.</p></div></div>`;
+ }
+
+ // Bar charts
+ const bc=byComp(data);
+ const ovItems=bc.map(([n,v])=>[n,v.d61_90+v.d91_120+v.d121]).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]);
+ const balItems=bc.slice(0,10).map(([n,v])=>[n,v.balance,pc(v.balance,t.balance)]);
+ const ovMax=ovItems[0]?.[1]||1;
+ const balMax=balItems[0]?.[1]||1;
+
+ h+=`<div class="tc"><div class="cd"><div class="ch">Overdue by Company<span class="dd" onclick="drill('overdue')">View All →</span></div>${bars(ovItems.slice(0,8).map(x=>[x[0],x[1],pc(x[1],t.overdue)]),'linear-gradient(90deg,#d97706,#dc2626)',ovMax)}</div>`;
+ h+=`<div class="cd"><div class="ch">Top Receivables<span class="dd" onclick="nav('top15',document.querySelectorAll('.ni')[2])">View Top 15 →</span></div>${bars(balItems,'#1B3D6E',balMax)}</div></div>`;
+
+ // Company table
+ h+=`<div class="cd"><div class="ch">Company Summary</div><div class="st"><table class="tbl"><thead><tr><th class="l">Company</th><th>Clients</th><th>Total AR</th><th>61-90</th><th>91-120</th><th>121+</th><th>Overdue</th><th>% OD</th><th>Risk</th></tr></thead><tbody>`;
+ bc.sort((a,b)=>(b[1].d61_90+b[1].d91_120+b[1].d121)-(a[1].d61_90+a[1].d91_120+a[1].d121)).forEach(([n,v],i)=>{
+  const ov=v.d61_90+v.d91_120+v.d121;const r=pn(ov,v.balance);
+  const rc=r>40?'rg-r':r>25?'rg-a':r>10?'rg-y':'rg-g';const rt=r>40?'Critical':r>25?'High':r>10?'Moderate':'Low';
+  h+=`<tr class="${i%2?'a':''}"><td class="l dd-t" onclick="drill('comp_${n}')">${n}</td><td style="text-align:center">${v.count}</td><td class="b">${fm(v.balance)}</td><td>${fm(v.d61_90)}</td><td${v.d91_120>0?' style="color:#dc2626;font-weight:600"':''}>${fm(v.d91_120)}</td><td${v.d121>0?' style="color:#9b2c2c;font-weight:600"':''}>${fm(v.d121)}</td><td class="b">${fm(ov)}</td><td class="b" style="color:${r>30?'#dc2626':r>15?'#d97706':'#16a34a'}">${r.toFixed(1)}%</td><td><span class="rg ${rc}">${rt}</span></td></tr>`;
+ });
+ h+=`<tr class="t"><td class="l">TOTAL</td><td style="text-align:center">${t.count}</td><td>${fm(t.balance)}</td><td>${fm(t.d61_90)}</td><td>${fm(t.d91_120)}</td><td>${fm(t.d121)}</td><td>${fm(t.overdue)}</td><td>${pn(t.overdue,t.balance).toFixed(1)}%</td><td></td></tr></tbody></table></div></div>`;
+
+ $('pg-overview').innerHTML=h;
+}
+
+function renderCollection(){
+ const data=getF(),t=tot(data);
+ const oc=data.filter(d=>(d.d61_90+d.d91_120+d.d121)>0).map(d=>({...d,ov:d.d61_90+d.d91_120+d.d121,sc:d.d121*3+d.d91_120*2+d.d61_90})).sort((a,b)=>b.sc-a.sc);
+ const otot=oc.reduce((s,d)=>s+d.ov,0);
+ const crit=oc.filter(d=>d.ov>100000);
+ const top10=oc.slice(0,10);const t10s=top10.reduce((s,d)=>s+d.ov,0);
+
+ let h=`<div class="ph">Collection Priority Matrix</div><div class="ps">${oc.length} overdue clients ranked by urgency score</div>`;
+ h+=`<div class="kg">`
+  +kpi('r','Overdue Clients',oc.length,'of '+t.count+' total ('+pc(oc.length,t.count)+')','overdue')
+  +kpi('dr','Critical (>$100K)',crit.length,fs(crit.reduce((s,d)=>s+d.ov,0))+' total','critical')
+  +kpi('a','Top 10 Recovery',fs(t10s),pc(t10s,otot)+' of all overdue','top10')
+  +kpi('','Avg Overdue/Client',fs(otot/(oc.length||1)),'Across overdue clients','overdue')
+  +`</div>`;
+
+ h+=`<div class="ib bl" style="margin-bottom:14px"><div class="ibh" style="color:#0c4a6e">Collection Strategy</div><div class="ibt" style="color:#1e3a5f"><strong>1.</strong> ${crit.length} clients >$100K need executive escalation. <strong>2.</strong> Top 10 recovers ${fs(t10s)} (${pc(t10s,otot)}). <strong>3.</strong> ${data.filter(d=>d.d121>0).length} clients in 121+ bucket — evaluate for legal action. <strong>4.</strong> ${data.filter(d=>d.d91_120>0).length} clients at 91-120 days — prevent migration.</div></div>`;
+
+ h+=`<div class="cd"><div class="ch">Client Priority — Ranked by Urgency</div><div class="st"><table class="tbl"><thead><tr><th>#</th><th class="l">Company</th><th class="l">Client</th><th>Overdue</th><th>61-90</th><th>91-120</th><th>121+</th><th>%</th><th>Priority</th></tr></thead><tbody>`;
+ oc.forEach((d,i)=>{
+  const p=d.ov>200000?['Critical','rg-r']:d.ov>50000?['High','rg-a']:d.ov>10000?['Medium','rg-y']:['Low','rg-g'];
+  h+=`<tr class="${i%2?'a':''}"><td>${i+1}</td><td class="l" style="font-size:10px">${d.company}</td><td class="l dd-t" onclick="drill('client_${d.client}')">${d.client}</td><td class="b">${fm(d.ov)}</td><td>${fm(d.d61_90)}</td><td${d.d91_120>0?' style="color:#dc2626;font-weight:600"':''}>${fm(d.d91_120)}</td><td${d.d121>0?' style="color:#9b2c2c;font-weight:600"':''}>${fm(d.d121)}</td><td>${pc(d.ov,otot)}</td><td><span class="rg ${p[1]}">${p[0]}</span></td></tr>`;
+ });
+ h+=`<tr class="t"><td></td><td class="l" colspan="2">TOTAL (${oc.length})</td><td>${fm(otot)}</td><td>${fm(oc.reduce((s,d)=>s+d.d61_90,0))}</td><td>${fm(oc.reduce((s,d)=>s+d.d91_120,0))}</td><td>${fm(oc.reduce((s,d)=>s+d.d121,0))}</td><td>100%</td><td></td></tr></tbody></table></div></div>`;
+ $('pg-collection').innerHTML=h;
+}
+
+function renderTop15(){
+ const data=getF().sort((a,b)=>b.balance-a.balance),t=tot(data);
+ const t15=data.slice(0,15);const tb=t15.reduce((s,d)=>s+d.balance,0);
+ const t15ov=t15.reduce((s,d)=>s+d.d61_90+d.d91_120+d.d121,0);
+ const t15_121=t15.reduce((s,d)=>s+d.d121,0);
+
+ let h=`<div class="ph">Top 15 Receivables</div><div class="ps">Highest exposure — concentration risk analysis</div>`;
+ h+=`<div class="kg">`
+  +kpi('b','Top 15 Total',fs(tb),pc(tb,t.balance)+' of filtered AR','top15')
+  +kpi('r','Top 15 Overdue',fs(t15ov),pc(t15ov,tb)+' of their balance','overdue')
+  +kpi('dr','Top 15 Over 121d',fs(t15_121),pc(t15_121,tb)+' of top 15','period_d121')
+  +kpi('','Average Balance',fs(tb/15),'per top 15 client','top15')
+  +kpi('g','Largest Client',fs(t15[0]?.balance||0),(t15[0]?.client||'N/A').slice(0,25),'client_'+(t15[0]?.client||''))
+  +kpi('a','Top 5 Concentration',pc(t15.slice(0,5).reduce((s,d)=>s+d.balance,0),t.balance),fs(t15.slice(0,5).reduce((s,d)=>s+d.balance,0))+' from top 5','top15')
+  +`</div>`;
+
+ h+=`<div class="ib bl" style="margin-bottom:14px"><div class="ibh" style="color:#0c4a6e">Concentration Risk</div><div class="ibt" style="color:#1e3a5f">Top 15 clients hold ${fs(tb)} (${pc(tb,t.balance)} of AR). ${t15.filter(d=>(d.d61_90+d.d91_120+d.d121)>100000).length} have >$100K overdue. Assign named account managers and conduct monthly reviews.</div></div>`;
+
+ // Bars
+ const mx=t15[0]?.balance||1;
+ const bItems=t15.slice(0,10).map(d=>{const ov=d.d61_90+d.d91_120+d.d121;const op=d.balance?ov/d.balance*100:0;return[d.client,d.balance,pc(d.balance,t.balance),op>40?'#dc2626':op>20?'#d97706':'#1B3D6E']});
+ const ovSort=[...t15].sort((a,b)=>(b.d61_90+b.d91_120+b.d121)-(a.d61_90+a.d91_120+a.d121)).filter(d=>(d.d61_90+d.d91_120+d.d121)>0).slice(0,8);
+ const omx=ovSort[0]?(ovSort[0].d61_90+ovSort[0].d91_120+ovSort[0].d121):1;
+
+ h+=`<div class="tc"><div class="cd"><div class="ch">Top 10 by Balance</div>`;
+ bItems.forEach(([n,v,p,c])=>{const sn=n.length>24?n.slice(0,24)+'...':n;h+=`<div class="br"><div class="bl">${sn}</div><div class="bt"><div class="bf" style="width:${v/mx*100}%;background:${c}">${p}</div></div><div class="bv">${fs(v)}</div></div>`});
+ h+=`</div><div class="cd"><div class="ch">Top Overdue Amounts</div>`;
+ ovSort.forEach(d=>{const ov=d.d61_90+d.d91_120+d.d121;const sn=d.client.length>24?d.client.slice(0,24)+'...':d.client;h+=`<div class="br"><div class="bl">${sn}</div><div class="bt"><div class="bf" style="width:${ov/omx*100}%;background:linear-gradient(90deg,#d97706,#9b2c2c)">${pc(ov,d.balance)}</div></div><div class="bv">${fs(ov)}</div></div>`});
+ h+=`</div></div>`;
+
+ // Table
+ h+=`<div class="cd"><div class="ch">Top 15 Detail</div><div class="st"><table class="tbl"><thead><tr><th>#</th><th class="l">Company</th><th class="l">Client</th><th>Balance</th><th>Future</th><th>0-30</th><th>31-60</th><th>61-90</th><th>91-120</th><th>121+</th><th>% AR</th><th>Risk</th></tr></thead><tbody>`;
+ t15.forEach((d,i)=>{
+  const ov=d.d61_90+d.d91_120+d.d121;const r=pn(ov,d.balance);
+  const rc=r>50?'rg-r':r>25?'rg-a':r>10?'rg-y':'rg-g';const rt=r>50?'Critical':r>25?'High':r>10?'Moderate':'Low';
+  h+=`<tr class="${i%2?'a':''}"><td class="b">${i+1}</td><td class="l" style="font-size:10px">${d.company}</td><td class="l dd-t" onclick="drill('client_${d.client}')">${d.client}</td><td class="b">${fm(d.balance)}</td><td>${fm(d.future)}</td><td>${fm(d.d0_30)}</td><td>${fm(d.d31_60)}</td><td>${fm(d.d61_90)}</td><td${d.d91_120>0?' style="color:#dc2626;font-weight:600"':''}>${fm(d.d91_120)}</td><td${d.d121>0?' style="color:#9b2c2c;font-weight:600"':''}>${fm(d.d121)}</td><td class="b">${pc(d.balance,t.balance)}</td><td><span class="rg ${rc}">${rt}</span></td></tr>`;
+ });
+ h+=`<tr class="t"><td></td><td class="l" colspan="2">TOP 15</td><td>${fm(tb)}</td><td>${fm(t15.reduce((s,d)=>s+d.future,0))}</td><td>${fm(t15.reduce((s,d)=>s+d.d0_30,0))}</td><td>${fm(t15.reduce((s,d)=>s+d.d31_60,0))}</td><td>${fm(t15.reduce((s,d)=>s+d.d61_90,0))}</td><td>${fm(t15.reduce((s,d)=>s+d.d91_120,0))}</td><td>${fm(t15_121)}</td><td>${pc(tb,t.balance)}</td><td></td></tr></tbody></table></div></div>`;
+ $('pg-top15').innerHTML=h;
+}
+
+function renderPeriod(pgId,key,label,color,tagColor,tagText){
+ const data=getF(),t=tot(data);
+ const clients=data.filter(d=>d[key]>0).sort((a,b)=>b[key]-a[key]);
+ const ptot=clients.reduce((s,d)=>s+d[key],0);
+ const bc={};clients.forEach(d=>{bc[d.company]=(bc[d.company]||0)+d[key]});
+ const sc=Object.entries(bc).sort((a,b)=>b[1]-a[1]);
+
+ let h=`<div class="ph">${label} Aging</div><div class="ps">${tagText}</div>`;
+ h+=`<div class="kg">`
+  +kpi(tagColor,label+' Total',fs(ptot),pc(ptot,t.balance)+' of total AR','period_'+key)
+  +kpi('','Clients Affected',''+clients.length,pc(clients.length,t.count)+' of all clients','period_'+key)
+  +kpi('','Avg per Client',fs(ptot/(clients.length||1)),'Across affected clients','period_'+key)
+  +kpi(tagColor==='dr'?'r':tagColor,'Top Client',fs(clients[0]?.[key]||0),(clients[0]?.client||'N/A').slice(0,25),'client_'+(clients[0]?.client||''))
+  +`</div>`;
+
+ // Reco
+ const recos={future:`Future remittances — ${clients.length} clients with ${fs(ptot)} in upcoming payments. Monitor scheduled payment dates and confirm receipt.`,d0_30:`Current period — ${clients.length} clients with ${fs(ptot)} within normal terms. Standard follow-up and invoice reconciliation recommended.`,d31_60:`Approaching overdue — ${clients.length} clients at ${fs(ptot)}. Send payment reminders and confirm outstanding invoice details.`,d61_90:`Escalation window — ${clients.length} clients approaching critical. Send payment reminders, confirm payment dates, schedule weekly follow-ups.`,d91_120:`HIGH RISK — ${clients.length} clients at ${fs(ptot)}. Escalate to senior management, halt new credit, send formal demand letters, prepare legal notices.`,d121:`CRITICAL — ${fs(ptot)} (${pc(ptot,t.balance)} of AR) aged beyond 121 days. Initiate legal proceedings, negotiate settlements, establish doubtful debt provisions, suspend all credit lines.`};
+ const ibCls={future:'bl',d0_30:'bl',d31_60:'am',d61_90:'am',d91_120:'rd',d121:'rd'};
+ const ibHClr={future:'#0c4a6e',d0_30:'#0c4a6e',d31_60:'#9a3412',d61_90:'#9a3412',d91_120:'#991b1b',d121:'#991b1b'};
+ const ibTClr={future:'#1e3a5f',d0_30:'#1e3a5f',d31_60:'#92400e',d61_90:'#92400e',d91_120:'#7f1d1d',d121:'#7f1d1d'};
+ h+=`<div class="ib ${ibCls[key]}" style="margin-bottom:14px"><div class="ibh" style="color:${ibHClr[key]}">Focus: ${label}</div><div class="ibt" style="color:${ibTClr[key]}">${recos[key]}</div></div>`;
+
+ // Bars + RAG
+ const mx=sc[0]?.[1]||1;
+ const ragItems={future:[['#3b82f6','#eff6ff','Scheduled Payments',fs(ptot)+' expected in upcoming remittances'],['#16a34a','#f0fdf4','On Track',clients.length+' clients with future commitments'],['#0284c7','#e0f2fe','Cash Flow','Monitor for timely receipt of scheduled payments']],d0_30:[['#16a34a','#f0fdf4','Current & Healthy',fs(ptot)+' within normal payment terms'],['#3b82f6','#eff6ff','Standard Follow-up','Routine invoice reconciliation for '+clients.length+' clients'],['#16a34a','#f0fdf4','Low Risk','Continue normal credit operations']],d31_60:[['#eab308','#fefce8','Approaching Overdue',fs(ptot)+' nearing overdue threshold'],['#d97706','#fff7ed','Reminder Required','Send reminders to '+clients.filter(d=>d[key]>50000).length+' clients >$50K'],['#16a34a','#f0fdf4','Prevention Window','Early intervention prevents escalation']],d61_90:[['#d97706','#fff7ed','Migration Risk',fs(ptot)+' at risk of moving to 91-120 next month'],['#eab308','#fefce8','Action Required','Demand letters for '+clients.filter(d=>d[key]>50000).length+' clients >$50K'],['#16a34a','#f0fdf4','Recovery Opportunity','Proactive engagement prevents bad debt']],d91_120:[['#dc2626','#fef2f2','Bad Debt Imminent',fs(ptot)+' approaching write-off threshold'],['#dc2626','#fef2f2','Credit Hold','Halt credit for '+clients.filter(d=>d[key]>50000).length+' clients >$50K'],['#d97706','#fff7ed','Legal Preparation','Prepare legal notices for non-responsive clients']],d121:[['#9b2c2c','#fef2f2','Provision Required','Establish doubtful debt provisions for '+fs(ptot)],['#dc2626','#fef2f2','Legal Escalation',clients.filter(d=>d[key]>100000).length+' clients >$100K require legal action'],['#dc2626','#fef2f2','Credit Suspended','All '+clients.length+' clients need credit lines suspended']]};
+
+ h+=`<div class="tc"><div class="cd"><div class="ch">By Company<span class="dd" onclick="drill('period_${key}')">Full Breakdown →</span></div>`;
+ sc.slice(0,6).forEach(([n,v])=>{const sn=n.length>24?n.slice(0,24)+'...':n;h+=`<div class="br"><div class="bl">${sn}</div><div class="bt"><div class="bf" style="width:${v/mx*100}%;background:${color}">${pc(v,ptot)}</div></div><div class="bv">${fs(v)}</div></div>`});
+ h+=`</div><div class="cd"><div class="ch">Risk Assessment</div>`;
+ ragItems[key].forEach(([c,bg,title,sub])=>{h+=`<div class="ri" style="background:${bg};border-left-color:${c}"><div class="rd" style="background:${c}"></div><div><div class="rt" style="color:${c}">${title}</div><div class="rs" style="color:${c}">${sub}</div></div></div>`});
+ h+=`</div></div>`;
+
+ // Table
+ h+=`<div class="cd"><div class="ch">All Clients with ${label} Balances</div><div class="st"><table class="tbl"><thead><tr><th>#</th><th class="l">Company</th><th class="l">Client</th><th>${label}</th><th>Balance</th><th>% of AR</th><th>Action</th></tr></thead><tbody>`;
+ clients.forEach((d,i)=>{
+  const a=d[key]>100000?['Escalate','rg-r']:d[key]>50000?['Demand Letter','rg-a']:d[key]>10000?['Call','rg-y']:['Email','rg-g'];
+  h+=`<tr class="${i%2?'a':''}"><td>${i+1}</td><td class="l" style="font-size:10px">${d.company}</td><td class="l dd-t" onclick="drill('client_${d.client}')">${d.client}</td><td class="b" style="color:${color}">${fm(d[key])}</td><td>${fm(d.balance)}</td><td>${pn(d[key],d.balance).toFixed(1)}%</td><td><span class="rg ${a[1]}">${a[0]}</span></td></tr>`;
+ });
+ h+=`<tr class="t"><td></td><td class="l" colspan="2">TOTAL (${clients.length})</td><td>${fm(ptot)}</td><td>${fm(clients.reduce((s,d)=>s+d.balance,0))}</td><td></td><td></td></tr></tbody></table></div></div>`;
+ $(pgId).innerHTML=h;
+}
+
+function renderCompany(){
+ const data=getF(),t=tot(data),bc=byComp(data);
+ const selComp=$('fC').value;
+ let h=`<div class="ph">AR Aging by Company</div><div class="ps">${selComp?selComp+' — Per-Client Breakdown by Aging Category':'Click any company for client-level drill-down'}</div>`;
+
+ // Company summary table
+ h+=`<div class="cd"><div class="ch">Company Summary</div><div class="st"><table class="tbl"><thead><tr><th class="l">Company</th><th>Clients</th><th>Total AR</th><th>Future</th><th>0-30</th><th>31-60</th><th>61-90</th><th>91-120</th><th>121+</th><th>% OD</th><th>Risk</th></tr></thead><tbody>`;
+ bc.forEach(([n,v],i)=>{
+  const ov=v.d61_90+v.d91_120+v.d121;const r=pn(ov,v.balance);
+  const rc=r>40?'rg-r':r>25?'rg-a':r>10?'rg-y':'rg-g';const rt=r>40?'Critical':r>25?'High':r>10?'Moderate':'Low';
+  h+=`<tr class="${i%2?'a':''}"><td class="l dd-t" onclick="$('fC').value='${n}';refresh();nav('company',document.querySelectorAll('.ni')[6])">${n}</td><td style="text-align:center">${v.count}</td><td class="b">${fm(v.balance)}</td><td>${fm(v.future)}</td><td>${fm(v.d0_30)}</td><td>${fm(v.d31_60)}</td><td>${fm(v.d61_90)}</td><td${v.d91_120>0?' style="color:#dc2626;font-weight:600"':''}>${fm(v.d91_120)}</td><td${v.d121>0?' style="color:#9b2c2c;font-weight:600"':''}>${fm(v.d121)}</td><td class="b" style="color:${r>30?'#dc2626':r>15?'#d97706':'#16a34a'}">${r.toFixed(1)}%</td><td><span class="rg ${rc}">${rt}</span></td></tr>`;
+ });
+ h+=`<tr class="t"><td class="l">TOTAL</td><td style="text-align:center">${t.count}</td><td>${fm(t.balance)}</td><td>${fm(t.future)}</td><td>${fm(t.d0_30)}</td><td>${fm(t.d31_60)}</td><td>${fm(t.d61_90)}</td><td>${fm(t.d91_120)}</td><td>${fm(t.d121)}</td><td>${pn(t.overdue,t.balance).toFixed(1)}%</td><td></td></tr></tbody></table></div></div>`;
+
+ // When a specific company is selected — show full per-client breakdown
+ if(selComp){
+  const clients=data.filter(d=>d.company===selComp).sort((a,b)=>b.balance-a.balance);
+  const ct=tot(clients);
+  const dso=ct.balance?Math.round((ct.future*0+ct.d0_30*15+ct.d31_60*45+ct.d61_90*75+ct.d91_120*105+ct.d121*150)/ct.balance):0;
+
+  // KPIs for selected company
+  h+=`<div class="kg">`
+   +kpi('b','Total AR',fs(ct.balance),clients.length+' clients','comp_'+selComp)
+   +kpi('','Future Remit',fs(ct.future),pc(ct.future,ct.balance)+' of company AR','period_future')
+   +kpi('g','Current (0-30)',fs(ct.d0_30),pc(ct.d0_30,ct.balance)+' of company AR','period_d0_30')
+   +kpi('','31-60 Days',fs(ct.d31_60),pc(ct.d31_60,ct.balance),'period_d31_60')
+   +kpi('a','61-90 Days',fs(ct.d61_90),clients.filter(d=>d.d61_90>0).length+' clients','period_d61_90')
+   +kpi('r','91-120 Days',fs(ct.d91_120),clients.filter(d=>d.d91_120>0).length+' clients','period_d91_120')
+   +kpi('dr','Over 121 Days',fs(ct.d121),clients.filter(d=>d.d121>0).length+' clients','period_d121')
+   +kpi('r','Total Overdue',fs(ct.overdue),pc(ct.overdue,ct.balance)+' of AR','overdue')
+   +kpi('','Weighted DSO',dso+' days','Collection speed indicator','dso')
+   +`</div>`;
+
+  // Bar chart — top 10 clients by balance
+  const topB=clients.slice(0,10);
+  const bMax=topB[0]?.balance||1;
+  const ovClients=clients.filter(d=>(d.d61_90+d.d91_120+d.d121)>0).sort((a,b)=>(b.d61_90+b.d91_120+b.d121)-(a.d61_90+a.d91_120+a.d121)).slice(0,8);
+  const ovMax=ovClients.length?(ovClients[0].d61_90+ovClients[0].d91_120+ovClients[0].d121):1;
+
+  h+=`<div class="tc"><div class="cd"><div class="ch">Top Clients by Balance</div>`;
+  topB.forEach(d=>{const sn=d.client.length>24?d.client.slice(0,24)+'...':d.client;h+=`<div class="br"><div class="bl" title="${d.client}">${sn}</div><div class="bt"><div class="bf" style="width:${d.balance/bMax*100}%;background:#1B3D6E">${pc(d.balance,ct.balance)}</div></div><div class="bv">${fs(d.balance)}</div></div>`});
+  h+=`</div><div class="cd"><div class="ch">Top Overdue Clients</div>`;
+  if(ovClients.length){ovClients.forEach(d=>{const ov=d.d61_90+d.d91_120+d.d121;const sn=d.client.length>24?d.client.slice(0,24)+'...':d.client;h+=`<div class="br"><div class="bl" title="${d.client}">${sn}</div><div class="bt"><div class="bf" style="width:${ov/ovMax*100}%;background:linear-gradient(90deg,#d97706,#9b2c2c)">${pc(ov,d.balance)}</div></div><div class="bv">${fs(ov)}</div></div>`})}
+  else{h+=`<div style="padding:20px;text-align:center;color:#16a34a;font-size:12px;font-weight:600">No overdue clients for this company</div>`}
+  h+=`</div></div>`;
+
+  // Full client detail table — per client, each category
+  h+=`<div class="cd"><div class="ch">${selComp} — All Clients by Aging Category<span class="dd" onclick="drill('comp_${selComp}')">Export View →</span></div><div class="st" style="max-height:700px"><table class="tbl"><thead><tr><th>#</th><th class="l">Client</th><th>Balance</th><th>Future</th><th>0-30</th><th>31-60</th><th>61-90</th><th>91-120</th><th>121+</th><th>% OD</th><th>Risk</th></tr></thead><tbody>`;
+  clients.forEach((d,i)=>{
+   const ov=d.d61_90+d.d91_120+d.d121;const r=pn(ov,d.balance);
+   const rc=r>50?'rg-r':r>25?'rg-a':r>10?'rg-y':'rg-g';const rt=r>50?'Critical':r>25?'High':r>10?'Moderate':'Low';
+   h+=`<tr class="${i%2?'a':''}"><td>${i+1}</td><td class="l dd-t" onclick="drill('client_${d.client}')">${d.client}</td><td class="b">${fm(d.balance)}</td><td>${d.future?fm(d.future):'<span class="dm">—</span>'}</td><td>${d.d0_30?fm(d.d0_30):'<span class="dm">—</span>'}</td><td>${d.d31_60?fm(d.d31_60):'<span class="dm">—</span>'}</td><td${d.d61_90>0?' style="color:#d97706;font-weight:600"':''}>${d.d61_90?fm(d.d61_90):'<span class="dm">—</span>'}</td><td${d.d91_120>0?' style="color:#dc2626;font-weight:600"':''}>${d.d91_120?fm(d.d91_120):'<span class="dm">—</span>'}</td><td${d.d121>0?' style="color:#9b2c2c;font-weight:600"':''}>${d.d121?fm(d.d121):'<span class="dm">—</span>'}</td><td class="b" style="color:${r>30?'#dc2626':r>15?'#d97706':'#16a34a'}">${r.toFixed(1)}%</td><td><span class="rg ${rc}">${rt}</span></td></tr>`;
+  });
+  h+=`<tr class="t"><td></td><td class="l">TOTAL (${clients.length})</td><td>${fm(ct.balance)}</td><td>${fm(ct.future)}</td><td>${fm(ct.d0_30)}</td><td>${fm(ct.d31_60)}</td><td>${fm(ct.d61_90)}</td><td>${fm(ct.d91_120)}</td><td>${fm(ct.d121)}</td><td>${pn(ct.overdue,ct.balance).toFixed(1)}%</td><td></td></tr></tbody></table></div></div>`;
+
+  // Per-category breakdown cards for the selected company
+  const cats=[['Future Remit','future','#3b82f6'],['0-30 Days','d0_30','#16a34a'],['31-60 Days','d31_60','#eab308'],['61-90 Days','d61_90','#d97706'],['91-120 Days','d91_120','#dc2626'],['Over 121 Days','d121','#9b2c2c']];
+  cats.forEach(([label,key,color])=>{
+   const cc=clients.filter(d=>d[key]>0).sort((a,b)=>b[key]-a[key]);
+   if(!cc.length)return;
+   const ptot=cc.reduce((s,d)=>s+d[key],0);
+   h+=`<div class="cd"><div class="ch" style="border-bottom-color:${color}"><span style="color:${color}">&#9632;</span> ${label} — ${cc.length} clients | ${fs(ptot)} (${pc(ptot,ct.balance)} of AR)<span class="dd" onclick="drill('period_${key}')">Drill Down →</span></div>`;
+   h+=`<div class="st" style="max-height:320px"><table class="tbl"><thead><tr><th>#</th><th class="l">Client</th><th style="background:${color}">${label}</th><th>Balance</th><th>% of Client</th><th>Action</th></tr></thead><tbody>`;
+   cc.forEach((d,i)=>{
+    const a=d[key]>100000?['Escalate','rg-r']:d[key]>50000?['Demand Letter','rg-a']:d[key]>10000?['Call','rg-y']:['Email','rg-g'];
+    h+=`<tr class="${i%2?'a':''}"><td>${i+1}</td><td class="l dd-t" onclick="drill('client_${d.client}')">${d.client}</td><td class="b" style="color:${color}">${fm(d[key])}</td><td>${fm(d.balance)}</td><td>${pn(d[key],d.balance).toFixed(1)}%</td><td><span class="rg ${a[1]}">${a[0]}</span></td></tr>`;
+   });
+   h+=`<tr class="t"><td></td><td class="l">SUBTOTAL (${cc.length})</td><td>${fm(ptot)}</td><td></td><td></td><td></td></tr></tbody></table></div></div>`;
+  });
+ }
+ // When Overall — show all companies, and for each company show client preview
+ else{
+  bc.forEach(([cn,cv])=>{
+   const compClients=data.filter(d=>d.company===cn).sort((a,b)=>b.balance-a.balance);
+   const ov=cv.d61_90+cv.d91_120+cv.d121;
+   h+=`<div class="cd"><div class="ch"><span class="dd-t" onclick="$('fC').value='${cn}';refresh();nav('company',document.querySelectorAll('.ni')[6])">${cn}</span> — ${cv.count} clients | AR: ${fs(cv.balance)}${ov>0?' | <span style=color:#dc2626>Overdue: '+fs(ov)+'</span>':''}<span class="dd" onclick="drill('comp_${cn}')">Full Detail →</span></div>`;
+   h+=`<div class="st" style="max-height:220px"><table class="tbl"><thead><tr><th>#</th><th class="l">Client</th><th>Balance</th><th>Future</th><th>0-30</th><th>31-60</th><th>61-90</th><th>91-120</th><th>121+</th></tr></thead><tbody>`;
+   compClients.slice(0,10).forEach((d,i)=>{
+    h+=`<tr class="${i%2?'a':''}"><td>${i+1}</td><td class="l dd-t" onclick="drill('client_${d.client}')">${d.client}</td><td class="b">${fm(d.balance)}</td><td>${d.future?fm(d.future):'<span class="dm">—</span>'}</td><td>${d.d0_30?fm(d.d0_30):'<span class="dm">—</span>'}</td><td>${d.d31_60?fm(d.d31_60):'<span class="dm">—</span>'}</td><td${d.d61_90>0?' style="color:#d97706;font-weight:600"':''}>${d.d61_90?fm(d.d61_90):'<span class="dm">—</span>'}</td><td${d.d91_120>0?' style="color:#dc2626;font-weight:600"':''}>${d.d91_120?fm(d.d91_120):'<span class="dm">—</span>'}</td><td${d.d121>0?' style="color:#9b2c2c;font-weight:600"':''}>${d.d121?fm(d.d121):'<span class="dm">—</span>'}</td></tr>`;
+   });
+   if(compClients.length>10)h+=`<tr><td colspan="9" class="dd-t" onclick="$('fC').value='${cn}';refresh();nav('company',document.querySelectorAll('.ni')[6])" style="text-align:center;color:#0369a1;font-size:10px">View all ${compClients.length} clients →</td></tr>`;
+   h+=`</tbody></table></div></div>`;
+  });
+ }
+
+ $('pg-company').innerHTML=h;
+}
+
+function renderInsights(){
+ const data=getF(),t=tot(data);
+ const oc=data.filter(d=>(d.d61_90+d.d91_120+d.d121)>0);
+ const otot=oc.reduce((s,d)=>s+d.d61_90+d.d91_120+d.d121,0);
+ const top10=oc.map(d=>({...d,ov:d.d61_90+d.d91_120+d.d121})).sort((a,b)=>b.ov-a.ov).slice(0,10);
+ const t10s=top10.reduce((s,d)=>s+d.ov,0);
+ const bc=byComp(data).sort((a,b)=>(b[1].d61_90+b[1].d91_120+b[1].d121)-(a[1].d61_90+a[1].d91_120+a[1].d121));
+ const topComp=bc[0];const topOv=topComp?(topComp[1].d61_90+topComp[1].d91_120+topComp[1].d121):0;
+ const t15=data.sort((a,b)=>b.balance-a.balance).slice(0,15);const tb=t15.reduce((s,d)=>s+d.balance,0);
+
+ let h=`<div class="ph">Insights & Recommended Actions</div><div class="ps">Data-driven collection strategy</div>`;
+ h+=`<div class="tc"><div class="cd"><div class="ch">Key Findings</div>`;
+ const findings=[
+  ['#dc2626','#fef2f2',`Overdue: ${pc(t.overdue,t.balance)} of AR`,`${fs(t.overdue)} across ${oc.length} clients exceeds 60 days`],
+  ['#9b2c2c','#fef2f2',`121+ is largest bucket at ${fs(t.d121)}`,`${pc(t.d121,t.balance)} of total AR — highest provisioning risk`],
+  ['#d97706','#fff7ed',`${topComp?topComp[0]:'Top company'} holds ${pc(topOv,otot)} of overdue`,`Single subsidiary concentration creates material risk`],
+  ['#eab308','#fefce8',`Top 10 = ${pc(t10s,otot)} of all overdue`,`Focused collection on 10 accounts recovers ${fs(t10s)}`],
+  ['#16a34a','#f0fdf4',`Top 15 = ${pc(tb,t.balance)} of AR`,`Relationship management for these accounts is critical`]
+ ];
+ findings.forEach(([c,bg,title,sub])=>{h+=`<div class="ri" style="background:${bg};border-left-color:${c}"><div class="rd" style="background:${c}"></div><div><div class="rt" style="color:${c}">${title}</div><div class="rs" style="color:${c}">${sub}</div></div></div>`});
+ h+=`</div><div class="cd"><div class="ch">Recommended Actions</div>`;
+ h+=`<div class="ib rd" style="margin-bottom:10px"><div class="ibh" style="color:#991b1b">CRITICAL — Immediate</div><div class="ibt" style="color:#7f1d1d">1. Escalate ${data.filter(d=>d.d121>100000).length} clients >$100K in 121+. 2. Suspend credit for 121+ clients (${data.filter(d=>d.d121>0).length} accounts). 3. Formal demand letters to top 10 overdue.</div></div>`;
+ h+=`<div class="ib am" style="margin-bottom:10px"><div class="ibh" style="color:#9a3412">HIGH — Next 2 Weeks</div><div class="ibt" style="color:#92400e">1. Dedicated collectors for 91-120 day clients (${data.filter(d=>d.d91_120>0).length} accounts, ${fs(t.d91_120)}). 2. Payment plans for >$50K. 3. Credit holds on new orders. 4. Executive calls with top 5 overdue companies.</div></div>`;
+ h+=`<div class="ib bl"><div class="ibh" style="color:#0c4a6e">MODERATE — Ongoing</div><div class="ibt" style="color:#1e3a5f">1. Weekly follow-up for 61-90 day clients (${data.filter(d=>d.d61_90>0).length} accounts). 2. Monthly review for Top 15. 3. Quarterly provision review. 4. Auto reminders at 45 & 60 days.</div></div>`;
+ h+=`</div></div>`;
+ $('pg-insights').innerHTML=h;
+}
+
+// ══════════════════════════════════════════════
+// NAVIGATION & REFRESH
+// ══════════════════════════════════════════════
+const titles={overview:'Overview',collection:'Collection Priority',top15:'Top 15 Receivables',pfut:'Future Remit',p030:'0–30 Days',p3160:'31–60 Days',p61:'61–90 Days',p91:'91–120 Days',p121:'Over 121 Days',company:'By Company',insights:'Insights & Actions'};
+
+function nav(pg,el){
+ document.querySelectorAll('.pg').forEach(p=>p.classList.remove('ac'));
+ $('pg-'+pg).classList.add('ac');
+ document.querySelectorAll('.ni').forEach(n=>n.classList.remove('ac'));
+ if(el)el.classList.add('ac');
+ $('pt').textContent=titles[pg]||pg;
+ $('sb').classList.remove('mo-o');
+ window.scrollTo(0,0);
+ refresh();
+}
+
+function refresh(){
+ renderOverview();
+ renderCollection();
+ renderTop15();
+ renderPeriod('pg-pfut','future','Future Remit','#3b82f6','b','Scheduled future remittances');
+ renderPeriod('pg-p030','d0_30','0–30 Days','#16a34a','g','Current period — within normal terms');
+ renderPeriod('pg-p3160','d31_60','31–60 Days','#eab308','a','Approaching overdue threshold');
+ renderPeriod('pg-p61','d61_90','61–90 Days','#d97706','a','Action required — escalation window');
+ renderPeriod('pg-p91','d91_120','91–120 Days','#dc2626','r','High risk — approaching bad debt');
+ renderPeriod('pg-p121','d121','Over 121 Days','#9b2c2c','dr','Critical — potential write-off');
+ renderCompany();
+ renderInsights();
+}
+
+// Init
+refresh();
+</script>
+</body>
+</html>
