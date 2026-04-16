@@ -138,39 +138,29 @@ window.addEventListener('load', function(){
 
 <div id="sidebar-overlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
 <nav id="sidebar" class="collapsed">
-<div class="logo-area" style="background:#0B1D3A;padding:12px 14px;border-bottom:none;">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 70" height="60" width="240">
-  <!-- Shield emblem -->
-  <g transform="translate(10,5)">
-    <!-- Outer shield shape -->
-    <path d="M20,2 L38,2 Q42,2 42,6 L42,32 Q42,48 29,58 Q16,48 16,32 L16,6 Q16,2 20,2 Z" fill="none" stroke="#C8A84E" stroke-width="1.8"/>
-    <!-- Inner shield -->
-    <path d="M22,6 L36,6 Q38,6 38,8 L38,30 Q38,44 29,52 Q20,44 20,30 L20,8 Q20,6 22,6 Z" fill="#0B1D3A" stroke="#C8A84E" stroke-width="0.8"/>
-    <!-- Decorative lines inside shield -->
-    <line x1="29" y1="12" x2="29" y2="46" stroke="#C8A84E" stroke-width="0.6" opacity="0.5"/>
-    <line x1="22" y1="20" x2="36" y2="20" stroke="#C8A84E" stroke-width="0.6" opacity="0.5"/>
-    <line x1="22" y1="30" x2="36" y2="30" stroke="#C8A84E" stroke-width="0.6" opacity="0.5"/>
-    <!-- Star/diamond in shield center -->
-    <polygon points="29,16 31,22 29,28 27,22" fill="#C8A84E" opacity="0.8"/>
-    <polygon points="24,22 29,20 34,22 29,24" fill="#C8A84E" opacity="0.6"/>
+<div class="logo-area" style="background:#0B1D3A;padding:16px 12px 10px;border-bottom:none;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 68" height="62" width="230">
+  <!-- Two interlocked rings matching Al Majal brand -->
+  <g transform="translate(2,2)">
+    <!-- Large outer ring (lighter teal) -->
+    <circle cx="28" cy="32" r="28" fill="none" stroke="#48C5CC" stroke-width="2.5"/>
+    <!-- Smaller inner ring (darker teal/blue), offset right and overlapping -->
+    <circle cx="40" cy="32" r="19" fill="none" stroke="#1B8FA0" stroke-width="2.8"/>
   </g>
-  <!-- AL MAJAL text -->
-  <text x="62" y="32" font-family="'Trebuchet MS',Arial,sans-serif" font-weight="800" font-size="24" fill="#FFFFFF" letter-spacing="4">AL MAJAL</text>
-  <!-- Decorative line -->
-  <line x1="62" y1="40" x2="280" y2="40" stroke="#C8A84E" stroke-width="0.8" opacity="0.6"/>
-  <!-- Tagline -->
-  <text x="62" y="54" font-family="'Trebuchet MS',Arial,sans-serif" font-weight="400" font-size="9.5" fill="#FFFFFF" letter-spacing="1.2" opacity="0.85">Iraqi Roots. World-Class Delivery.</text>
+  <!-- AL MAJAL bold text -->
+  <text x="78" y="28" font-family="'Trebuchet MS',Arial,sans-serif" font-weight="900" font-size="23" fill="#FFFFFF" letter-spacing="2.5">AL MAJAL</text>
+  <!-- Subsidiary name -->
+  <text x="80" y="48" font-family="'Trebuchet MS',Arial,sans-serif" font-weight="400" font-size="12.5" fill="#48C5CC" letter-spacing="2.2">NGK Spare Parts</text>
 </svg>
-<div style="margin-top:8px;padding-top:7px;border-top:1px solid rgba(200,168,78,0.3);">
-  <div style="font-size:11px;font-weight:700;color:#C8A84E;letter-spacing:1.5px;">NGK SPARE PARTS</div>
-  <div style="font-size:9px;color:rgba(255,255,255,0.5);margin-top:1px;">Financial Intelligence · March 2026</div>
+<div style="margin-top:5px;padding-top:5px;border-top:1px solid rgba(72,197,204,0.2);">
+  <div style="font-size:9px;color:rgba(255,255,255,0.4);letter-spacing:0.5px;">March 2026</div>
 </div>
 </div>
 
 <div class="nav-group">
   <div class="nav-label">Overview</div>
   <div class="nav-item" onclick="show('exec',this)"><span>📋</span>Executive Summary</div>
-  <div class="nav-item active" onclick="show('dashboard',this)"><span>🏠</span>Dashboard</div>
+  <div class="nav-item active" onclick="show('dashboard',this)"><span>🏠</span>Executive Summary</div>
   <div class="nav-item" onclick="show('ratios',this)"><span>📐</span>Financial Ratios</div>
 </div>
 <div class="nav-divider"></div>
@@ -207,7 +197,7 @@ window.addEventListener('load', function(){
 <div id="topbar">
   <div style="display:flex;align-items:center;gap:10px;">
     <button id="menu-toggle" onclick="toggleSidebar()" title="Toggle Menu">☰ Menu</button>
-    <h2 id="pg-title">Executive Dashboard</h2>
+    <h2 id="pg-title">Executive Summary</h2>
     <span style="background:#00B5B8;color:#fff;padding:2px 10px;border-radius:20px;font-size:10px;font-weight:700;">Mar 2026</span>
   </div>
   <div class="topbar-meta">NGK Spare Parts · Iraq · All figures in USD</div>
@@ -405,7 +395,7 @@ window.addEventListener('load', function(){
 
 <!-- ════════ EXECUTIVE DASHBOARD ════════ -->
 <div id="page-dashboard" class="page active">
-  <div class="ph">Executive Dashboard</div>
+  <div class="ph">Executive Summary</div>
   <div class="ps">NGK Spare Parts — Deep-Dive Analytics · March 2026</div>
 
   <!-- Top KPI Strip -->
@@ -945,7 +935,7 @@ window.addEventListener('load', function(){
   </div>
 
   <div class="card">
-    <div class="card-hdr">Profit &amp; Loss Statement</div>
+    <div class="card-hdr">Income Statement</div>
     <div class="card-body" style="overflow-x:auto;">
       <table class="tbl">
         <thead><tr><th>Item</th><th>2018</th><th>2019</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>Jan-26</th><th>Feb-26</th><th>Mar-26</th><th>YTD 26</th></tr></thead>
@@ -1500,244 +1490,51 @@ window.addEventListener('load', function(){
 <!-- ════════ PERFORMANCE ANALYSIS ════════ -->
 <div id="page-analysis" class="page">
   <div class="ph">Performance Analysis</div>
-  <div class="ps">Monthly trends 2024 vs 2025 vs 2026 YTD | Year-over-year and month-over-month movements</div>
+  <div class="ps">Dynamic period comparison · Select a period to view revenue, COGS, and profitability metrics</div>
 
-  <!-- Summary KPI Strip -->
-  <div class="kpi-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 18px;">
-    <div class="kpi b" style="cursor:pointer;" onclick="showDrilldown('revJan')">
-      <div class="kpi-lbl">Jan 2026</div>
-      <div class="kpi-val">$622K</div>
-      <div class="kpi-sub">↑ +22.6% YoY</div>
-    </div>
-    <div class="kpi a" style="cursor:pointer;" onclick="showDrilldown('revFeb')">
-      <div class="kpi-lbl">Feb 2026</div>
-      <div class="kpi-val">$263K</div>
-      <div class="kpi-sub">↓ -57.4% YoY</div>
-    </div>
-    <div class="kpi g" style="cursor:pointer;" onclick="showDrilldown('revMar')">
-      <div class="kpi-lbl">Mar 2026</div>
-      <div class="kpi-val">$319K</div>
-      <div class="kpi-sub">↓ -62.3% YoY</div>
-    </div>
-    <div class="kpi a" style="cursor:pointer;" onclick="showDrilldown('revYTD')">
-      <div class="kpi-lbl">YTD 1Q 2026</div>
-      <div class="kpi-val">$1.205M</div>
-      <div class="kpi-sub">↓ -16.9% vs 1Q25</div>
-    </div>
+  <!-- Period Selector -->
+  <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;padding:14px 18px;background:linear-gradient(135deg,#f0f9ff,#e0f2fe);border-radius:10px;border:1px solid #bae6fd;">
+    <div style="font-size:13px;font-weight:700;color:#1B3D6E;">📅 Select Period:</div>
+    <select id="analysisPeriod" onchange="updateAnalysisPeriod()" style="padding:8px 16px;border-radius:8px;border:2px solid #00B5B8;font-size:13px;font-weight:600;color:#1B3D6E;background:#fff;cursor:pointer;min-width:200px;outline:none;">
+      <option value="jan">January 2026</option>
+      <option value="feb">February 2026</option>
+      <option value="mar" selected>March 2026</option>
+      <option value="ytd">YTD — Q1 2026</option>
+    </select>
+    <div id="analysisPeriodBadge" style="font-size:11px;color:#00B5B8;font-weight:600;padding:4px 10px;background:rgba(0,181,184,0.1);border-radius:12px;">Currently: March 2026</div>
   </div>
 
-  <!-- Insight Boxes -->
-  <div class="two-col" style="margin-bottom: 18px;">
-    <div class="alert info">
-      ℹ️ <strong>Same-Period YoY Analysis (1Q26 vs 1Q25):</strong> Revenue -16.9% ($1.449M → $1.205M), but EBITDA <strong>+51.0%</strong> ($56.7K → $85.7K) and GP margin +330bps. Operational leverage offset the volume decline via better cost control and product mix.
-    </div>
-    <div class="alert warn">
-      ⚠️ <strong>MoM Pattern:</strong> Jan $622K → Feb $263K (-57.7%) → Mar $319K (+21.3% rebound). March partial recovery above Feb trough but still below Jan peak. Average monthly run-rate $402K implies FY26 revenue of ~$4.82M, broadly tracking FY25 actuals.
-    </div>
+  <!-- Dynamic KPI Strip -->
+  <div id="analysisKPIs" class="kpi-grid" style="grid-template-columns: repeat(5, 1fr) !important; margin-bottom: 18px;"></div>
+
+  <!-- Dynamic Insight Box -->
+  <div id="analysisInsight" class="two-col" style="margin-bottom:18px;"></div>
+
+  <!-- Revenue Comparison Chart -->
+  <div class="card" style="margin-bottom:15px;">
+    <div class="card-hdr" id="analysisRevHdr">Revenue Comparison <span>Click bars for details</span></div>
+    <div class="card-body" style="padding:18px 14px;" id="analysisRevChart"></div>
   </div>
 
-  <!-- Revenue Trend - Vertical Grouped Bar Chart -->
-  <div class="card">
-    <div class="card-hdr">Monthly Revenue Trend: 2024 vs 2025 vs 2026 <span>Click bars for details</span></div>
-    <div class="card-body" style="padding:18px 14px;">
-      <!-- Legend -->
-      <div style="display:flex;gap:16px;margin-bottom:16px;font-size:10px;">
-        <div style="display:flex;align-items:center;gap:4px;"><div style="width:10px;height:10px;border-radius:2px;background:#94a3b8;"></div><span style="color:#64748b;">2024</span></div>
-        <div style="display:flex;align-items:center;gap:4px;"><div style="width:10px;height:10px;border-radius:2px;background:#00B5B8;"></div><span style="color:#64748b;">2025</span></div>
-        <div style="display:flex;align-items:center;gap:4px;"><div style="width:10px;height:10px;border-radius:2px;background:#1B3D6E;"></div><span style="color:#64748b;">2026</span></div>
-      </div>
-      <!-- Vertical Bars -->
-      <div style="display:flex;gap:4px;align-items:flex-end;border-bottom:2px solid #e2e8f0;padding-bottom:0;">
-        <!-- Jan Group -->
-        <div style="flex:1;display:flex;gap:2px;align-items:flex-end;justify-content:center;">
-          <div style="display:flex;flex-direction:column;align-items:center;flex:1;cursor:pointer;" onclick="showDrilldown('revJan')">
-            <div style="font-size:8px;font-weight:700;color:#94a3b8;margin-bottom:2px;">$532K</div>
-            <div style="width:80%;height:110px;background:linear-gradient(180deg,#b0bec5,#94a3b8);border-radius:4px 4px 0 0;"></div>
-          </div>
-          <div style="display:flex;flex-direction:column;align-items:center;flex:1;cursor:pointer;" onclick="showDrilldown('revJan')">
-            <div style="font-size:8px;font-weight:700;color:#00B5B8;margin-bottom:2px;">$507K</div>
-            <div style="width:80%;height:105px;background:linear-gradient(180deg,#26c6da,#00B5B8);border-radius:4px 4px 0 0;"></div>
-          </div>
-          <div style="display:flex;flex-direction:column;align-items:center;flex:1;cursor:pointer;" onclick="showDrilldown('revJan')">
-            <div style="font-size:8px;font-weight:700;color:#1B3D6E;margin-bottom:2px;">$622K</div>
-            <div style="width:80%;height:129px;background:linear-gradient(180deg,#2e5e9e,#1B3D6E);border-radius:4px 4px 0 0;"></div>
-          </div>
-        </div>
-        <!-- Feb Group -->
-        <div style="flex:1;display:flex;gap:2px;align-items:flex-end;justify-content:center;border-left:1px solid #f1f5f9;">
-          <div style="display:flex;flex-direction:column;align-items:center;flex:1;cursor:pointer;" onclick="showDrilldown('revFeb')">
-            <div style="font-size:8px;font-weight:700;color:#94a3b8;margin-bottom:2px;">$371K</div>
-            <div style="width:80%;height:77px;background:linear-gradient(180deg,#b0bec5,#94a3b8);border-radius:4px 4px 0 0;"></div>
-          </div>
-          <div style="display:flex;flex-direction:column;align-items:center;flex:1;cursor:pointer;" onclick="showDrilldown('revFeb')">
-            <div style="font-size:8px;font-weight:700;color:#00B5B8;margin-bottom:2px;">$618K</div>
-            <div style="width:80%;height:128px;background:linear-gradient(180deg,#26c6da,#00B5B8);border-radius:4px 4px 0 0;"></div>
-          </div>
-          <div style="display:flex;flex-direction:column;align-items:center;flex:1;cursor:pointer;" onclick="showDrilldown('revFeb')">
-            <div style="font-size:8px;font-weight:700;color:#dc2626;margin-bottom:2px;">$263K</div>
-            <div style="width:80%;height:54px;background:linear-gradient(180deg,#ef5350,#dc2626);border-radius:4px 4px 0 0;"></div>
-          </div>
-        </div>
-        <!-- Mar Group -->
-        <div style="flex:1;display:flex;gap:2px;align-items:flex-end;justify-content:center;border-left:1px solid #f1f5f9;">
-          <div style="display:flex;flex-direction:column;align-items:center;flex:1;cursor:pointer;" onclick="showDrilldown('revMar')">
-            <div style="font-size:8px;font-weight:700;color:#94a3b8;margin-bottom:2px;">$847K</div>
-            <div style="width:80%;height:175px;background:linear-gradient(180deg,#b0bec5,#94a3b8);border-radius:4px 4px 0 0;"></div>
-          </div>
-          <div style="display:flex;flex-direction:column;align-items:center;flex:1;cursor:pointer;" onclick="showDrilldown('revMar')">
-            <div style="font-size:8px;font-weight:700;color:#00B5B8;margin-bottom:2px;">$324K</div>
-            <div style="width:80%;height:67px;background:linear-gradient(180deg,#26c6da,#00B5B8);border-radius:4px 4px 0 0;"></div>
-          </div>
-          <div style="display:flex;flex-direction:column;align-items:center;flex:1;cursor:pointer;" onclick="showDrilldown('revMar')">
-            <div style="font-size:8px;font-weight:700;color:#1B3D6E;margin-bottom:2px;">$319K</div>
-            <div style="width:80%;height:66px;background:linear-gradient(180deg,#2e5e9e,#1B3D6E);border-radius:4px 4px 0 0;"></div>
-          </div>
-        </div>
-        <!-- Q1 Group -->
-        <div style="flex:1;display:flex;gap:2px;align-items:flex-end;justify-content:center;border-left:2px solid #e2e8f0;padding-left:4px;">
-          <div style="display:flex;flex-direction:column;align-items:center;flex:1;cursor:pointer;" onclick="showDrilldown('isRevenue')">
-            <div style="font-size:8px;font-weight:700;color:#94a3b8;margin-bottom:2px;">$1.75M</div>
-            <div style="width:80%;height:175px;background:linear-gradient(180deg,#b0bec5,#94a3b8);border-radius:4px 4px 0 0;"></div>
-          </div>
-          <div style="display:flex;flex-direction:column;align-items:center;flex:1;cursor:pointer;" onclick="showDrilldown('isRevenue')">
-            <div style="font-size:8px;font-weight:700;color:#00B5B8;margin-bottom:2px;">$1.45M</div>
-            <div style="width:80%;height:145px;background:linear-gradient(180deg,#26c6da,#00B5B8);border-radius:4px 4px 0 0;"></div>
-          </div>
-          <div style="display:flex;flex-direction:column;align-items:center;flex:1;cursor:pointer;" onclick="showDrilldown('isRevenue')">
-            <div style="font-size:8px;font-weight:700;color:#1B3D6E;margin-bottom:2px;">$1.20M</div>
-            <div style="width:80%;height:120px;background:linear-gradient(180deg,#2e5e9e,#1B3D6E);border-radius:4px 4px 0 0;"></div>
-          </div>
-        </div>
-      </div>
-      <!-- Month labels -->
-      <div style="display:flex;gap:4px;margin-top:6px;">
-        <div style="flex:1;text-align:center;font-size:11px;font-weight:700;color:#1e293b;">Jan</div>
-        <div style="flex:1;text-align:center;font-size:11px;font-weight:700;color:#1e293b;">Feb</div>
-        <div style="flex:1;text-align:center;font-size:11px;font-weight:700;color:#1e293b;">Mar</div>
-        <div style="flex:1;text-align:center;font-size:11px;font-weight:700;color:#1B3D6E;">Q1 Total</div>
-      </div>
-      <!-- YoY Summary -->
-      <div style="display:flex;gap:0;margin-top:14px;padding:10px;background:#f8fafc;border-radius:6px;">
-        <div style="flex:1;text-align:center;border-right:1px solid #e2e8f0;">
-          <div style="font-size:9px;color:#64748b;text-transform:uppercase;">Jan YoY</div>
-          <div style="font-size:13px;font-weight:700;color:#16a34a;">+22.7%</div>
-        </div>
-        <div style="flex:1;text-align:center;border-right:1px solid #e2e8f0;">
-          <div style="font-size:9px;color:#64748b;text-transform:uppercase;">Feb YoY</div>
-          <div style="font-size:13px;font-weight:700;color:#dc2626;">-57.5%</div>
-        </div>
-        <div style="flex:1;text-align:center;border-right:1px solid #e2e8f0;">
-          <div style="font-size:9px;color:#64748b;text-transform:uppercase;">Mar YoY</div>
-          <div style="font-size:13px;font-weight:700;color:#dc2626;">-1.5%</div>
-        </div>
-        <div style="flex:1;text-align:center;">
-          <div style="font-size:9px;color:#64748b;text-transform:uppercase;">Q1 YoY</div>
-          <div style="font-size:13px;font-weight:700;color:#dc2626;">-16.9%</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- EBITDA & Net Income Monthly Trends — Vertical -->
-  <div class="two-col" style="margin-top: 15px;">
+  <!-- Profitability Breakdown -->
+  <div class="two-col" style="margin-bottom:15px;">
     <div class="card">
-      <div class="card-hdr">Monthly EBITDA 2026 <span>Click bars</span></div>
-      <div class="card-body" style="padding:18px 14px;">
-        <div style="display:flex;gap:10px;align-items:flex-end;border-bottom:2px solid #e2e8f0;">
-          <!-- Jan -->
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;cursor:pointer;" onclick="showDrilldown('cfOCF')">
-            <div style="height:140px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;width:100%;">
-              <div style="font-size:11px;font-weight:700;color:#16a34a;margin-bottom:3px;">$62.3K</div>
-              <div style="width:60%;height:104px;background:linear-gradient(180deg,#22c55e,#16a34a);border-radius:5px 5px 0 0;"></div>
-            </div>
-          </div>
-          <!-- Feb (negative) -->
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;cursor:pointer;" onclick="showDrilldown('cfOCF')">
-            <div style="height:140px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;width:100%;">
-              <div style="font-size:11px;font-weight:700;color:#dc2626;margin-bottom:3px;">($9.0K)</div>
-              <div style="width:60%;height:15px;background:linear-gradient(180deg,#ef5350,#dc2626);border-radius:5px 5px 0 0;"></div>
-            </div>
-          </div>
-          <!-- Mar -->
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;cursor:pointer;" onclick="showDrilldown('isEBITDA')">
-            <div style="height:140px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;width:100%;">
-              <div style="font-size:11px;font-weight:700;color:#16a34a;margin-bottom:3px;">$32.4K</div>
-              <div style="width:60%;height:54px;background:linear-gradient(180deg,#22c55e,#16a34a);border-radius:5px 5px 0 0;"></div>
-            </div>
-          </div>
-          <!-- YTD -->
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;cursor:pointer;border-left:2px solid #e2e8f0;padding-left:6px;" onclick="showDrilldown('isEBITDA')">
-            <div style="height:140px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;width:100%;">
-              <div style="font-size:11px;font-weight:700;color:#1B3D6E;margin-bottom:3px;">$85.7K</div>
-              <div style="width:60%;height:140px;background:linear-gradient(180deg,#2e5e9e,#1B3D6E);border-radius:5px 5px 0 0;"></div>
-            </div>
-          </div>
-        </div>
-        <!-- Labels -->
-        <div style="display:flex;gap:10px;margin-top:6px;">
-          <div style="flex:1;text-align:center;"><div style="font-size:10px;font-weight:600;color:#1e293b;">Jan</div><div style="font-size:8px;color:#94a3b8;">10.0%</div></div>
-          <div style="flex:1;text-align:center;"><div style="font-size:10px;font-weight:600;color:#dc2626;">Feb</div><div style="font-size:8px;color:#dc2626;">-3.4%</div></div>
-          <div style="flex:1;text-align:center;"><div style="font-size:10px;font-weight:600;color:#1e293b;">Mar</div><div style="font-size:8px;color:#94a3b8;">10.2%</div></div>
-          <div style="flex:1;text-align:center;border-left:2px solid #e2e8f0;"><div style="font-size:10px;font-weight:700;color:#1B3D6E;">YTD</div><div style="font-size:8px;color:#94a3b8;">7.1% · +51% vs 1Q25</div></div>
-        </div>
-      </div>
+      <div class="card-hdr" id="analysisPLHdr">P&amp;L Waterfall <span>Selected period</span></div>
+      <div class="card-body" style="padding:18px 14px;" id="analysisPLChart"></div>
     </div>
-
     <div class="card">
-      <div class="card-hdr">Monthly Net Income 2026 <span>Click bars</span></div>
-      <div class="card-body" style="padding:18px 14px;">
-        <div style="display:flex;gap:10px;align-items:flex-end;border-bottom:2px solid #e2e8f0;">
-          <!-- Jan -->
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;cursor:pointer;" onclick="showDrilldown('isNetIncome')">
-            <div style="height:140px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;width:100%;">
-              <div style="font-size:11px;font-weight:700;color:#16a34a;margin-bottom:3px;">$61.7K</div>
-              <div style="width:60%;height:63px;background:linear-gradient(180deg,#22c55e,#16a34a);border-radius:5px 5px 0 0;"></div>
-            </div>
-          </div>
-          <!-- Feb -->
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;cursor:pointer;" onclick="showDrilldown('isNetIncome')">
-            <div style="height:140px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;width:100%;">
-              <div style="font-size:11px;font-weight:700;color:#22c55e;margin-bottom:3px;">$44.9K</div>
-              <div style="width:60%;height:46px;background:linear-gradient(180deg,#4ade80,#22c55e);border-radius:5px 5px 0 0;"></div>
-            </div>
-          </div>
-          <!-- Mar -->
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;cursor:pointer;" onclick="showDrilldown('isNetIncome')">
-            <div style="height:140px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;width:100%;">
-              <div style="font-size:11px;font-weight:700;color:#16a34a;margin-bottom:3px;">$31.8K</div>
-              <div style="width:60%;height:32px;background:linear-gradient(180deg,#22c55e,#16a34a);border-radius:5px 5px 0 0;"></div>
-            </div>
-          </div>
-          <!-- YTD -->
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;cursor:pointer;border-left:2px solid #e2e8f0;padding-left:6px;" onclick="showDrilldown('isNetIncome')">
-            <div style="height:140px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;width:100%;">
-              <div style="font-size:11px;font-weight:700;color:#1B3D6E;margin-bottom:3px;">$138.3K</div>
-              <div style="width:60%;height:140px;background:linear-gradient(180deg,#2e5e9e,#1B3D6E);border-radius:5px 5px 0 0;"></div>
-            </div>
-          </div>
-        </div>
-        <!-- Labels -->
-        <div style="display:flex;gap:10px;margin-top:6px;">
-          <div style="flex:1;text-align:center;"><div style="font-size:10px;font-weight:600;color:#1e293b;">Jan</div><div style="font-size:8px;color:#94a3b8;">9.9% net</div></div>
-          <div style="flex:1;text-align:center;"><div style="font-size:10px;font-weight:600;color:#1e293b;">Feb</div><div style="font-size:8px;color:#94a3b8;">17.1% · FX boost</div></div>
-          <div style="flex:1;text-align:center;"><div style="font-size:10px;font-weight:600;color:#1e293b;">Mar</div><div style="font-size:8px;color:#94a3b8;">9.9% net</div></div>
-          <div style="flex:1;text-align:center;border-left:2px solid #e2e8f0;"><div style="font-size:10px;font-weight:700;color:#1B3D6E;">YTD</div><div style="font-size:8px;color:#94a3b8;">11.5% · -29% vs 1Q25</div></div>
-        </div>
-      </div>
+      <div class="card-hdr" id="analysisMarginHdr">Margin Trends <span>All months</span></div>
+      <div class="card-body" style="padding:18px 14px;" id="analysisMarginChart"></div>
     </div>
   </div>
 
   <!-- Key Performance Insights -->
-  <div class="insight-box" style="margin-top: 20px; margin-bottom: 20px;">
-    <div class="insight-box-hdr">📊 Key Performance Insights — March 2026 &amp; 1Q26 Close</div>
-    <div class="insight-box-txt">
-      <strong>1. Revenue Pattern &amp; March Stabilization:</strong> Jan $622K (+22.6% YoY) &rarr; Feb $263K (-57.4% YoY) &rarr; Mar $319K (-62.3% YoY vs $847K tough comp). March showed partial MoM recovery (+21.3% vs Feb) but remained well below the exceptional Mar-24 benchmark. 1Q26 total revenue of <strong>$1.205M (-16.9% vs 1Q25)</strong> reflects softer Iraq spare-parts demand, not a structural shift.<br><br>
-      <strong>2. Margin Resilience &amp; Operating Leverage:</strong> Despite -16.9% same-period revenue decline, GP margin expanded to <strong>20.8% (vs 16.2% 1Q25)</strong> — a 460bps improvement. Product mix shift to higher-margin SKUs plus tighter COGS discipline drove the gain. March standalone GP margin of 26.0% was the best monthly print of the quarter.<br><br>
-      <strong>3. EBITDA Recovery:</strong> 1Q26 EBITDA of <strong>$85.7K (7.1% margin)</strong> grew <strong>+51.0%</strong> vs 1Q25 ($56.7K / 3.9% margin) — proving that cost leverage more than offset volume decline. March standalone EBITDA of $32.4K (10.2%) confirms Feb negative EBITDA was an outlier, not a trend.<br><br>
-      <strong>4. Net Income Down on FX Reversal:</strong> YTD Net Income of <strong>$138.3K (11.5% margin, -29.3% YoY)</strong> was pressured by lower currency gain vs 1Q25 ($54.5K this period vs ~$138K last period). Strip out FX, operating performance is stronger than the headline suggests.<br><br>
-      <strong>5. Outlook:</strong> Run-rate $402K/mo implies FY26E revenue ~$4.82M (-1% vs FY25). With margin expansion holding, full-year EBITDA should exceed FY25 even on flat-to-down revenue.
-    </div>
+  <div class="insight-box" style="margin-top:20px;margin-bottom:20px;">
+    <div class="insight-box-hdr" id="analysisInsightHdr">📊 Key Performance Insights</div>
+    <div class="insight-box-txt" id="analysisInsightTxt"></div>
   </div>
+</div>
+
 </div>
 
 <!-- ════════ AR AGING ════════ -->
@@ -2421,7 +2218,7 @@ function show(pageId, el) {
   var pg = document.getElementById('page-' + pageId);
   if (pg) pg.classList.add('active');
   if (el) el.classList.add('active');
-  var titles = {exec:'Executive Summary',dashboard:'Executive Dashboard',ratios:'Financial Ratios',pnl:'Income Statement',bs:'Balance Sheet',cf:'Cash Flow',analysis:'Performance Analysis',ar:'AR Aging',ap:'AP Aging',revd:'Revenue Detail',cogsd:'COGS Detail',sgad:'SG&A Detail',fa:'Fixed Assets',stock:'Stock / Inventory'};
+  var titles = {exec:'Executive Summary',dashboard:'Executive Summary',ratios:'Financial Ratios',pnl:'Income Statement',bs:'Balance Sheet',cf:'Cash Flow',analysis:'Performance Analysis',ar:'AR Aging',ap:'AP Aging',revd:'Revenue Detail',cogsd:'COGS Detail',sgad:'SG&A Detail',fa:'Fixed Assets',stock:'Stock / Inventory'};
   document.getElementById('pg-title').textContent = titles[pageId] || pageId;
   // Close sidebar after navigation
   closeSidebar();
@@ -3066,6 +2863,214 @@ function showDrilldown(key) {
 };
   if (dd[key]) openModal(dd[key].title, dd[key].html);
 }
+/* ═══ Performance Analysis Dynamic Period ═══ */
+var analysisData = {
+  jan: {
+    label:'January 2026', rev:622170, cogs:511898, gp:110273, gpPct:17.72,
+    sga:36277, ebitda:62310, ebitdaPct:10.01, ni:61655, niPct:9.91,
+    dep:655, oi:73996, oiPct:11.90, otherInc:0, otherExp:12341,
+    revPY:507444, revYoY:22.6, revMoM:0, badge:'g',
+    cogsPY:424100, gpPY:83344, gpPctPY:16.42,
+    ebitdaPY:56740, ebitdaPctPY:3.91, niPY:195300, niPctPY:13.48,
+    drillRev:'revJan', drillCogs:'cogsJan', drillSga:'sgaJan'
+  },
+  feb: {
+    label:'February 2026', rev:262822, cogs:205034, gp:57788, gpPct:21.99,
+    sga:54413, ebitda:-9035, ebitdaPct:-3.44, ni:44941, niPct:17.10,
+    dep:655, oi:3375, oiPct:1.28, otherInc:42221, otherExp:655,
+    revPY:617785, revYoY:-57.5, revMoM:-57.7, badge:'a',
+    cogsPY:527600, gpPY:90185, gpPctPY:14.60,
+    ebitdaPY:0, ebitdaPctPY:0, niPY:0, niPctPY:0,
+    drillRev:'revFeb', drillCogs:'cogsFeb', drillSga:'sgaFeb'
+  },
+  mar: {
+    label:'March 2026', rev:319182, cogs:236272, gp:82911, gpPct:25.98,
+    sga:37527, ebitda:32410, ebitdaPct:10.15, ni:31755, niPct:9.95,
+    dep:655, oi:45384, oiPct:14.22, otherInc:0, otherExp:13629,
+    revPY:323825, revYoY:-1.4, revMoM:21.4, badge:'a',
+    cogsPY:269300, gpPY:54525, gpPctPY:16.84,
+    ebitdaPY:0, ebitdaPctPY:0, niPY:0, niPctPY:0,
+    drillRev:'revMar', drillCogs:'cogsMar', drillSga:'sgaMar'
+  },
+  ytd: {
+    label:'YTD Q1 2026', rev:1204175, cogs:953203, gp:250972, gpPct:20.84,
+    sga:128217, ebitda:85685, ebitdaPct:7.11, ni:138351, niPct:11.49,
+    dep:1964, oi:122755, oiPct:10.19, otherInc:42221, otherExp:26625,
+    revPY:1449054, revYoY:-16.9, revMoM:0, badge:'a',
+    cogsPY:1220700, gpPY:228354, gpPctPY:15.76,
+    ebitdaPY:56740, ebitdaPctPY:3.91, niPY:195641, niPctPY:13.50,
+    drillRev:'revYTD', drillCogs:'cogsYTD', drillSga:'sgaComposition'
+  }
+};
+
+var analysisMonthly = [
+  {m:'Jan', rev:622170, gp:110273, gpP:17.72, ebitda:62310, ebitdaP:10.01, ni:61655, niP:9.91},
+  {m:'Feb', rev:262822, gp:57788,  gpP:21.99, ebitda:-9035, ebitdaP:-3.44, ni:44941, niP:17.10},
+  {m:'Mar', rev:319182, gp:82911,  gpP:25.98, ebitda:32410, ebitdaP:10.15, ni:31755, niP:9.95}
+];
+
+function fmtK(v){ return v>=1000000?'$'+(v/1000000).toFixed(2)+'M':v>=0?'$'+(v/1000).toFixed(1)+'K':'($'+(Math.abs(v)/1000).toFixed(1)+'K)'; }
+function fmtPct(v){ return (v>=0?'+':'')+v.toFixed(1)+'%'; }
+function clr(v){ return v>=0?'#16a34a':'#dc2626'; }
+
+function updateAnalysisPeriod(){
+  var sel = document.getElementById('analysisPeriod').value;
+  var d = analysisData[sel];
+  document.getElementById('analysisPeriodBadge').textContent = 'Currently: ' + d.label;
+
+  /* ── KPI Cards ── */
+  var kh = '';
+  kh += '<div class="kpi '+(d.revYoY>=0?'g':'a')+'" style="cursor:pointer" onclick="showDrilldown(\''+d.drillRev+'\')"><div class="kpi-lbl">Revenue</div><div class="kpi-val">'+fmtK(d.rev)+'</div><div class="kpi-sub">'+(d.revYoY>=0?'↑':'↓')+' '+fmtPct(d.revYoY)+' YoY</div></div>';
+  kh += '<div class="kpi '+(d.gpPct>20?'g':'b')+'" style="cursor:pointer" onclick="showDrilldown(\''+d.drillCogs+'\')"><div class="kpi-lbl">Gross Profit</div><div class="kpi-val">'+fmtK(d.gp)+'</div><div class="kpi-sub">'+d.gpPct.toFixed(1)+'% margin</div></div>';
+  kh += '<div class="kpi '+(d.ebitda>=0?'g':'a')+'" style="cursor:pointer" onclick="showDrilldown(\'isEBITDA\')"><div class="kpi-lbl">EBITDA</div><div class="kpi-val">'+fmtK(d.ebitda)+'</div><div class="kpi-sub">'+d.ebitdaPct.toFixed(1)+'% margin</div></div>';
+  kh += '<div class="kpi '+(d.ni>=0?'g':'a')+'" style="cursor:pointer" onclick="showDrilldown(\'isNetIncome\')"><div class="kpi-lbl">Net Income</div><div class="kpi-val">'+fmtK(d.ni)+'</div><div class="kpi-sub">'+d.niPct.toFixed(1)+'% margin</div></div>';
+  kh += '<div class="kpi b" style="cursor:pointer" onclick="showDrilldown(\''+d.drillSga+'\')"><div class="kpi-lbl">SG&A</div><div class="kpi-val">'+fmtK(d.sga)+'</div><div class="kpi-sub">'+(d.sga/d.rev*100).toFixed(1)+'% of revenue</div></div>';
+  document.getElementById('analysisKPIs').innerHTML = kh;
+
+  /* ── Insight Alert ── */
+  var ih = '';
+  var gpDelta = (d.gpPct - d.gpPctPY).toFixed(0);
+  ih += '<div class="alert info">ℹ️ <strong>Period Overview ('+d.label+'):</strong> Revenue '+fmtK(d.rev)+' ('+fmtPct(d.revYoY)+' YoY). GP margin <strong>'+d.gpPct.toFixed(1)+'%</strong> vs PY '+d.gpPctPY.toFixed(1)+'% ('+(gpDelta>=0?'+':'')+gpDelta+'00bps). EBITDA '+fmtK(d.ebitda)+' ('+d.ebitdaPct.toFixed(1)+'% margin).</div>';
+  if(sel!=='ytd'){
+    ih += '<div class="alert '+(d.ebitda>=0?'info':'warn')+'">'+(d.ebitda>=0?'ℹ️':'⚠️')+' <strong>Profitability:</strong> COGS '+fmtK(d.cogs)+' ('+(d.cogs/d.rev*100).toFixed(1)+'% of rev). SG&A '+fmtK(d.sga)+' ('+(d.sga/d.rev*100).toFixed(1)+'% of rev). Operating income '+fmtK(d.oi)+' ('+d.oiPct.toFixed(1)+'%).</div>';
+  } else {
+    ih += '<div class="alert info">ℹ️ <strong>Same-Period Comparison (1Q26 vs 1Q25):</strong> Revenue -16.9%, but EBITDA <strong>+51.0%</strong> ($56.7K→$85.7K) and GP margin +460bps. Operational leverage offset volume decline via better cost control and product mix.</div>';
+  }
+  document.getElementById('analysisInsight').innerHTML = ih;
+
+  /* ── Revenue Comparison Bar Chart ── */
+  document.getElementById('analysisRevHdr').innerHTML = 'Revenue Comparison — '+d.label+' <span>Click bars for details</span>';
+  var maxRev = Math.max(d.rev, d.revPY) * 1.1;
+  var h26 = Math.max(12, Math.round(d.rev/maxRev*180));
+  var hPY = Math.max(12, Math.round(d.revPY/maxRev*180));
+  var rc = '<div style="display:flex;gap:16px;margin-bottom:14px;font-size:10px;">';
+  rc += '<div style="display:flex;align-items:center;gap:4px;"><div style="width:10px;height:10px;border-radius:2px;background:#94a3b8;"></div><span style="color:#64748b;">Prior Year</span></div>';
+  rc += '<div style="display:flex;align-items:center;gap:4px;"><div style="width:10px;height:10px;border-radius:2px;background:#1B3D6E;"></div><span style="color:#64748b;">2026</span></div></div>';
+
+  if(sel==='ytd'){
+    /* YTD shows all 3 months side by side + Q1 total */
+    var pyMonths = [{m:'Jan',v:507444},{m:'Feb',v:617785},{m:'Mar',v:323825}];
+    var cyMonths = [{m:'Jan',v:622170},{m:'Feb',v:262822},{m:'Mar',v:319182}];
+    var allMax = 850000;
+    rc += '<div style="display:flex;gap:6px;align-items:flex-end;border-bottom:2px solid #e2e8f0;">';
+    for(var i=0;i<3;i++){
+      var pyH = Math.max(10, Math.round(pyMonths[i].v/allMax*160));
+      var cyH = Math.max(10, Math.round(cyMonths[i].v/allMax*160));
+      var cyClr = cyMonths[i].v>=pyMonths[i].v ? '#1B3D6E' : '#dc2626';
+      rc += '<div style="flex:1;display:flex;gap:3px;align-items:flex-end;justify-content:center;'+(i>0?'border-left:1px solid #f1f5f9;':'')+'">';
+      rc += '<div style="display:flex;flex-direction:column;align-items:center;flex:1;cursor:pointer;" onclick="showDrilldown(\''+['revJan','revFeb','revMar'][i]+'\')">';
+      rc += '<div style="font-size:8px;font-weight:700;color:#94a3b8;margin-bottom:2px;">'+fmtK(pyMonths[i].v)+'</div>';
+      rc += '<div style="width:75%;height:'+pyH+'px;background:linear-gradient(180deg,#b0bec5,#94a3b8);border-radius:4px 4px 0 0;"></div></div>';
+      rc += '<div style="display:flex;flex-direction:column;align-items:center;flex:1;cursor:pointer;" onclick="showDrilldown(\''+['revJan','revFeb','revMar'][i]+'\')">';
+      rc += '<div style="font-size:8px;font-weight:700;color:'+cyClr+';margin-bottom:2px;">'+fmtK(cyMonths[i].v)+'</div>';
+      rc += '<div style="width:75%;height:'+cyH+'px;background:linear-gradient(180deg,'+(cyMonths[i].v>=pyMonths[i].v?'#2e5e9e,#1B3D6E':'#ef5350,#dc2626')+');border-radius:4px 4px 0 0;"></div></div>';
+      rc += '</div>';
+    }
+    /* Q1 total */
+    var pyQ1=1449054, cyQ1=1204175;
+    rc += '<div style="flex:1;display:flex;gap:3px;align-items:flex-end;justify-content:center;border-left:2px solid #e2e8f0;padding-left:4px;">';
+    rc += '<div style="display:flex;flex-direction:column;align-items:center;flex:1;cursor:pointer;" onclick="showDrilldown(\'isRevenue\')">';
+    rc += '<div style="font-size:8px;font-weight:700;color:#94a3b8;margin-bottom:2px;">$1.45M</div>';
+    rc += '<div style="width:75%;height:160px;background:linear-gradient(180deg,#b0bec5,#94a3b8);border-radius:4px 4px 0 0;"></div></div>';
+    rc += '<div style="display:flex;flex-direction:column;align-items:center;flex:1;cursor:pointer;" onclick="showDrilldown(\'isRevenue\')">';
+    rc += '<div style="font-size:8px;font-weight:700;color:#dc2626;margin-bottom:2px;">$1.20M</div>';
+    rc += '<div style="width:75%;height:'+Math.round(cyQ1/1449054*160)+'px;background:linear-gradient(180deg,#ef5350,#dc2626);border-radius:4px 4px 0 0;"></div></div>';
+    rc += '</div></div>';
+    rc += '<div style="display:flex;gap:6px;margin-top:6px;">';
+    rc += '<div style="flex:1;text-align:center;font-size:11px;font-weight:700;color:#1e293b;">Jan</div>';
+    rc += '<div style="flex:1;text-align:center;font-size:11px;font-weight:700;color:#1e293b;">Feb</div>';
+    rc += '<div style="flex:1;text-align:center;font-size:11px;font-weight:700;color:#1e293b;">Mar</div>';
+    rc += '<div style="flex:1;text-align:center;font-size:11px;font-weight:700;color:#1B3D6E;">Q1 Total</div></div>';
+  } else {
+    /* Single month: two big bars side by side */
+    rc += '<div style="display:flex;gap:24px;align-items:flex-end;justify-content:center;border-bottom:2px solid #e2e8f0;padding:0 40px;">';
+    rc += '<div style="width:120px;display:flex;flex-direction:column;align-items:center;cursor:pointer;" onclick="showDrilldown(\''+d.drillRev+'\')">';
+    rc += '<div style="font-size:12px;font-weight:700;color:#94a3b8;margin-bottom:4px;">'+fmtK(d.revPY)+'</div>';
+    rc += '<div style="width:80px;height:'+hPY+'px;background:linear-gradient(180deg,#b0bec5,#94a3b8);border-radius:5px 5px 0 0;"></div></div>';
+    rc += '<div style="width:120px;display:flex;flex-direction:column;align-items:center;cursor:pointer;" onclick="showDrilldown(\''+d.drillRev+'\')">';
+    rc += '<div style="font-size:12px;font-weight:700;color:'+(d.rev>=d.revPY?'#1B3D6E':'#dc2626')+';margin-bottom:4px;">'+fmtK(d.rev)+'</div>';
+    rc += '<div style="width:80px;height:'+h26+'px;background:linear-gradient(180deg,'+(d.rev>=d.revPY?'#2e5e9e,#1B3D6E':'#ef5350,#dc2626')+');border-radius:5px 5px 0 0;"></div></div>';
+    rc += '</div>';
+    rc += '<div style="display:flex;gap:24px;margin-top:8px;justify-content:center;padding:0 40px;">';
+    rc += '<div style="width:120px;text-align:center;font-size:12px;font-weight:600;color:#94a3b8;">PY ('+(sel==="jan"?"Jan 25":sel==="feb"?"Feb 25":"Mar 25")+')</div>';
+    rc += '<div style="width:120px;text-align:center;font-size:12px;font-weight:700;color:#1B3D6E;">2026</div></div>';
+    /* YoY callout */
+    rc += '<div style="text-align:center;margin-top:12px;padding:8px;background:#f8fafc;border-radius:6px;">';
+    rc += '<span style="font-size:13px;font-weight:700;color:'+clr(d.revYoY)+';">'+fmtPct(d.revYoY)+' Year-over-Year</span></div>';
+  }
+  document.getElementById('analysisRevChart').innerHTML = rc;
+
+  /* ── P&L Waterfall ── */
+  document.getElementById('analysisPLHdr').innerHTML = 'P&L Waterfall — '+d.label+' <span>Selected period</span>';
+  var items = [
+    {lbl:'Revenue', val:d.rev, pct:100, color:'#1B3D6E', drill:d.drillRev},
+    {lbl:'COGS', val:-d.cogs, pct:-(d.cogs/d.rev*100), color:'#dc2626', drill:d.drillCogs},
+    {lbl:'Gross Profit', val:d.gp, pct:d.gpPct, color:'#16a34a', drill:d.drillCogs},
+    {lbl:'SG&A', val:-d.sga, pct:-(d.sga/d.rev*100), color:'#f97316', drill:d.drillSga},
+    {lbl:'EBITDA', val:d.ebitda, pct:d.ebitdaPct, color:d.ebitda>=0?'#0891b2':'#dc2626', drill:'isEBITDA'},
+    {lbl:'Net Income', val:d.ni, pct:d.niPct, color:d.ni>=0?'#059669':'#dc2626', drill:'isNetIncome'}
+  ];
+  var maxW = d.rev;
+  var wh = '<table style="width:100%;border-collapse:collapse;font-size:12px;">';
+  for(var j=0;j<items.length;j++){
+    var it = items[j];
+    var barW = Math.max(3, Math.abs(it.val)/maxW*100);
+    wh += '<tr style="cursor:pointer;" onclick="showDrilldown(\''+it.drill+'\')">';
+    wh += '<td style="padding:6px 8px;font-weight:600;color:#1e293b;width:90px;white-space:nowrap;">'+it.lbl+'</td>';
+    wh += '<td style="padding:6px 4px;"><div style="width:'+barW.toFixed(1)+'%;height:22px;background:'+it.color+';border-radius:3px;display:flex;align-items:center;padding-left:6px;">';
+    wh += '<span style="font-size:10px;font-weight:700;color:#fff;">'+fmtK(Math.abs(it.val))+'</span></div></td>';
+    wh += '<td style="padding:6px 8px;text-align:right;font-weight:700;color:'+it.color+';width:60px;">'+it.pct.toFixed(1)+'%</td>';
+    wh += '</tr>';
+  }
+  wh += '</table>';
+  document.getElementById('analysisPLChart').innerHTML = wh;
+
+  /* ── Margin Trend Chart (always shows all 3 months) ── */
+  document.getElementById('analysisMarginHdr').innerHTML = 'Margin Trends — Monthly <span>GP%, EBITDA%, NI%</span>';
+  var mc = '<div style="display:flex;gap:16px;margin-bottom:12px;font-size:9px;">';
+  mc += '<div style="display:flex;align-items:center;gap:3px;"><div style="width:8px;height:8px;border-radius:50%;background:#16a34a;"></div>GP%</div>';
+  mc += '<div style="display:flex;align-items:center;gap:3px;"><div style="width:8px;height:8px;border-radius:50%;background:#0891b2;"></div>EBITDA%</div>';
+  mc += '<div style="display:flex;align-items:center;gap:3px;"><div style="width:8px;height:8px;border-radius:50%;background:#7c3aed;"></div>NI%</div></div>';
+  /* Simple bar groups for each month */
+  mc += '<div style="display:flex;gap:8px;align-items:flex-end;border-bottom:2px solid #e2e8f0;">';
+  for(var k=0;k<analysisMonthly.length;k++){
+    var mo = analysisMonthly[k];
+    var gpH = Math.max(4, Math.round(mo.gpP/30*120));
+    var ebH = mo.ebitdaP>=0 ? Math.max(4, Math.round(mo.ebitdaP/30*120)) : 6;
+    var niH = Math.max(4, Math.round(mo.niP/30*120));
+    var ebClr = mo.ebitdaP>=0?'#0891b2':'#dc2626';
+    mc += '<div style="flex:1;display:flex;gap:2px;align-items:flex-end;justify-content:center;'+(k>0?'border-left:1px solid #f1f5f9;':'')+'">';
+    mc += '<div style="flex:1;display:flex;flex-direction:column;align-items:center;"><div style="font-size:8px;font-weight:700;color:#16a34a;">'+mo.gpP.toFixed(1)+'%</div><div style="width:70%;height:'+gpH+'px;background:linear-gradient(180deg,#22c55e,#16a34a);border-radius:3px 3px 0 0;"></div></div>';
+    mc += '<div style="flex:1;display:flex;flex-direction:column;align-items:center;"><div style="font-size:8px;font-weight:700;color:'+ebClr+';">'+mo.ebitdaP.toFixed(1)+'%</div><div style="width:70%;height:'+ebH+'px;background:linear-gradient(180deg,#22d3ee,'+ebClr+');border-radius:3px 3px 0 0;"></div></div>';
+    mc += '<div style="flex:1;display:flex;flex-direction:column;align-items:center;"><div style="font-size:8px;font-weight:700;color:#7c3aed;">'+mo.niP.toFixed(1)+'%</div><div style="width:70%;height:'+niH+'px;background:linear-gradient(180deg,#a78bfa,#7c3aed);border-radius:3px 3px 0 0;"></div></div>';
+    mc += '</div>';
+  }
+  mc += '</div>';
+  mc += '<div style="display:flex;gap:8px;margin-top:6px;">';
+  for(var k=0;k<analysisMonthly.length;k++){
+    mc += '<div style="flex:1;text-align:center;font-size:10px;font-weight:600;color:#1e293b;">'+analysisMonthly[k].m+'</div>';
+  }
+  mc += '</div>';
+  document.getElementById('analysisMarginChart').innerHTML = mc;
+
+  /* ── Key Insights ── */
+  document.getElementById('analysisInsightHdr').innerHTML = '📊 Key Performance Insights — '+d.label;
+  var ins = '';
+  if(sel==='jan'){
+    ins = '<strong>1. Revenue Surge:</strong> Jan 2026 $622K marked the best January since NGK inception, +22.6% YoY ($507K→$622K). Strong pipeline execution and Iraq rebuild demand.<br><br><strong>2. GP Margin:</strong> 17.7% — slightly above FY25 average of 16.4%. COGS at 82.3% of revenue reflects typical product mix.<br><br><strong>3. EBITDA:</strong> $62.3K (10.0% margin) — strongest EBITDA month in recent history. SG&A held lean at $36.3K (5.8% of rev).<br><br><strong>4. Net Income:</strong> $61.7K (9.9%) — solid bottom line with no FX tailwinds. Clean operating performance.';
+  } else if(sel==='feb'){
+    ins = '<strong>1. Revenue Drop:</strong> Feb $263K was -57.7% MoM from Jan $622K peak, and -57.5% YoY vs Feb 25 $618K. Reflects seasonal lull and order timing.<br><br><strong>2. GP Margin Improved:</strong> 22.0% — best margin month of Q1 despite low volume. Product mix shift to higher-margin SKUs offset volume decline.<br><br><strong>3. EBITDA Negative:</strong> ($9.0K) — SG&A of $54.4K overwhelmed the low GP of $57.8K. One-time admin costs inflated the month.<br><br><strong>4. NI Rescued by FX:</strong> $44.9K net income (17.1% margin) thanks to $42.2K currency gain. Strip FX, operating loss of ~$2.7K.';
+  } else if(sel==='mar'){
+    ins = '<strong>1. Revenue Partial Recovery:</strong> Mar $319K rebounded +21.4% MoM from Feb trough but remained -1.4% YoY vs tough Mar 25 comp ($324K). Order pipeline normalizing.<br><br><strong>2. Best GP Margin:</strong> 26.0% — quarterly high. Higher-margin product mix and tighter supplier negotiation drove the beat.<br><br><strong>3. EBITDA Rebound:</strong> $32.4K (10.2%) confirmed Feb negative was an outlier. SG&A back to lean $37.5K (11.8% of rev).<br><br><strong>4. Net Income:</strong> $31.8K (9.9%) — clean operating result with no significant FX impact. Consistent with Jan profitability profile.';
+  } else {
+    ins = '<strong>1. Revenue Pattern & March Stabilization:</strong> Jan $622K (+22.6% YoY) → Feb $263K (-57.4% YoY) → Mar $319K (-1.4% YoY). 1Q26 total <strong>$1.205M (-16.9% vs 1Q25)</strong> reflects softer Iraq spare-parts demand, not structural.<br><br><strong>2. Margin Resilience:</strong> GP margin expanded to <strong>20.8% vs 15.8% 1Q25</strong> — a 500bps improvement. Product mix and cost discipline drove the gain. March standalone GP margin of 26.0% was the best monthly print.<br><br><strong>3. EBITDA Recovery:</strong> 1Q26 EBITDA <strong>$85.7K (7.1%)</strong> grew <strong>+51.0%</strong> vs 1Q25 ($56.7K / 3.9%). Cost leverage more than offset volume decline.<br><br><strong>4. Net Income:</strong> $138.4K (11.5% margin, -29.3% YoY) pressured by lower FX gain vs 1Q25. Strip FX, operating performance stronger than headline.<br><br><strong>5. Outlook:</strong> Run-rate $402K/mo implies FY26E ~$4.82M. With margin expansion holding, full-year EBITDA should exceed FY25 on flat-to-down revenue.';
+  }
+  document.getElementById('analysisInsightTxt').innerHTML = ins;
+}
+
+/* Initialize on page load */
+document.addEventListener('DOMContentLoaded', function(){ setTimeout(updateAnalysisPeriod, 100); });
+
 </script>
 </body>
 </html>
