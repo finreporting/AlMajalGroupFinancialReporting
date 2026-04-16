@@ -139,20 +139,27 @@ window.addEventListener('load', function(){
 <div id="sidebar-overlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
 <nav id="sidebar" class="collapsed">
 <div class="logo-area" style="background:#0B1D3A;padding:16px 12px 10px;border-bottom:none;">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 68" height="62" width="230">
-  <!-- Two overlapping tilted ellipses — Al Majal brand mark -->
-  <g transform="translate(2,2)">
-    <!-- Larger outer ellipse, slight tilt left — lighter teal -->
-    <ellipse cx="28" cy="32" rx="25" ry="28" fill="none" stroke="#5BBFC7" stroke-width="2.2" transform="rotate(-8,28,32)"/>
-    <!-- Smaller inner ellipse, slight tilt right — darker navy-teal -->
-    <ellipse cx="35" cy="32" rx="17" ry="21" fill="none" stroke="#1A6E7E" stroke-width="2.8" transform="rotate(6,35,32)"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 70" height="64" width="230">
+  <defs>
+    <!-- Clip to reveal only the TOP portion of the outer ring where it crosses in FRONT of the inner ring -->
+    <clipPath id="outerFront">
+      <rect x="0" y="0" width="70" height="28"/>
+    </clipPath>
+  </defs>
+  <g transform="translate(2,3)">
+    <!-- LAYER 1: Full outer ring (back) — larger, lighter teal, slightly tilted -->
+    <ellipse cx="27" cy="32" rx="24" ry="29" fill="none" stroke="#5ABEC6" stroke-width="2.3" transform="rotate(-6,27,32)"/>
+    <!-- LAYER 2: Full inner ring (middle) — smaller, darker navy-teal, tilted opposite -->
+    <ellipse cx="38" cy="32" rx="16" ry="21" fill="none" stroke="#145E6E" stroke-width="2.8" transform="rotate(8,38,32)"/>
+    <!-- LAYER 3: Outer ring front segment (top crossing) — redrawn on top to create interlocked look -->
+    <ellipse cx="27" cy="32" rx="24" ry="29" fill="none" stroke="#5ABEC6" stroke-width="2.3" transform="rotate(-6,27,32)" clip-path="url(#outerFront)"/>
   </g>
-  <!-- AL MAJAL text — dark navy matching the image -->
-  <text x="72" y="28" font-family="'Trebuchet MS',Arial,sans-serif" font-weight="900" font-size="22" fill="#1A4E6E" letter-spacing="2.5">AL MAJAL</text>
-  <!-- Subsidiary name in teal -->
-  <text x="74" y="48" font-family="'Trebuchet MS',Arial,sans-serif" font-weight="400" font-size="12" fill="#5BBFC7" letter-spacing="2">NGK Spare Parts</text>
+  <!-- AL MAJAL text — dark navy-teal -->
+  <text x="74" y="30" font-family="'Trebuchet MS',Arial,sans-serif" font-weight="900" font-size="23" fill="#14465E" letter-spacing="2">AL MAJAL</text>
+  <!-- Subsidiary name -->
+  <text x="76" y="50" font-family="'Trebuchet MS',Arial,sans-serif" font-weight="400" font-size="12" fill="#5ABEC6" letter-spacing="1.8">NGK Spare Parts</text>
 </svg>
-<div style="margin-top:5px;padding-top:5px;border-top:1px solid rgba(91,191,199,0.2);">
+<div style="margin-top:5px;padding-top:5px;border-top:1px solid rgba(90,190,198,0.2);">
   <div style="font-size:9px;color:rgba(255,255,255,0.4);letter-spacing:0.5px;">March 2026</div>
 </div>
 </div>
