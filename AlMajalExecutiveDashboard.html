@@ -946,8 +946,8 @@ Unlock Dashboard
   </div>
   <nav class="nav-menu">
 
-    <!-- ── Analysis Combined Financials ────────────────── -->
-    <div class="nav-section-label">Analysis Combined Financials</div>
+    <!-- ── Analysis Combined Financials ── -->
+    <div style="padding:6px 20px 2px;font-size:9px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:1px;text-transform:uppercase">Analysis Combined Financials</div>
     <div class="nav-item active" onclick="showPage('revenue')"><span class="nav-icon">📈</span>Revenue Analysis Combined</div>
     <div class="nav-item" onclick="showPage('margins')"><span class="nav-icon">💹</span>Profitability and Margins Combined</div>
     <div class="nav-item" onclick="showPage('spotlight')"><span class="nav-icon">🔍</span>Business Unit Spotlight Combined</div>
@@ -957,28 +957,27 @@ Unlock Dashboard
     <div class="nav-item" onclick="showPage('ytd')" style="display:none"><span class="nav-icon">📅</span>2026 YTD</div>
     <div class="nav-item" onclick="showPage('table')" style="display:none"><span class="nav-icon">📋</span>Full Data Table</div>
 
-    <!-- ── Financial Statements ────────────────────────── -->
-    <div class="nav-divider"></div>
-    <div class="nav-section-label">Financial Statements</div>
+    <!-- ── Financial Statements ── -->
+    <div style="height:1px;background:rgba(255,255,255,0.1);margin:8px 16px 4px"></div>
+    <div style="padding:6px 20px 2px;font-size:9px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:1px;text-transform:uppercase">Financial Statements</div>
     <div class="nav-item" onclick="showPage('incomestatement')"><span class="nav-icon">📑</span>Income Statement Consolidation</div>
     <div class="nav-item" onclick="showPage('balancesheet')"><span class="nav-icon">⚖️</span>Balance Sheet Consolidation</div>
     <div class="nav-item" onclick="showPage('cashflow')"><span class="nav-icon">💵</span>Cash Flow Consolidation (WIP)</div>
     <div class="nav-item" onclick="showPage('ratios')"><span class="nav-icon">📐</span>Key Ratios Consolidation</div>
     <div class="nav-item" onclick="showPage('overview')"><span class="nav-icon">🏠</span>Executive Summary Consolidation (WIP)</div>
 
-    <!-- ── Balances and Analysis ───────────────────────── -->
-    <div class="nav-divider"></div>
-    <div class="nav-section-label">Balances and Analysis</div>
-    <div class="nav-item" id="nav-ageing" onclick="showPage('ageing')"><span class="nav-icon">⏱️</span>AR / AP Agings</div>
+    <!-- ── Balances & Analysis (sub-section under Financial Statements) ── -->
+    <div style="padding:4px 20px 2px 32px;font-size:8.5px;font-weight:600;color:rgba(255,255,255,0.22);letter-spacing:1.2px;text-transform:uppercase">Balances & Analysis</div>
+    <div class="nav-item" id="nav-ageing" onclick="showPage('ageing')"><span class="nav-icon">⏱️</span>AR / AP Aging</div>
     <div class="nav-item" id="nav-ar-ageing" onclick="showPage('ar-ageing')"><span class="nav-icon">📊</span>Accounts Receivable Details</div>
     <div class="nav-item" id="nav-ap-ageing" onclick="showPage('ap-ageing')"><span class="nav-icon">📋</span>Accounts Payable Details</div>
     <div class="nav-item" onclick="showPage('topbalances')"><span class="nav-icon">🧾</span>Taxes and Other Balances</div>
     <div class="nav-item" onclick="showPage('openitems')"><span class="nav-icon">⚠️</span>Open Item List</div>
 
-    <!-- ── Facility and Treasury ───────────────────────── -->
-    <div class="nav-divider"></div>
-    <div class="nav-section-label">Facility and Treasury</div>
-    <div class="nav-item" onclick="showPage('bank')"><span class="nav-icon">🏦</span>Bank Account Activities</div>
+    <!-- ── Facility and Treasury ── -->
+    <div style="height:1px;background:rgba(255,255,255,0.1);margin:8px 16px 4px"></div>
+    <div style="padding:6px 20px 2px;font-size:9px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:1px;text-transform:uppercase">Facility and Treasury</div>
+    <div class="nav-item" onclick="showPage('bank')"><span class="nav-icon">🏦</span>MBI and BOJ Account Activities</div>
     <div class="nav-item" onclick="showPage('facilities')"><span class="nav-icon">🏛️</span>Bank Facility</div>
     <div class="nav-item" onclick="showPage('loanschedule')"><span class="nav-icon">📆</span>Loans Schedule</div>
 
@@ -3967,6 +3966,458 @@ const D = {
       0,
       0
     ]
+  },
+  "bu_monthly_2025": {
+    "AMBP B": [
+      1688846.87,
+      1577367.95,
+      1675748.67,
+      1713730.56,
+      1768383.67,
+      1658847.94,
+      1688937.84,
+      1727078.4,
+      1738640.93,
+      1858406.17,
+      1834656.48,
+      2318077.84
+    ],
+    "AMBP NR": [
+      2803499.28,
+      2693013.03,
+      3274585.79,
+      3494975.36,
+      3295486.78,
+      2892431.34,
+      2844184.05,
+      2947048.2,
+      2984682.97,
+      3039448.56,
+      2949261.03,
+      2740561.81
+    ],
+    "AMES - AMDH": [
+      855365.4,
+      824174.04,
+      730238.62,
+      3563889.46,
+      902426.19,
+      976176.76,
+      539412.46,
+      1313926.19,
+      1234452.71,
+      1383312.88,
+      1219348.23,
+      796784.67
+    ],
+    "FEGTA": [
+      887394.16,
+      2174515.71,
+      605896.3,
+      870684.65,
+      825962.63,
+      373542.67,
+      11500.0,
+      1612317.51,
+      776436.18,
+      1752387.65,
+      1139410.73,
+      375640.0
+    ],
+    "NGK": [
+      507443.65,
+      617659.0,
+      323604.2,
+      626321.43,
+      761640.14,
+      219424.82,
+      527735.05,
+      703223.81,
+      501250.92,
+      564513.76,
+      455931.26,
+      524831.65
+    ],
+    "AMLS": [
+      1097082.92,
+      952899.66,
+      1001534.89,
+      1483001.99,
+      1006395.7,
+      864337.51,
+      916988.25,
+      1180973.77,
+      1157774.76,
+      1143394.16,
+      1153606.7,
+      1456131.54
+    ],
+    "AMTS": [
+      793571.38,
+      936071.7,
+      1151211.34,
+      1674079.78,
+      1252630.2,
+      1140284.32,
+      609642.07,
+      1048929.22,
+      1004783.52,
+      1701461.42,
+      852762.69,
+      2830081.48
+    ],
+    "AMHR": [
+      503292.0,
+      1598828.96,
+      1737426.06,
+      1718581.67,
+      1679092.39,
+      2179893.72,
+      1905987.34,
+      1908354.48,
+      2369371.53,
+      1965168.38,
+      2031618.38,
+      2143819.77
+    ],
+    "AMTS-Score": [
+      1704448.56,
+      1970357.88,
+      2163396.52,
+      3316171.83,
+      2402252.22,
+      1980661.04,
+      1946490.66,
+      2253975.23,
+      1563213.1,
+      2032655.34,
+      2043762.79,
+      2139596.21
+    ],
+    "AMTS-Sulzer": [
+      562000.0,
+      508658.35,
+      742000.0,
+      643000.0,
+      571000.0,
+      460368.0,
+      569279.33,
+      2874000.0,
+      403280.0,
+      608711.0,
+      1110703.0,
+      3337000.0
+    ],
+    "AMOS": [
+      695701.5,
+      632609.67,
+      586796.14,
+      843719.55,
+      649192.75,
+      869665.81,
+      854219.05,
+      744565.69,
+      612447.35,
+      1315970.96,
+      899734.57,
+      3312724.0
+    ],
+    "Corporate": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      31373.6,
+      0.0
+    ],
+    "GPA": [
+      15900.0,
+      267565.0,
+      211195.0,
+      108680.0,
+      109360.0,
+      128080.0,
+      238160.0,
+      219855.0,
+      120300.0,
+      140280.0,
+      123350.0,
+      222685.0
+    ],
+    "Al Holoul": [
+      18503.0,
+      0.0,
+      31021.0,
+      0.0,
+      100056.0,
+      0.0,
+      85669.0,
+      144247.0,
+      0.0,
+      275582.0,
+      87197.0,
+      166945.98
+    ],
+    "FES LIBYA": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      9915.0,
+      0.0,
+      0.0,
+      0.0,
+      290260.0,
+      0,
+      0.0
+    ],
+    "Wood Al Majal (WAM)": [
+      133492.0,
+      158782.0,
+      136393.46,
+      148317.67,
+      136273.68,
+      154483.75,
+      151948.98,
+      219117.98,
+      327492.83,
+      425746.85,
+      384288.06,
+      434214.19
+    ]
+  },
+  "bu_monthly_2024": {
+    "AMBP B": [
+      1490088.36,
+      1554028.73,
+      1659247.51,
+      1598906.12,
+      1862454.42,
+      1732772.47,
+      1809102.25,
+      1751539.99,
+      1743670.86,
+      1819380.9,
+      1643476.88,
+      1761628.22
+    ],
+    "AMBP NR": [
+      1982783.53,
+      1827578.89,
+      1870919.26,
+      1838909.52,
+      1938261.77,
+      2061055.56,
+      2294972.24,
+      2327184.3,
+      2408418.28,
+      2550442.21,
+      2590635.4,
+      2681445.23
+    ],
+    "AMES - AMDH": [
+      551784.4,
+      692309.3,
+      1577005.43,
+      1587989.32,
+      667315.5,
+      525785.89,
+      1350625.7,
+      906406.18,
+      865446.05,
+      2176047.01,
+      3780867.0,
+      875117.53
+    ],
+    "FEGTA": [
+      11500.0,
+      11500.0,
+      398157.12,
+      234096.38,
+      252400.41,
+      1865030.15,
+      19700.0,
+      74479.5,
+      181128.02,
+      59071.2,
+      285865.58,
+      109391.0
+    ],
+    "NGK": [
+      532474.16,
+      371256.6,
+      846807.75,
+      614392.82,
+      670525.13,
+      643592.53,
+      629490.65,
+      632019.55,
+      593517.93,
+      555496.35,
+      427037.14,
+      511598.29
+    ],
+    "AMLS": [
+      1116531.09,
+      1049890.53,
+      1038344.52,
+      956025.66,
+      1152385.65,
+      841402.18,
+      1060136.91,
+      828234.96,
+      1444489.12,
+      982509.73,
+      935503.36,
+      1138352.97
+    ],
+    "AMTS": [
+      556850.28,
+      509335.44,
+      911329.39,
+      812632.4,
+      525904.04,
+      988107.55,
+      640133.58,
+      788399.42,
+      1004607.5,
+      2328122.02,
+      1186361.46,
+      738215.88
+    ],
+    "AMHR": [
+      458060.21,
+      467970.71,
+      509546.2,
+      628785.87,
+      528173.37,
+      1118162.85,
+      689086.4,
+      864329.28,
+      828424.37,
+      1121099.68,
+      377681.89,
+      582361.65
+    ],
+    "AMTS-Score": [
+      2500607.07,
+      1548245.22,
+      1632782.41,
+      2156424.57,
+      1771748.05,
+      2309173.22,
+      1807265.31,
+      1887529.98,
+      1973209.8,
+      3041469.64,
+      2197874.0,
+      2422373.04
+    ],
+    "AMTS-Sulzer": [
+      952000.0,
+      922000.0,
+      2349000.0,
+      1290000.0,
+      850000.0,
+      1658000.0,
+      1409000.0,
+      1766000.0,
+      2138000.0,
+      1265000.0,
+      829000.0,
+      1053428.57
+    ],
+    "AMOS": [
+      373256.8,
+      411981.11,
+      359608.13,
+      540966.13,
+      391526.9,
+      288025.0,
+      753800.82,
+      452887.5,
+      440222.9,
+      496941.46,
+      421912.47,
+      627305.07
+    ],
+    "Corporate": [
+      0.0,
+      0.0,
+      0.0,
+      409268.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "GPA": [
+      304955.0,
+      90138.2,
+      48505.0,
+      100295.0,
+      130013.0,
+      118093.0,
+      100025.0,
+      175338.0,
+      36060.5,
+      141570.0,
+      60400.0,
+      137106.0
+    ],
+    "Al Holoul": [
+      9455.0,
+      32061.4,
+      0.0,
+      42807.2,
+      0.0,
+      11882.0,
+      10404.0,
+      0.0,
+      0.0,
+      1479.0,
+      8690.0,
+      24248.0
+    ],
+    "FES LIBYA": [
+      0.0,
+      0.0,
+      0.0,
+      38535.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0,
+      0,
+      0
+    ],
+    "Wood Al Majal (WAM)": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      28262.0,
+      136056.0,
+      263573.0
+    ]
   }
 };
 
@@ -4016,7 +4467,7 @@ const pageTitles = {
   ytd: '2026 YTD Performance', table: 'Full Data Table', topbalances: 'Taxes and Other Liabilities',
   incomestatement: 'Income Statement Consolidation',
   balancesheet: 'Balance Sheet Consolidation',
-  bank: 'Bank Report',
+  bank: 'NBI and BOJ Account Activities',
   ageing: 'AR / AP Ageing Analysis',
   facilities: 'Bank Facilities — Limits & Utilization',
   loanschedule: 'Loan Schedule',
@@ -22645,7 +23096,7 @@ window.initBS = function(){
     'ap-ageing'       : 'Accounts Payable Details',
     'topbalances'     : 'Taxes and Other Balances',
     'openitems'       : 'Open Item List',
-    'bank'            : 'Bank Account Activities',
+    'bank'            : 'MBI and BOJ Account Activities',
     'facilities'      : 'Bank Facility',
     'loanschedule'    : 'Loans Schedule'
   };
@@ -25618,7 +26069,7 @@ function _getAllCompanies(){
   return list;
 }
 var VIEW_OPTS=[
-  {k:'combined',l:'Combined (100%)'},{k:'consolidated',l:'Consolidated (Ownership %)'}
+  {k:'combined',l:'Consolidated Entities / Combined 100%'}
 ];
 var _selPeriod='Mar 2026 YTD',_selEntity='all',_selView='combined';
 
@@ -30282,7 +30733,7 @@ window._bankDrill=function(key){
 })();
 
 /* ═══════════════════════════════════════════════════════════════════════
-   BANK ACCOUNT ACTIVITY V7 — Full Excel rebuild · Dec 2025 / Jan–Mar 2026
+   NBI AND BOJ ACCOUNT ACTIVITIES V7 — Full Excel rebuild · Dec 2025 / Jan–Mar 2026
    ═══════════════════════════════════════════════════════════════════════ */
 (function(){
 'use strict';
@@ -30577,7 +31028,7 @@ function _showModal(title, subtitle, bodyHtml){
   ov.style.display='flex';
   ov.innerHTML='<div style="background:#fff;border-radius:16px;max-width:1340px;width:96%;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.3)">'
     +'<div style="background:linear-gradient(135deg,'+N+' 0%,#2d4a9e 100%);padding:20px 28px;display:flex;justify-content:space-between;align-items:flex-start;flex-shrink:0">'
-    +'<div><div style="font-size:11px;color:rgba(201,168,76,.9);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Al Majal Group — Bank Activity</div>'
+    +'<div><div style="font-size:11px;color:rgba(201,168,76,.9);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Al Majal Group — NBI and BOJ Account Activities</div>'
     +'<div style="font-size:18px;font-weight:900;color:#fff;line-height:1.2">'+title+'</div>'
     +(subtitle?'<div style="font-size:11px;color:rgba(255,255,255,.65);margin-top:4px">'+subtitle+'</div>':'')
     +'</div>'
@@ -31316,7 +31767,7 @@ function _buildInsights(pd,cpd,et,et2){
     text:'FY 2025 Total: MBI $43.38M | BOJ $2.27M | Combined $45.65M. Monthly avg: $3.62M MBI / $0.19M BOJ. Peak month: Dec 2025 ($7.95M). Trough: Feb 2025 ($1.79M). YTD 2026: $7.77M (Jan+Feb+Mar) vs $6.85M same period 2025 — +78% YoY.'});
 
   var h='<div style="margin-bottom:30px">';
-  h+='<div style="font-size:14px;font-weight:800;color:'+N+';margin-bottom:14px;padding-bottom:8px;border-bottom:3px solid '+G+'">\uD83D\uDCA1 Executive Insights — Bank Account Activity</div>';
+  h+='<div style="font-size:14px;font-weight:800;color:'+N+';margin-bottom:14px;padding-bottom:8px;border-bottom:3px solid '+G+'">\uD83D\uDCA1 Executive Insights — NBI and BOJ Account Activities</div>';
   h+='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px">';
   ins.forEach(function(i){
     h+='<div style="background:#fff;border-radius:10px;padding:16px 18px;border-left:4px solid '+i.color+';box-shadow:0 2px 8px rgba(0,0,0,.06)">';
@@ -31801,7 +32252,7 @@ var N='#1F2D5A',G='#C9A84C',GR='#1A6B3C',RD='#CC3300',BL='#2563EB',
     PU='#7C3AED',TE='#0891B2',OR='#D97706',TL='#0F766E',MG='#9D174D';
 
 /* ═══ DATA ═══ */
-var _D = {"categories": [{"name": "Working Capital Sales Financing", "items": [{"name": "IDC OPR 193", "balance": 300416, "bu": "", "notes": "AMDH-Sales"}, {"name": "IDC OPR 219", "balance": 105099, "bu": "", "notes": "AMDH-Sales"}, {"name": "IDC OPR 226", "balance": 65270, "bu": "", "notes": "AMDH-Sales"}, {"name": "IDC OPR 221", "balance": 107055, "bu": "", "notes": "AMDH-Sales"}, {"name": "IDC 23/2024", "balance": 497893, "bu": "", "notes": "AMDH-Sales"}, {"name": "IDC 6/2024", "balance": 200000, "bu": "", "notes": "AMDH-Sales"}], "subtotal": 1275733, "subTotal": 1275733}, {"name": "Capex Existing Operations", "items": [{"name": "Planned Capex B", "balance": 708645, "bu": "", "notes": "Capex B"}, {"name": "Planned Capex NR", "balance": 812458, "bu": "", "notes": "Capex NR"}, {"name": "Holoul Capex", "balance": 280000, "bu": "", "notes": "-"}, {"name": "AMDH Capex", "balance": 1000000, "bu": "", "notes": "Budget TBC"}, {"name": "Capex AMTS", "balance": 250000, "bu": "", "notes": "AMTS Capex Budget"}, {"name": "Capex AMOS Provision (Open Items / AP)", "balance": 3000000, "bu": "", "notes": "AMOS Capex"}, {"name": "Capex AMOS Forecast", "balance": 3000000, "bu": "", "notes": "AMOS Capex - monthly 2026 revised forecast"}], "subtotal": 9051103, "subTotal": 9051103}, {"name": "New Projects Capex & Investments", "items": [{"name": "AMBP Kirkuk", "balance": 10000000, "bu": "", "notes": "Budgetary"}, {"name": "Auto Distr. Project", "balance": 7000000, "bu": "", "notes": "Initial Equity Injection/Financing Requirements - TBC"}, {"name": "O2N2 Project", "balance": 5000000, "bu": "", "notes": "Initial Equity Injection/Financing Requirements - TBC"}, {"name": "NGK / batteries", "balance": 300000, "bu": "", "notes": ""}, {"name": "Lezzoo", "balance": 0, "bu": "", "notes": ""}, {"name": "Ameeneh", "balance": 0, "bu": "", "notes": "SAFE"}, {"name": "Liquid Detergents", "balance": 300000, "bu": "", "notes": "Production Line + Budgetary Facility Preparation"}], "subtotal": 22600000, "subTotal": 22600000}, {"name": "Partner Distributions and Contingencies", "items": [{"name": "AMBP Past Due Payables (excl monthly invoice)", "balance": 1659472, "bu": "", "notes": "Prime Support - Past Due"}, {"name": "CIT, PIT, SS & related payments/penalties", "balance": 2500000, "bu": "", "notes": ""}, {"name": "Mgmt Bonus", "balance": 1250000, "bu": "", "notes": "Remaining 2025 incentives TBC"}, {"name": "Partner Distribution Targets 2026", "balance": 5800000, "bu": "", "notes": "AJ + Al"}, {"name": "Other Open Items", "balance": 1000000, "bu": "", "notes": "Contingencies"}], "subtotal": 12209472, "subTotal": 12209472}], "grand_total": 45136309, "summary": {"working_capital": 1275733, "capex_existing": 9051103, "new_projects": 22600000, "partner_dist": 12209472, "direct_loan": 0, "bonds_facility": 0, "grand_total": 45136309}, "bank_facilities": [{"bank": "NBI", "entity": "AMLS", "limit": 1673613, "used": 1299276.44, "available": 374336.56}, {"bank": "NBI", "entity": "AMOES", "limit": 13496000, "used": 12539684, "available": 956316}, {"bank": "MBI", "entity": "AMOES", "limit": 5000000, "used": 2241191, "available": 2758809}, {"bank": "MBI", "entity": "AMHR", "limit": 3000000, "used": 1997774, "available": 1002226}, {"bank": "BOJ", "entity": "AMOES", "limit": 5000000, "used": 1565000, "available": 3435000}], "bank_totals": {"total_limit": 28169613, "total_used": 19642925, "total_utilised": 19642925, "total_available": 8526688}};
+var _D = {"categories": [{"name": "Working Capital Sales Financing", "items": [{"name": "IDC OPR 193", "balance": 300416, "bu": "", "notes": "AMDH-Sales"}, {"name": "IDC OPR 219", "balance": 105099, "bu": "", "notes": "AMDH-Sales"}, {"name": "IDC OPR 226", "balance": 65270, "bu": "", "notes": "AMDH-Sales"}, {"name": "IDC OPR 221", "balance": 107055, "bu": "", "notes": "AMDH-Sales"}, {"name": "IDC 23/2024", "balance": 497893, "bu": "", "notes": "AMDH-Sales"}, {"name": "IDC 6/2024", "balance": 200000, "bu": "", "notes": "AMDH-Sales"}], "subtotal": 1275733, "subTotal": 1275733}, {"name": "Capex Existing Operations", "items": [{"name": "Planned Capex B", "balance": 708645, "bu": "", "notes": "Capex B"}, {"name": "Planned Capex NR", "balance": 812458, "bu": "", "notes": "Capex NR"}, {"name": "Holoul Capex", "balance": 280000, "bu": "", "notes": "-"}, {"name": "AMDH Capex", "balance": 1000000, "bu": "", "notes": "Budget TBC"}, {"name": "Capex AMTS", "balance": 250000, "bu": "", "notes": "AMTS Capex Budget"}, {"name": "Capex AMOS Provision (Open Items / AP)", "balance": 3000000, "bu": "", "notes": "AMOS Capex"}, {"name": "Capex AMOS Forecast", "balance": 3000000, "bu": "", "notes": "AMOS Capex - monthly 2026 revised forecast"}], "subtotal": 9051103, "subTotal": 9051103}, {"name": "New Projects Capex & Investments", "items": [{"name": "AMBP Kirkuk", "balance": 10000000, "bu": "", "notes": "Budgetary"}, {"name": "Auto Distr. Project", "balance": 7000000, "bu": "", "notes": "Initial Equity Injection/Financing Requirements - TBC"}, {"name": "O2N2 Project", "balance": 5000000, "bu": "", "notes": "Initial Equity Injection/Financing Requirements - TBC"}, {"name": "Lezzoo", "balance": 0, "bu": "", "notes": ""}, {"name": "Ameeneh", "balance": 0, "bu": "", "notes": "SAFE"}, {"name": "Liquid Detergents", "balance": 300000, "bu": "", "notes": "Production Line + Budgetary Facility Preparation"}], "subtotal": 22300000, "subTotal": 22600000}, {"name": "Partner Distributions and Contingencies", "items": [{"name": "AMBP Past Due Payables (excl monthly invoice)", "balance": 1659472, "bu": "", "notes": "Prime Support - Past Due"}, {"name": "CIT, PIT, SS & related payments/penalties", "balance": 2500000, "bu": "", "notes": ""}, {"name": "Mgmt Bonus", "balance": 1250000, "bu": "", "notes": "Remaining 2025 incentives TBC"}, {"name": "Partner Distribution Targets 2026", "balance": 5800000, "bu": "", "notes": "AJ + Al"}, {"name": "Other Open Items", "balance": 1000000, "bu": "", "notes": "Contingencies"}], "subtotal": 12209472, "subTotal": 12209472}], "grand_total": 44836309, "summary": {"working_capital": 1275733, "capex_existing": 9051103, "new_projects": 22600000, "partner_dist": 12209472, "direct_loan": 0, "bonds_facility": 0, "grand_total": 45136309}, "bank_facilities": [{"bank": "NBI", "entity": "AMLS", "limit": 1673613, "used": 1299276.44, "available": 374336.56}, {"bank": "NBI", "entity": "AMOES", "limit": 13496000, "used": 12539684, "available": 956316}, {"bank": "MBI", "entity": "AMOES", "limit": 5000000, "used": 2241191, "available": 2758809}, {"bank": "MBI", "entity": "AMHR", "limit": 3000000, "used": 1997774, "available": 1002226}, {"bank": "BOJ", "entity": "AMOES", "limit": 5000000, "used": 1565000, "available": 3435000}], "bank_totals": {"total_limit": 28169613, "total_used": 19642925, "total_utilised": 19642925, "total_available": 8526688}};
 var CATS = _D.categories;
 var SUM  = _D.summary;
 var BF   = _D.bank_facilities;
@@ -36179,9 +36630,9 @@ var N='#1F2D5A', G='#C9A84C', GR='#1A6B3C', RD='#CC3300';
 var BL='#2563EB', PU='#7C3AED', TE='#0891B2', OR='#D97706';
 
 /* ═══════════ PERIOD KEYS & LABELS ═══════════ */
-var PERIODS=['FY 2021','FY 2022','FY 2023','FY 2024','FY 2025','Jan 2026','Feb 2026','Mar 2026'];
-var P_LABELS=['2021','2022','2023','2024','2025','Jan 2026','Feb 2026','Mar 2026'];
-var P_SHORT=['FY21','FY22','FY23','FY24','FY25','Jan-26','Feb-26','Mar-26'];
+var PERIODS=['FY 2021','FY 2022','FY 2023','FY 2024','FY 2025','Jan 2026','Feb 2026','Mar 2026','YTD 2026'];
+var P_LABELS=['2021','2022','2023','2024','2025','Jan 2026','Feb 2026','Mar 2026','YTD Mar 2026'];
+var P_SHORT=['FY21','FY22','FY23','FY24','FY25','Jan-26','Feb-26','Mar-26','YTD-26'];
 
 /* Line name mapping: what we call → actual IS keys (tries first then second) */
 var LINE_MAP={
@@ -36194,8 +36645,8 @@ var LINE_MAP={
 };
 
 /* ═══════════ STATE ═══════════ */
-var _yr='Mar 2026';     // selected period (IS_FULL key)
-var _yrIdx=7;
+var _yr='YTD 2026';     // selected period (IS_FULL key or YTD virtual)
+var _yrIdx=8;
 var _ent='__TOTAL__';   // selected entity (or __TOTAL__ for combined)
 var _cm='rev';          // chart metric
 
@@ -36210,9 +36661,20 @@ function _bsRows(){try{return(_fp().bs26||{}).rows||{};}catch(e){return{};}}
 /* Get line value from IS_FULL_DATA for a period and metric key */
 function _getVal(period, metricKey, entity){
   var isd=_isData();if(!isd||!isd.data)return 0;
+  var ent=entity||_ent;
+
+  /* YTD 2026: sum Jan + Feb + Mar 2026 */
+  if(period==='YTD 2026'){
+    var ytdMonths=['Jan 2026','Feb 2026','Mar 2026'];
+    var sum=0;
+    for(var mi=0;mi<ytdMonths.length;mi++){
+      sum+=_getVal(ytdMonths[mi], metricKey, ent);
+    }
+    return sum;
+  }
+
   var pd=isd.data[period];if(!pd)return 0;
   var keys=LINE_MAP[metricKey]||[];
-  var ent=entity||_ent;
   for(var ki=0;ki<keys.length;ki++){
     var lineData=pd.lines[keys[ki]];
     if(lineData){
@@ -36231,10 +36693,13 @@ function _val(key){
 /* Get previous period value for comparison */
 function _prev(key){
   if(_yrIdx<=0)return null;
+  /* YTD 2026 compares vs FY 2025 */
+  if(_yr==='YTD 2026')return _getVal('FY 2025', key, _ent);
   return _getVal(PERIODS[_yrIdx-1], key, _ent);
 }
 function _prevLbl(){
   if(_yrIdx<=0)return'';
+  if(_yr==='YTD 2026')return'vs FY 2025';
   return'vs '+P_LABELS[_yrIdx-1];
 }
 
@@ -36511,8 +36976,7 @@ function _kpiHTML(){
   h+='<div style="margin-bottom:8px;display:flex;align-items:center;gap:8px"><div style="width:5px;height:18px;background:'+TE+';border-radius:3px"></div><span style="font-size:13px;font-weight:800;color:'+N+';text-transform:uppercase;letter-spacing:.8px">Equity & Capital</span></div>';
   h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px">';
   h+=kC('capital','Total Capital',capital,TE,'Assets \u2212 Liabilities');
-  h+=kC('equity','Total Equity (AMOES)',_bs('Equity Capital',0)+_bs('Retained Earnings',0)+_bs('Net income (incl. share from subsidiaries)',0),GR,'Click for entity view');
-  h+='<div></div><div></div>';
+  h+='<div></div><div></div><div></div>';
   h+='</div>';
   return h;
 }
@@ -36565,7 +37029,7 @@ window._es11CM=function(k){
   var mb=document.getElementById('es11cmbar');if(mb)mb.innerHTML=_cmBar();
   var ttl=document.getElementById('es11ctitle');
   var entLbl=_ent==='__TOTAL__'?'Combined Group':_ent;
-  if(ttl)ttl.textContent=CM_CFG[k].l+' — 2021 to Mar 2026 ('+entLbl+')';
+  if(ttl)ttl.textContent=CM_CFG[k].l+' — 2021 to YTD Mar 2026 ('+entLbl+')';
   _buildCharts();
 };
 
@@ -36576,7 +37040,7 @@ function _fullUpdate(){
   var hp=document.getElementById('es11hp');if(hp)hp.textContent=P_LABELS[_yrIdx];
   var entLbl=_ent==='__TOTAL__'?'Combined Group':_ent;
   var el=document.getElementById('es11entLbl');if(el)el.textContent=entLbl;
-  var ttl=document.getElementById('es11ctitle');if(ttl)ttl.textContent=(CM_CFG[_cm]||CM_CFG.rev).l+' — 2021 to Mar 2026 ('+entLbl+')';
+  var ttl=document.getElementById('es11ctitle');if(ttl)ttl.textContent=(CM_CFG[_cm]||CM_CFG.rev).l+' — 2021 to YTD Mar 2026 ('+entLbl+')';
   // Re-render entity select
   var esWrap=document.getElementById('es11entWrap');if(esWrap){esWrap.innerHTML=_entSelect();
     var sel=document.getElementById('es11entSel');if(sel)sel.addEventListener('change',function(){window._es11Ent(this.value);});
@@ -36770,7 +37234,7 @@ window.initOverview=function(){
   +'<div style="background:#fff;border-radius:16px;padding:24px 28px;margin-top:28px;box-shadow:0 6px 28px rgba(0,0,0,.08);border:1.5px solid #E2E8F0">'
   +'<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:18px;margin-bottom:30px">'
   +'<div>'
-  +'<div id="es11ctitle" style="font-size:16px;font-weight:800;color:'+N+';letter-spacing:.2px">'+(CM_CFG[_cm]||CM_CFG.rev).l+' — 2021 to Mar 2026 ('+entLbl+')</div>'
+  +'<div id="es11ctitle" style="font-size:16px;font-weight:800;color:'+N+';letter-spacing:.2px">'+(CM_CFG[_cm]||CM_CFG.rev).l+' — 2021 to YTD Mar 2026 ('+entLbl+')</div>'
   +'<div style="font-size:12px;color:#94A3B8;margin-top:6px">Select metric below to change chart view. Values in USD.</div>'
   +'</div>'
   +'<div id="es11cmbar" style="display:flex;gap:8px;flex-wrap:wrap">'+_cmBar()+'</div>'
@@ -36782,7 +37246,7 @@ window.initOverview=function(){
   +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px">'
   +'<div style="background:#fff;border-radius:16px;padding:24px 28px;box-shadow:0 6px 28px rgba(0,0,0,.08);border:1.5px solid #E2E8F0">'
   +'<div style="font-size:16px;font-weight:800;color:'+N+';margin-bottom:8px;letter-spacing:.2px">Profitability Margins</div>'
-  +'<div style="font-size:12px;color:#94A3B8;margin-bottom:22px">GP & EBITDA Margin % — 2021 to Mar 2026</div>'
+  +'<div style="font-size:12px;color:#94A3B8;margin-bottom:22px">GP & EBITDA Margin % — 2021 to YTD Mar 2026</div>'
   +'<div class="es11-chart-wrap es11-sec-chart"><canvas id="es11mgc" style="width:100%;height:100%"></canvas></div>'
   +'</div>'
 
@@ -38199,13 +38663,19 @@ window._pm2DrillBU=function(bu){
   /* Add Feb 2026 */
   var bjF=_D().bu_feb26||{};var jiF=(bjF.BusinessUnit||[]).indexOf(bu);
   if(jiF>=0){
-    var rF26=(bjF.Revenue||[])[jiF]||0;var eF26=(bjF.EBITDA||[])[jiF]||0;var gpmF26=bjF.GP_Margin?((bjF.GP_Margin[jiF]||0)>1?(bjF.GP_Margin[jiF]*1).toFixed(1):(bjF.GP_Margin[jiF]*100).toFixed(1))+'%':'\u2014';
+    var rF26=(bjF.Revenue||[])[jiF]||0;var gF26=(bjF.GrossProfit||[])[jiF]||0;var eF26=(bjF.EBITDA||[])[jiF]||0;
+    var gpmF26='\u2014';
+    if(bjF.GP_Margin&&(bjF.GP_Margin[jiF]||0)!==0){gpmF26=((bjF.GP_Margin[jiF]||0)>1?(bjF.GP_Margin[jiF]*1).toFixed(1):(bjF.GP_Margin[jiF]*100).toFixed(1))+'%';}
+    else if(rF26>0&&gF26!==0){gpmF26=(gF26/rF26*100).toFixed(1)+'%';}
     rows.push({yr:'Feb 2026',rev:rF26,ebd:eF26,gpm:gpmF26,ebm:rF26>0?(eF26/rF26*100).toFixed(1)+'%':'\u2014'});
   }
   /* Add Mar 2026 */
   var bj=_D().bu_mar26||{};var ji=(bj.BusinessUnit||[]).indexOf(bu);
   if(ji>=0){
-    var r26=(bj.Revenue||[])[ji]||0;var e26=(bj.EBITDA||[])[ji]||0;var gpm26=bj.GP_Margin?((bj.GP_Margin[ji]||0)>1?(bj.GP_Margin[ji]*1).toFixed(1):(bj.GP_Margin[ji]*100).toFixed(1))+'%':'\u2014';
+    var r26=(bj.Revenue||[])[ji]||0;var g26=(bj.GrossProfit||[])[ji]||0;var e26=(bj.EBITDA||[])[ji]||0;
+    var gpm26='\u2014';
+    if(bj.GP_Margin&&(bj.GP_Margin[ji]||0)!==0){gpm26=((bj.GP_Margin[ji]||0)>1?(bj.GP_Margin[ji]*1).toFixed(1):(bj.GP_Margin[ji]*100).toFixed(1))+'%';}
+    else if(r26>0&&g26!==0){gpm26=(g26/r26*100).toFixed(1)+'%';}
     rows.push({yr:'Mar 2026',rev:r26,ebd:e26,gpm:gpm26,ebm:r26>0?(e26/r26*100).toFixed(1)+'%':'\u2014'});
   }
   var h=tbl(rows,[{l:'Year',k:'yr'},{l:'Revenue (USD)',k:'rev',r:true,fmt:$f,clr:N},{l:'GP Margin',k:'gpm',r:true},{l:'EBITDA (USD)',k:'ebd',r:true,fmt:$f,clr:BL},{l:'EBITDA Margin',k:'ebm',r:true}],
@@ -38245,14 +38715,17 @@ function _insights(){
   var gpmBest=0,gpmWorst=0;
   H.gpm.forEach(function(v,i){if(v>H.gpm[gpmBest])gpmBest=i;if(v!==null&&(H.gpm[gpmWorst]===null||v<H.gpm[gpmWorst]))gpmWorst=i;});
 
-  /* Top & Bottom BU margin */
-  var buD25=_D().bu_rev_2025||{};
-  var bus25=buD25.BusinessUnit||[];var gpmArr25=buD25.GP_Margin||[];
+  /* Top & Bottom BU margin — use YTD Mar 2026 for current period */
+  var buCur=_D().bu_mar26||_D().bu_feb26||_D().bu_rev_2025||{};
+  var busCur=buCur.BusinessUnit||[];var gpmArrCur=buCur.GP_Margin||[];
+  var revCur=buCur.Revenue||[];var gpCur=buCur.GrossProfit||[];
   var topBU={bu:'N/A',gpm:0},btmBU={bu:'N/A',gpm:100};
-  bus25.forEach(function(b,i){
-    var m=gpmArr25[i];if(typeof m!=='number')return;
-    var pct=m>1?m:m*100;
+  busCur.forEach(function(b,i){
     if(b==='Corporate')return;
+    var m=gpmArrCur[i];var pct=0;
+    if(typeof m==='number'&&m!==0){pct=m>1?m:m*100;}
+    else if((revCur[i]||0)>0&&(gpCur[i]||0)!==0){pct=+(gpCur[i]/revCur[i]*100).toFixed(1);}
+    if(pct===0)return;
     if(pct>topBU.gpm){topBU={bu:b,gpm:pct};}
     if(pct<btmBU.gpm){btmBU={bu:b,gpm:pct};}
   });
@@ -38333,12 +38806,22 @@ function _buildBUMarginBar(){
   var buD25=_D().bu_rev_2025||{};
   var bj=_D().bu_mar26||_D().bu_feb26||{};
   var bus=buD25.BusinessUnit||[];var gpm25=buD25.GP_Margin||[];
+  var rev25=buD25.Revenue||[];var gp25Arr=buD25.GrossProfit||[];
   var bjBU=bj.BusinessUnit||[];var gpm26=bj.GP_Margin||[];
-  var pairs=bus.filter(function(b){return b!=='Corporate';}).map(function(b,i){
+  var rev26=bj.Revenue||[];var gp26Arr=bj.GrossProfit||[];
+  var pairs=bus.filter(function(b){return b!=='Corporate';}).map(function(b){
     var origIdx=bus.indexOf(b);
     var ji=bjBU.indexOf(b);
-    return{b:b,gp25:typeof gpm25[origIdx]==='number'?(gpm25[origIdx]>1?gpm25[origIdx]:gpm25[origIdx]*100):0,
-           gp26:ji>=0&&typeof gpm26[ji]==='number'?(gpm26[ji]>1?gpm26[ji]:gpm26[ji]*100):0};
+    /* FY 2025: use GP_Margin if valid, else compute from GP/Rev */
+    var m25=typeof gpm25[origIdx]==='number'&&gpm25[origIdx]!==0?(Math.abs(gpm25[origIdx])>1?gpm25[origIdx]:gpm25[origIdx]*100):0;
+    if(m25===0&&(rev25[origIdx]||0)>0&&(gp25Arr[origIdx]||0)!==0)m25=+(gp25Arr[origIdx]/rev25[origIdx]*100).toFixed(1);
+    /* YTD 2026: use GP_Margin if valid, else compute from GP/Rev */
+    var m26=0;
+    if(ji>=0){
+      m26=typeof gpm26[ji]==='number'&&gpm26[ji]!==0?(Math.abs(gpm26[ji])>1?gpm26[ji]:gpm26[ji]*100):0;
+      if(m26===0&&(rev26[ji]||0)>0&&(gp26Arr[ji]||0)!==0)m26=+(gp26Arr[ji]/rev26[ji]*100).toFixed(1);
+    }
+    return{b:b,gp25:m25,gp26:m26};
   }).sort(function(a,b){return a.b.localeCompare(b.b);});
   makeChart('pm2-bu-gp',{type:'bar',indexAxis:'y',data:{
     labels:pairs.map(function(p){return p.b;}),
@@ -38364,11 +38847,21 @@ function _buildBUEBDBar(){
   var buD25=_D().bu_rev_2025||{};
   var bj=_D().bu_mar26||_D().bu_feb26||{};
   var bus=buD25.BusinessUnit||[];var ebm25=buD25.EBITDA_Margin||[];
+  var rev25=buD25.Revenue||[];var ebd25Arr=buD25.EBITDA||[];
   var bjBU=bj.BusinessUnit||[];var ebm26=bj.EBITDA_Margin||[];
+  var rev26=bj.Revenue||[];var ebd26Arr=bj.EBITDA||[];
   var pairs=bus.filter(function(b){return b!=='Corporate';}).map(function(b){
     var origIdx=bus.indexOf(b);var ji=bjBU.indexOf(b);
-    return{b:b,eb25:typeof ebm25[origIdx]==='number'?(ebm25[origIdx]>1?ebm25[origIdx]:ebm25[origIdx]*100):0,
-           eb26:ji>=0&&typeof ebm26[ji]==='number'?(ebm26[ji]>1?ebm26[ji]:ebm26[ji]*100):0};
+    /* FY 2025: use EBITDA_Margin if valid, else compute from EBITDA/Rev */
+    var m25=typeof ebm25[origIdx]==='number'&&ebm25[origIdx]!==0?(Math.abs(ebm25[origIdx])>1?ebm25[origIdx]:ebm25[origIdx]*100):0;
+    if(m25===0&&(rev25[origIdx]||0)>0&&(ebd25Arr[origIdx]||0)!==0)m25=+(ebd25Arr[origIdx]/rev25[origIdx]*100).toFixed(1);
+    /* YTD 2026: use EBITDA_Margin if valid, else compute from EBITDA/Rev */
+    var m26=0;
+    if(ji>=0){
+      m26=typeof ebm26[ji]==='number'&&ebm26[ji]!==0?(Math.abs(ebm26[ji])>1?ebm26[ji]:ebm26[ji]*100):0;
+      if(m26===0&&(rev26[ji]||0)>0&&(ebd26Arr[ji]||0)!==0)m26=+(ebd26Arr[ji]/rev26[ji]*100).toFixed(1);
+    }
+    return{b:b,eb25:m25,eb26:m26};
   }).sort(function(a,b){return a.b.localeCompare(b.b);});
   makeChart('pm2-bu-ebd',{type:'bar',indexAxis:'y',data:{
     labels:pairs.map(function(p){return p.b;}),
@@ -38661,7 +39154,7 @@ window.initMargins=function(){
   +'<div style="background:#fff;border-radius:16px;padding:24px 28px;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1px solid #E2E8F0">'
   +'<div style="font-size:15px;font-weight:800;color:'+N+';margin-bottom:4px">GP Margin by Business Unit</div>'
   +'<div style="font-size:12px;color:#94A3B8;margin-bottom:16px">FY 2025 (green) vs YTD Mar 2026 (teal). Full BU names \u2014 horizontal bars sorted by name.</div>'
-  +'<div style="height:520px"><canvas id="pm2-bu-gp" style="width:100%;height:100%"></canvas></div>'
+  +'<div style="height:680px"><canvas id="pm2-bu-gp" style="width:100%;height:100%"></canvas></div>'
   +'</div>'
   +'</div>'
   /* ── ROW 3: BU EBITDA Margin (full-width) ── */
@@ -38669,7 +39162,7 @@ window.initMargins=function(){
   +'<div style="background:#fff;border-radius:16px;padding:24px 28px;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1px solid #E2E8F0">'
   +'<div style="font-size:15px;font-weight:800;color:'+N+';margin-bottom:4px">EBITDA Margin by Business Unit</div>'
   +'<div style="font-size:12px;color:#94A3B8;margin-bottom:16px">FY 2025 (blue) vs YTD Mar 2026 (gold). Full BU names \u2014 horizontal bars sorted by name.</div>'
-  +'<div style="height:520px"><canvas id="pm2-bu-ebd" style="width:100%;height:100%"></canvas></div>'
+  +'<div style="height:680px"><canvas id="pm2-bu-ebd" style="width:100%;height:100%"></canvas></div>'
   +'</div>'
   +'</div>'
 
@@ -39152,7 +39645,7 @@ window.initSpotlight=function(){
     /* ── CHARTS ROW 3: BU Ranking + Peer Comparison ── */
     '<div class="chart-row cols-2" style="margin-top:12px">'+
       '<div class="chart-box"><div class="chart-title"><span></span>BU Revenue Ranking (FY 2025)</div><div class="chart-container" style="height:400px"><canvas id="bus-ranking" style="width:100%;height:100%"></canvas></div></div>'+
-      '<div class="chart-box"><div class="chart-title"><span></span>EBITDA Margin Peer Comparison (FY 2025)</div><div class="chart-container" style="height:400px"><canvas id="bus-peer" style="width:100%;height:100%"></canvas></div></div>'+
+      '<div class="chart-box"><div class="chart-title"><span></span>EBITDA Margin BU YTD March 2026</div><div class="chart-container" style="height:400px"><canvas id="bus-peer" style="width:100%;height:100%"></canvas></div></div>'+
     '</div>'+
     /* ── INSIGHTS ── */
     '<div style="font-size:13px;font-weight:700;color:#1F2D5A;padding:8px 14px;background:rgba(31,45,90,0.08);border-left:4px solid #1F2D5A;border-radius:4px;margin:20px 0 12px">Key Business Unit Insights</div>'+
@@ -39233,7 +39726,7 @@ function _buildKPIs(){
 
   /* Group share */
   var grpRev25=195318802;
-  var share=grpRev25>0?revVal/grpRev25*100:0;
+  var _grpYtd26Rev=GRP['Mar 2026']?GRP['Mar 2026'].rev:0;var share=_grpYtd26Rev>0?revVal/_grpYtd26Rev*100:0;
 
   var drillBU=bu==='all'?'all':bu.replace(/'/g,"\\'");
   var kpiStyle='style="cursor:pointer" onclick="window._busDrillKPI(\''+drillBU+'\')"';
@@ -39292,7 +39785,7 @@ function _buildKPIs(){
   cards+='<div class="kpi-card" '+kpiStyle+'>'+
       '<div class="kpi-label">Group Revenue Share</div>'+
       '<div class="kpi-value" style="color:#C9A84C">'+(bu==='all'?'100.0':share.toFixed(1))+'%</div>'+
-      '<div class="kpi-sub">'+(bu==='all'?'Combined Group':'of $195.3M group total (FY2025)')+'</div>'+
+      '<div class="kpi-sub">'+(bu==='all'?'Combined Group':'of '+$v(GRP['Mar 2026']?GRP['Mar 2026'].rev:0)+' YTD Mar 2026 group total')+'</div>'+
     '</div>';
   /* 11. CAPEX — with period-appropriate sub + drilldown */
   cards+='<div class="kpi-card" onclick="window._busDrillCapex(\''+bu+'\',\''+primaryYr+'\')" '+kpiStyle+' style="cursor:pointer">'+
@@ -39332,8 +39825,7 @@ function _buildMarginTrend(){
   if(!h.yrs.length)return;
   makeChart('bus-margin-trend',{type:'bar',data:{labels:h.yrs,datasets:[
     {label:'GP Margin %',data:h.gpm,backgroundColor:'#1A6B3C'},
-    {label:'EBITDA Margin %',data:h.ebm,backgroundColor:'#2563EB'},
-    {label:'NI Margin %',data:h.nim,backgroundColor:'#0891B2'}
+    {label:'EBITDA Margin %',data:h.ebm,backgroundColor:'#2563EB'}
   ]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{ticks:{maxRotation:45,minRotation:0,font:{family:'Segoe UI',size:11}},grid:{display:false}},y:{ticks:{font:{family:'Segoe UI',size:11},color:'#555',callback:function(v){return v.toFixed(0)+'%';}},grid:{display:false}}},plugins:{legend:{labels:{font:{size:12},padding:16,usePointStyle:true}}}}});
   var c=document.getElementById('bus-margin-trend');if(c){c.style.cursor='pointer';c.onclick=function(){window._busDrillMargin(_selBU);};}
 }
@@ -39387,7 +39879,7 @@ function _buildPeer(){
   }
   /* Update chart title */
   var titleEl=document.querySelector('#bus-peer')&&document.querySelector('#bus-peer').closest('.chart-box');
-  if(titleEl){var t=titleEl.querySelector('.chart-title');if(t)t.innerHTML='<span></span>EBITDA Margin Peer Comparison ('+yrLabel+')';}
+  if(titleEl){var t=titleEl.querySelector('.chart-title');if(t)t.innerHTML='<span></span>EBITDA Margin BU YTD March 2026';}
   makeChart('bus-peer',{type:'bar',data:{labels:labels,datasets:[
     {label:'EBITDA Margin %',data:vals,backgroundColor:colors}
   ]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',scales:{y:axisStyle(),x:{ticks:{font:{family:'Segoe UI',size:10},color:'#555',callback:function(v){return v+'%';}},grid:{display:false}}}}});
@@ -39446,7 +39938,7 @@ function _buildInsights(){
   multiYr=parts.length?'YoY Revenue Growth: '+parts.join(' | ')+'.' :'Insufficient multi-year data.';
 
   /* 6. Scale Assessment */
-  var grpShare=bu==='all'?100:(d25.rev/195318802*100);
+  var _grpYtd26=GRP['Mar 2026']?GRP['Mar 2026'].rev:195318802;var grpShare=bu==='all'?100:(d25.rev/_grpYtd26*100);
   var scaleInsight=bu==='all'?'Combined group revenue of '+$v(d25.rev)+' across 15 business units.':grpShare>10?'Major entity at '+grpShare.toFixed(1)+'% of group revenue. Strategic priority.':grpShare>5?'Mid-tier entity at '+grpShare.toFixed(1)+'% of group. Good scale-up candidate.':'Smaller entity at '+grpShare.toFixed(1)+'%. Evaluate strategic fit.';
 
   /* 7. Growth CAGR (4-yr if data available) */
@@ -40615,22 +41107,30 @@ function _rv3Render(mode, buFilter){
     titleEl.textContent = 'Revenue by Business Unit \u2014 YTD Comparison (USD)';
     subEl.textContent = 'Comparing the same period (first '+ytdMo+' month'+(ytdMo>1?'s':'')+') across years. Click any figure for details.';
 
-    /* YTD for each year: sum first ytdMo months */
+    /* YTD for each year: ACTUAL accumulated from monthly data (group level) */
     var ytd25 = mo25.slice(0,ytdMo).reduce(function(s,v){return s+(v||0);},0);
     var ytd24 = mo24.slice(0,ytdMo).reduce(function(s,v){return s+(v||0);},0);
+    /* 2023: no monthly data available, use FY/12*ytdMo as best estimate */
+    var ga23Rev = 0;
+    var gi23 = (R.gaYrs||[]).indexOf(2023);
+    if(gi23>=0) ga23Rev = R.gaRevs[gi23]||0;
+    var ytd23 = ga23Rev/12*ytdMo;
+
+    /* Per-BU ACTUAL monthly data from Excel (Jan–Dec arrays per BU) */
+    var buMo25 = _D().bu_monthly_2025||{};
+    var buMo24 = _D().bu_monthly_2024||{};
 
     var rows=[];
     buList.forEach(function(bu){
-      var rev25Full=(bra[bu]||{})['2025']||0;
-      var rev24Full=(bra[bu]||{})['2024']||0;
+      /* Use YTD_2026 from bu_rev_all for exact BU-level accumulated YTD */
+      var buYtd26 = (bra[bu]||{})['YTD_2026']||0;
+      /* ACTUAL per-BU YTD from monthly arrays — sum first ytdMo months */
+      var mo25Arr = buMo25[bu]||[];
+      var mo24Arr = buMo24[bu]||[];
+      var buYtd25 = mo25Arr.slice(0,ytdMo).reduce(function(s,v){return s+(v||0);},0);
+      var buYtd24 = mo24Arr.slice(0,ytdMo).reduce(function(s,v){return s+(v||0);},0);
+      /* 2023: no BU monthly data, use FY/12*ytdMo */
       var rev23Full=(bra[bu]||{})['2023']||0;
-      var ji=(bj.BusinessUnit||[]).indexOf(bu);
-      var feb26=ji>=0?(bj.Revenue[ji]||0):0;
-
-      /* BU-level YTD approximation: (annual/12)*ytdMo for prior years, exact for 2026 */
-      var buYtd26 = feb26;
-      var buYtd25 = rev25Full/12*ytdMo;
-      var buYtd24 = rev24Full/12*ytdMo;
       var buYtd23 = rev23Full/12*ytdMo;
 
       var d2625=buYtd25>0?_pct(buYtd26,buYtd25):null;
@@ -40641,9 +41141,8 @@ function _rv3Render(mode, buFilter){
         d2625:d2625, d2524:d2524, _buName:bu
       });
     });
-    /* Totals */
-    var t={bu:'\u25FC GROUP TOTAL',_hi:true,ytd26:R.rev26,ytd25:R.rev25/12*ytdMo,ytd24:0,ytd23:0};
-    rows.forEach(function(r){t.ytd24+=r.ytd24;t.ytd23+=r.ytd23;});
+    /* GROUP TOTALS: use actual accumulated monthly data for 2025/2024 */
+    var t={bu:'\u25FC GROUP TOTAL',_hi:true,ytd26:R.rev26,ytd25:ytd25,ytd24:ytd24,ytd23:ytd23};
     t.d2625=t.ytd25>0?_pct(t.ytd26,t.ytd25):null;
     t.d2524=t.ytd24>0?_pct(t.ytd25,t.ytd24):null;
     rows.push(t);
@@ -40785,8 +41284,15 @@ window._rv3CellDrill = function(bu, yr, mode){
   var data=bra[bu]||{};
   var gpData=bgp[bu]||{};
   var ebData=bed[bu]||{};
+  var _D=function(){return window.D||{};};
+  var buMo25=_D().bu_monthly_2025||{};
+  var buMo24=_D().bu_monthly_2024||{};
+  var moNames=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
   var rev, gp, eb, gpM, ebM, months, label;
+  var useActualYTD=false;
+  var moArr=null;
+
   if(yr==='2026'){
     var ji=(bj.BusinessUnit||[]).indexOf(bu);
     rev=ji>=0?(bj.Revenue[ji]||0):0;
@@ -40794,6 +41300,17 @@ window._rv3CellDrill = function(bu, yr, mode){
     eb=ji>=0?(bj.EBITDA[ji]||0):0;
     months=R.ytd26Months;
     label='YTD Jan–Mar 2026';
+  } else if(mode==='ytd' && (yr==='2025'||yr==='2024')){
+    /* Use ACTUAL per-BU monthly data */
+    moArr=(yr==='2025')?(buMo25[bu]||[]):(buMo24[bu]||[]);
+    var ytdMo=R.ytd26Months||3;
+    rev=moArr.slice(0,ytdMo).reduce(function(s,v){return s+(v||0);},0);
+    var gpRaw=gpData[yr]||0;
+    gp=typeof gpRaw==='number'&&gpRaw>0&&gpRaw<100?(gpRaw/100*rev):gpRaw;
+    eb=ebData[yr]||0;
+    months=ytdMo;
+    label='Actual YTD Jan–'+moNames[ytdMo-1]+' '+yr;
+    useActualYTD=true;
   } else {
     rev=data[yr]||0;
     var gpRaw=gpData[yr]||0;
@@ -40804,16 +41321,20 @@ window._rv3CellDrill = function(bu, yr, mode){
   }
   gpM=rev>0?(gp/rev*100):0;
   ebM=rev>0?(eb/rev*100):0;
-  var avgMo=rev/months;
+  var avgMo=months>0?(rev/months):0;
 
   /* Group total for share */
   var grpRev=0;
   if(yr==='2026'){grpRev=R.rev26;}
-  else {
+  else if(useActualYTD){
+    var grpMo=(yr==='2025')?(_D().mo_2025||[]):(_D().mo_2024||[]);
+    var ytdMo2=R.ytd26Months||3;
+    grpRev=grpMo.slice(0,ytdMo2).reduce(function(s,v){return s+(v||0);},0);
+  } else {
     var gi=(R.gaYrs||[]).indexOf(parseInt(yr));
     grpRev=gi>=0?(R.gaRevs[gi]||0):0;
   }
-  var share=grpRev>0?(rev/grpRev*100).toFixed(1)+'%':'\u2014';
+  var share=grpRev>0?(rev/grpRev*100).toFixed(1)+'%':'—';
 
   var rows=[
     {cells:[{v:'Revenue (USD)'},{v:$f(Math.round(rev))},{v:share+' of Group'}]},
@@ -40822,19 +41343,41 @@ window._rv3CellDrill = function(bu, yr, mode){
     {cells:[{v:'EBITDA (USD)'},{v:$f(Math.round(eb))},{v:ebM.toFixed(1)+'% margin'}]}
   ];
 
-  /* YoY comparison if prior year data exists */
-  var prevYr=parseInt(yr)-1;
-  var prevRev=prevYr>=2016?(data[String(prevYr)]||0):0;
-  if(prevRev>0){
-    var yoy=_pct(rev,prevRev);
-    rows.push({cells:[{v:'vs '+prevYr},{v:$f(Math.round(prevRev))},{v:yoy!=null?(yoy>=0?'+':'')+yoy.toFixed(1)+'% growth':''}]});
+  /* Monthly breakdown for actual YTD */
+  if(useActualYTD && moArr && moArr.length>0){
+    var ytdMo3=R.ytd26Months||3;
+    rows.push({_total:true,cells:[{v:'Monthly Breakdown'},{v:''},{v:''}]});
+    for(var mi=0;mi<ytdMo3;mi++){
+      var mVal=moArr[mi]||0;
+      var mPct=rev>0?(mVal/rev*100).toFixed(1)+'%':'0%';
+      rows.push({cells:[{v:moNames[mi]+' '+yr},{v:$f(Math.round(mVal))},{v:mPct+' of YTD'}]});
+    }
+  }
+
+  /* YoY comparison */
+  if(useActualYTD){
+    var prevYrStr=String(parseInt(yr)-1);
+    var prevMoArr=(prevYrStr==='2024')?(buMo24[bu]||[]):(prevYrStr==='2023'?[]:buMo25[bu]||[]);
+    var ytdMo4=R.ytd26Months||3;
+    var prevRev=prevMoArr.slice(0,ytdMo4).reduce(function(s,v){return s+(v||0);},0);
+    if(prevRev>0){
+      var yoy=_pct(rev,prevRev);
+      rows.push({cells:[{v:'vs YTD '+prevYrStr},{v:$f(Math.round(prevRev))},{v:yoy!=null?(yoy>=0?'+':'')+yoy.toFixed(1)+'% growth':''}]});
+    }
+  } else {
+    var prevYr=parseInt(yr)-1;
+    var prevRev=prevYr>=2016?(data[String(prevYr)]||0):0;
+    if(prevRev>0){
+      var yoy=_pct(rev,prevRev);
+      rows.push({cells:[{v:'vs '+prevYr},{v:$f(Math.round(prevRev))},{v:yoy!=null?(yoy>=0?'+':'')+yoy.toFixed(1)+'% growth':''}]});
+    }
   }
 
   rows.push({_total:true,cells:[{v:'Period'},{v:label},{v:bu}]});
 
-  showDrillDown('\uD83D\uDCB0',bu+' \u2014 '+label+' (USD)',
+  showDrillDown('💰',bu+' — '+label+' (USD)',
     '<strong>'+bu+'</strong>: Revenue '+$v(rev)+' | GP Margin '+gpM.toFixed(1)+'% | EBITDA Margin '+ebM.toFixed(1)+'% | '+share+' of Group',
-    'SAP ERP \u2014 Management Accounts',rows,
+    'SAP ERP — Management Accounts',rows,
     [{label:'Metric'},{label:'Amount (USD)',num:true},{label:'Detail'}]);
 };
 
@@ -41943,6 +42486,14 @@ function render(pg){
       return;
     }
 
+    // Statement row drilldown click
+    var rowEl = t.closest?t.closest('[data-rowdrill]'):null;
+    if(!rowEl && t.parentElement && t.parentElement.getAttribute && t.parentElement.getAttribute('data-rowdrill')) rowEl=t.parentElement;
+    if(rowEl && rowEl.getAttribute('data-rowdrill')){
+      showRowDrill(rowEl.getAttribute('data-rowdrill'), rowEl.getAttribute('data-rowlabel')||'');
+      return;
+    }
+
     // Modal close
     if(t.id==='cf3-modal'||t.getAttribute('data-close')==='1'){
       document.getElementById('cf3-modal').style.display='none';
@@ -41977,43 +42528,46 @@ function buildStatement(d){
     var bdr=opts.topBorder?'border-top:2px solid '+BL:'';
     var c = val>=0?'#1e293b':RED;
     if(opts.total) c = val>=0?N:RED;
-    return '<tr style="'+bg+';'+bdr+'"><td style="'+indent+';padding-top:8px;padding-bottom:8px;'+bold+';color:#334155;border-bottom:1px solid #f1f5f9">'+label+'</td><td style="text-align:right;padding:8px 20px;'+bold+';color:'+c+';border-bottom:1px solid #f1f5f9;white-space:nowrap">'+fmt(val)+'</td></tr>';
+    var click=opts.field?'data-rowdrill="'+opts.field+'" data-rowlabel="'+label.replace(/"/g,'&quot;')+'"':'';
+    var cursor=opts.field?'cursor:pointer;':'';
+    var hover=opts.field?' onmouseover="this.style.background=\'#EFF6FF\'" onmouseout="this.style.background=\''+(opts.highlight?'#f8fafc':'')+'\'"':'';
+    return '<tr style="'+bg+';'+bdr+';'+cursor+'" '+click+hover+'><td style="'+indent+';padding-top:8px;padding-bottom:8px;'+bold+';color:#334155;border-bottom:1px solid #f1f5f9'+(opts.field?';text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px':'')+'">'+label+'</td><td style="text-align:right;padding:8px 20px;'+bold+';color:'+c+';border-bottom:1px solid #f1f5f9;white-space:nowrap">'+fmt(val)+'</td></tr>';
   }
   function subhdr(txt){return '<tr><td colspan="2" style="padding:8px 20px;font-weight:600;font-size:12px;color:#64748b;background:#fafbfc;border-bottom:1px solid #f1f5f9;text-transform:uppercase;letter-spacing:.5px">'+txt+'</td></tr>';}
 
   // Section A: Operating
   s+=hdr('A. OPERATING ACTIVITIES',N);
-  s+=row('Net Income',d.net_income);
-  s+=row('+ Depreciation & Amortization',d.da);
+  s+=row('Net Income',d.net_income,{field:'net_income'});
+  s+=row('+ Depreciation & Amortization',d.da,{field:'da'});
   s+=subhdr('Working Capital Changes');
-  s+=row('Accounts Receivable',d.ar_change,{indent:true});
-  s+=row('Inventory',d.inv_change,{indent:true});
-  s+=row('Prepaid Expenses',d.prep_change,{indent:true});
-  s+=row('Other Current Assets',d.oca_change,{indent:true});
-  s+=row('Accounts Payable',d.ap_change,{indent:true});
-  s+=row('Other Current Liabilities',d.ocl_change,{indent:true});
-  s+=row('Total Working Capital Changes',d.total_wc,{bold:true,highlight:true});
-  s+=row('NET CASH FROM OPERATIONS (CFO)',d.cfo,{bold:true,total:true,topBorder:true});
+  s+=row('Accounts Receivable',d.ar_change,{indent:true,field:'ar_change'});
+  s+=row('Inventory',d.inv_change,{indent:true,field:'inv_change'});
+  s+=row('Prepaid Expenses',d.prep_change,{indent:true,field:'prep_change'});
+  s+=row('Other Current Assets',d.oca_change,{indent:true,field:'oca_change'});
+  s+=row('Accounts Payable',d.ap_change,{indent:true,field:'ap_change'});
+  s+=row('Other Current Liabilities',d.ocl_change,{indent:true,field:'ocl_change'});
+  s+=row('Total Working Capital Changes',d.total_wc,{bold:true,highlight:true,field:'total_wc'});
+  s+=row('NET CASH FROM OPERATIONS (CFO)',d.cfo,{bold:true,total:true,topBorder:true,field:'cfo'});
 
   // Section B: Investing
   s+=hdr('B. INVESTING ACTIVITIES',G);
-  s+=row('Net PP&E Purchases',d.net_ppe);
-  s+=row('Investment Changes',d.invest_change);
-  s+=row('NET CASH FROM INVESTING (CFI)',d.cfi,{bold:true,total:true,topBorder:true});
+  s+=row('Net PP&E Purchases',d.net_ppe,{field:'net_ppe'});
+  s+=row('Investment Changes',d.invest_change,{field:'invest_change'});
+  s+=row('NET CASH FROM INVESTING (CFI)',d.cfi,{bold:true,total:true,topBorder:true,field:'cfi'});
 
   // Section C: Financing
   s+=hdr('C. FINANCING ACTIVITIES','#2563EB');
-  s+=row('Bank Debt Change',d.bank_change);
-  s+=row('Lease Liability Change',d.lease_change);
-  s+=row('Other Long-Term Liabilities',d.olt_change);
-  s+=row('Equity Changes (excl. NI)',d.equity_change);
-  s+=row('NET CASH FROM FINANCING (CFF)',d.cff,{bold:true,total:true,topBorder:true});
+  s+=row('Bank Debt Change',d.bank_change,{field:'bank_change'});
+  s+=row('Lease Liability Change',d.lease_change,{field:'lease_change'});
+  s+=row('Other Long-Term Liabilities',d.olt_change,{field:'olt_change'});
+  s+=row('Equity Changes (excl. NI)',d.equity_change,{field:'equity_change'});
+  s+=row('NET CASH FROM FINANCING (CFF)',d.cff,{bold:true,total:true,topBorder:true,field:'cff'});
 
   // Reconciliation
   s+=hdr('RECONCILIATION','#334155');
-  s+=row('Net Change in Cash (CFO+CFI+CFF)',d.net_change,{bold:true});
-  s+=row('Opening Cash Balance',d.opening_cash);
-  s+=row('Closing Cash Balance (from BS)',d.closing_cash,{bold:true});
+  s+=row('Net Change in Cash (CFO+CFI+CFF)',d.net_change,{bold:true,field:'net_change'});
+  s+=row('Opening Cash Balance',d.opening_cash,{field:'opening_cash'});
+  s+=row('Closing Cash Balance (from BS)',d.closing_cash,{bold:true,field:'closing_cash'});
   var balanced = Math.abs(d.recon_gap)<1000;
   s+='<tr><td style="padding:10px 20px;font-weight:600;color:'+(balanced?GR:RED)+'">Reconciliation Status</td>';
   s+='<td style="text-align:right;padding:10px 20px;font-weight:700;color:'+(balanced?GR:RED)+'">'+(balanced?'&#10003; BALANCED (gap: '+fmt(d.recon_gap)+')':'&#10007; GAP: '+fmt(d.recon_gap))+'</td></tr>';
@@ -42319,6 +42873,140 @@ function showDrilldown(type){
   var mhtml='<div style="background:#fff;border-radius:16px;max-width:680px;width:90%;max-height:85vh;overflow-y:auto;margin:auto;box-shadow:0 25px 60px rgba(0,0,0,0.3)">';
   mhtml+='<div style="display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid #e2e8f0;background:linear-gradient(135deg,'+N+',#2d4a9e);border-radius:16px 16px 0 0">';
   mhtml+='<h3 style="margin:0;color:#fff;font-size:16px">'+title+'</h3>';
+  mhtml+='<button data-close="1" style="background:rgba(255,255,255,0.2);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center">&times;</button></div>';
+  mhtml+='<div style="padding:24px">'+body+'</div></div>';
+
+  modal.innerHTML=mhtml;
+  modal.style.display='flex';
+}
+
+/* ===== Row-Level Drilldown — Entity Breakdown for ANY statement row ===== */
+function showRowDrill(field, label){
+  var d = getData();
+  if(!d) return;
+  var modal = document.getElementById('cf3-modal');
+  if(!modal) return;
+
+  var combinedVal = d[field]||0;
+
+  /* Field-to-category mapping for section headers */
+  var catMap = {
+    'net_income':'Operating','da':'Operating','ar_change':'Working Capital','inv_change':'Working Capital',
+    'prep_change':'Working Capital','oca_change':'Working Capital','ap_change':'Working Capital',
+    'ocl_change':'Working Capital','total_wc':'Working Capital','cfo':'Operating Total',
+    'net_ppe':'Investing','invest_change':'Investing','cfi':'Investing Total',
+    'bank_change':'Financing','lease_change':'Financing','olt_change':'Financing',
+    'equity_change':'Financing','cff':'Financing Total',
+    'net_change':'Reconciliation','opening_cash':'Reconciliation','closing_cash':'Reconciliation'
+  };
+  var catColors = {'Operating':N,'Working Capital':'#059669','Operating Total':N,'Investing':G,'Investing Total':G,'Financing':BL,'Financing Total':BL,'Reconciliation':'#334155'};
+  var cat = catMap[field]||'Detail';
+  var catClr = catColors[cat]||N;
+
+  var body = '';
+
+  /* Summary card */
+  body += '<div style="display:flex;gap:16px;margin-bottom:20px;flex-wrap:wrap">';
+  body += '<div style="flex:1;min-width:180px;background:linear-gradient(135deg,'+catClr+'10,'+catClr+'05);border:1px solid '+catClr+'25;border-radius:12px;padding:16px">';
+  body += '<div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Combined Total</div>';
+  body += '<div style="font-size:24px;font-weight:700;color:'+(combinedVal>=0?catClr:RED)+'">'+fmt(combinedVal)+'</div>';
+  body += '</div>';
+  /* Period badge */
+  body += '<div style="flex:1;min-width:140px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px">';
+  body += '<div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Period</div>';
+  body += '<div style="font-size:18px;font-weight:700;color:'+N+'">'+curPeriod+'</div>';
+  body += '</div>';
+  body += '</div>';
+
+  /* Entity breakdown table */
+  var pd = D.periods[curPeriod];
+  if(pd && curEntity==='__COMBINED__'){
+    /* For composite fields like total_wc, cfo, cfi, cff, net_change: show detailed sub-items per entity */
+    var isComposite = (field==='total_wc'||field==='cfo'||field==='cfi'||field==='cff'||field==='net_change');
+    var subFields = {
+      'total_wc':['ar_change','inv_change','prep_change','oca_change','ap_change','ocl_change'],
+      'cfo':['net_income','da','total_wc'],
+      'cfi':['net_ppe','invest_change'],
+      'cff':['bank_change','lease_change','olt_change','equity_change'],
+      'net_change':['cfo','cfi','cff']
+    };
+    var subLabels = {
+      'ar_change':'AR','inv_change':'Inventory','prep_change':'Prepaid','oca_change':'Other CA',
+      'ap_change':'AP','ocl_change':'Other CL','net_income':'Net Income','da':'D&A','total_wc':'WC Change',
+      'net_ppe':'Net PP&E','invest_change':'Investments','bank_change':'Bank Debt',
+      'lease_change':'Leases','olt_change':'Other LT','equity_change':'Equity','cfo':'CFO','cfi':'CFI','cff':'CFF'
+    };
+
+    if(isComposite){
+      /* Multi-column entity breakdown */
+      var subs = subFields[field]||[];
+      body += '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px">';
+      body += '<tr style="background:#f8fafc"><th style="padding:10px 12px;text-align:left;font-weight:600;color:#475569;border-bottom:2px solid #e2e8f0;position:sticky;left:0;background:#f8fafc">Entity</th>';
+      for(var si=0;si<subs.length;si++){
+        body += '<th style="padding:10px 10px;text-align:right;font-weight:600;color:#475569;border-bottom:2px solid #e2e8f0;white-space:nowrap;font-size:11px">'+(subLabels[subs[si]]||subs[si])+'</th>';
+      }
+      body += '<th style="padding:10px 12px;text-align:right;font-weight:700;color:'+catClr+';border-bottom:2px solid #e2e8f0">TOTAL</th></tr>';
+      for(var i=0;i<D.entities.length;i++){
+        var e=D.entities[i];var ed=pd[e];if(!ed)continue;
+        var bg=i%2===0?'#fff':'#fafbfc';
+        body += '<tr style="background:'+bg+'">';
+        body += '<td style="padding:7px 12px;font-weight:500;border-bottom:1px solid #f1f5f9;white-space:nowrap">'+e+'</td>';
+        for(var sj=0;sj<subs.length;sj++){
+          var sv=ed[subs[sj]]||0;var sc=sv>=0?'#1e293b':RED;
+          body += '<td style="padding:7px 10px;text-align:right;color:'+sc+';border-bottom:1px solid #f1f5f9;white-space:nowrap;font-size:11px">'+fmtM(sv)+'</td>';
+        }
+        var tv=ed[field]||0;var tc=tv>=0?catClr:RED;
+        body += '<td style="padding:7px 12px;text-align:right;font-weight:700;color:'+tc+';border-bottom:1px solid #f1f5f9;white-space:nowrap">'+fmtM(tv)+'</td>';
+        body += '</tr>';
+      }
+      /* Combined total row */
+      var cd=pd['__COMBINED__'];
+      body += '<tr style="background:#f0f4ff;font-weight:700"><td style="padding:9px 12px;border-top:2px solid '+catClr+'">TOTAL</td>';
+      for(var sk=0;sk<subs.length;sk++){
+        var stv=cd[subs[sk]]||0;var stc=stv>=0?'#1e293b':RED;
+        body += '<td style="padding:9px 10px;text-align:right;color:'+stc+';border-top:2px solid '+catClr+';white-space:nowrap;font-size:11px">'+fmtM(stv)+'</td>';
+      }
+      body += '<td style="padding:9px 12px;text-align:right;font-weight:700;color:'+(cd[field]>=0?catClr:RED)+';border-top:2px solid '+catClr+';white-space:nowrap">'+fmtM(cd[field]||0)+'</td>';
+      body += '</tr></table></div>';
+    } else {
+      /* Simple single-column entity breakdown */
+      body += '<table style="width:100%;border-collapse:collapse;font-size:13px">';
+      body += '<tr style="background:#f8fafc"><th style="padding:10px 14px;text-align:left;font-weight:600;color:#475569;border-bottom:2px solid #e2e8f0">Entity</th>';
+      body += '<th style="padding:10px 14px;text-align:right;font-weight:600;color:#475569;border-bottom:2px solid #e2e8f0">Amount</th>';
+      body += '<th style="padding:10px 14px;text-align:right;font-weight:600;color:#475569;border-bottom:2px solid #e2e8f0">% of Total</th></tr>';
+      var absTotal = Math.abs(combinedVal)||1;
+      for(var i=0;i<D.entities.length;i++){
+        var e=D.entities[i];var ed=pd[e];if(!ed)continue;
+        var v=ed[field]||0;var vc=v>=0?'#1e293b':RED;
+        var pctShare=Math.abs(v)/absTotal*100;
+        var bg=i%2===0?'#fff':'#fafbfc';
+        body += '<tr style="background:'+bg+'"><td style="padding:7px 14px;font-weight:500;border-bottom:1px solid #f1f5f9">'+e+'</td>';
+        body += '<td style="text-align:right;padding:7px 14px;color:'+vc+';border-bottom:1px solid #f1f5f9;white-space:nowrap">'+fmt(v)+'</td>';
+        body += '<td style="text-align:right;padding:7px 14px;color:#64748b;border-bottom:1px solid #f1f5f9">'+pctShare.toFixed(1)+'%</td></tr>';
+      }
+      body += '</table>';
+    }
+  } else if(curEntity!=='__COMBINED__'){
+    /* Single entity view — show cross-period comparison */
+    body += '<h4 style="margin:16px 0 8px;font-size:14px;color:'+N+'">Period Comparison</h4>';
+    body += '<table style="width:100%;border-collapse:collapse;font-size:13px">';
+    body += '<tr style="background:#f8fafc"><th style="padding:10px 14px;text-align:left;border-bottom:2px solid #e2e8f0">Period</th><th style="padding:10px 14px;text-align:right;border-bottom:2px solid #e2e8f0">Amount</th></tr>';
+    for(var pi=0;pi<D.display_periods.length;pi++){
+      var pp=D.display_periods[pi];
+      var ppd=D.periods[pp]?D.periods[pp][curEntity]:null;
+      var pv=ppd?(ppd[field]||0):0;var pc=pv>=0?'#1e293b':RED;
+      var pbg=pp===curPeriod?'#EFF6FF':'';
+      body += '<tr style="background:'+pbg+'"><td style="padding:8px 14px;font-weight:'+(pp===curPeriod?'700':'400')+';border-bottom:1px solid #f1f5f9">'+pp+(pp===curPeriod?' &#9664;':'')+'</td>';
+      body += '<td style="text-align:right;padding:8px 14px;color:'+pc+';font-weight:'+(pp===curPeriod?'700':'400')+';border-bottom:1px solid #f1f5f9">'+fmt(pv)+'</td></tr>';
+    }
+    body += '</table>';
+  }
+
+  /* Render modal */
+  var mhtml='<div style="background:#fff;border-radius:16px;max-width:800px;width:92%;max-height:85vh;overflow-y:auto;margin:auto;box-shadow:0 25px 60px rgba(0,0,0,0.3)">';
+  mhtml+='<div style="display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid #e2e8f0;background:linear-gradient(135deg,'+catClr+','+catClr+'cc);border-radius:16px 16px 0 0">';
+  mhtml+='<div><h3 style="margin:0;color:#fff;font-size:16px">'+label+'</h3>';
+  mhtml+='<div style="font-size:12px;color:rgba(255,255,255,.7);margin-top:2px">'+cat+' | '+curPeriod+'</div></div>';
   mhtml+='<button data-close="1" style="background:rgba(255,255,255,0.2);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center">&times;</button></div>';
   mhtml+='<div style="padding:24px">'+body+'</div></div>';
 
@@ -43101,8 +43789,7 @@ if (typeof window.axisStyle === 'undefined') {
         h += '<div style="margin-bottom:8px;display:flex;align-items:center;gap:8px"><div style="width:5px;height:18px;background:' + TE + ';border-radius:3px"></div><span style="font-size:12px;font-weight:800;color:' + N + ';text-transform:uppercase;letter-spacing:.8px">Equity & Capital</span></div>';
         h += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px">';
         h += kpiCard('Total Capital', capital, TE, 'Assets \u2212 Liabilities', null, 'Mar 2026');
-        h += kpiCard('Total Equity (AMOES)', _bs('Equity Capital', 0) + _bs('Retained Earnings', 0) + _bs('Net income (incl. share from subsidiaries)', 0), GR, 'Click for entity view', null, 'Mar 2026');
-        h += '<div></div><div></div>';
+        h += '<div></div><div></div><div></div>';
         h += '</div>';
 
         kc.innerHTML = h;
@@ -43239,12 +43926,12 @@ var MAP = {
   'balancesheet':    'Balance Sheet Consolidation',
   'cashflow':        'Cash Flow Consolidation (WIP)',
   'ratios':          'Key Ratios Consolidation',
-  'ageing':          'AR / AP Agings',
+  'ageing':          'AR / AP Aging',
   'ar-ageing':       'Accounts Receivable Details',
   'ap-ageing':       'Accounts Payable Details',
   'topbalances':     'Taxes and Other Balances',
   'openitems':       'Open Item List',
-  'bank':            'Bank Account Activities',
+  'bank':            'MBI and BOJ Account Activities',
   'facilities':      'Bank Facility',
   'loanschedule':    'Loans Schedule'
 };
@@ -43277,8 +43964,11 @@ function renameSectionLabels(){
     if(txt === 'Analysis' || txt === 'Analysis Combined'){
       el.textContent = 'Analysis Combined Financials';
     }
-    if(txt === 'Balances & Analytics' || txt === 'Balances &amp; Analytics'){
-      el.textContent = 'Balances and Analysis';
+    if(txt === 'Balances & Analytics' || txt === 'Balances &amp; Analytics' || txt === 'Balances and Analysis'){
+      el.textContent = 'Balances & Analysis';
+    }
+    if(txt === 'Balances & Analysis' || txt === 'Balances &amp; Analysis'){
+      /* keep as-is — sub-label under Financial Statements */
     }
     if(txt === 'Facilities & Treasury' || txt === 'Facilities &amp; Treasury'){
       el.textContent = 'Facility and Treasury';
@@ -43754,7 +44444,24 @@ function _buildInsights(ar, ap, totAR, totAP, arByBU, apByBU){
 
 /* ═══════ TOP TABLE BUILDER ═══════ */
 function _buildTopTable(title, items, nameKey, total, type){
-  var sorted=items.slice().sort(function(a,b){return(b.amount||b.total||0)-(a.amount||a.total||0);}).slice(0,10);
+  /* ── Aggregate same customer/vendor by name ── */
+  var aggMap={};
+  items.forEach(function(x){
+    var nm=(x[nameKey]||x.name||'Unknown').trim();
+    if(!aggMap[nm]){aggMap[nm]={name:nm,bu:x.bu||'',not_due:0,current:0,d0_30:0,days_30:0,d31_60:0,days_60:0,d61_90:0,days_90:0,d91_120:0,days_120:0,over_120:0,amount:0,total:0};}
+    var a=aggMap[nm];
+    a.not_due+=(x.not_due||x.current||0);a.current+=(x.not_due||x.current||0);
+    a.d0_30+=(x.d0_30||x.days_30||0);a.days_30+=(x.d0_30||x.days_30||0);
+    a.d31_60+=(x.d31_60||x.days_60||0);a.days_60+=(x.d31_60||x.days_60||0);
+    a.d61_90+=(x.d61_90||x.days_90||0);a.days_90+=(x.d61_90||x.days_90||0);
+    a.d91_120+=(x.d91_120||x.days_120||0);a.days_120+=(x.d91_120||x.days_120||0);
+    a.over_120+=(x.over_120||0);
+    a.amount+=(x.amount||x.total||0);a.total+=(x.amount||x.total||0);
+    if(!a.bu&&x.bu)a.bu=x.bu; /* keep first BU found */
+    if(x.bu&&a.bu&&x.bu!==a.bu)a.bu='Multi'; /* mark as Multi if different BUs */
+  });
+  var aggregated=Object.keys(aggMap).map(function(k){return aggMap[k];});
+  var sorted=aggregated.sort(function(a,b){return(b.amount||b.total||0)-(a.amount||a.total||0);}).slice(0,10);
   var h='<div style="background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.07)">';
   h+='<div style="background:'+N+';color:#fff;padding:12px 18px;font-size:13px;font-weight:700">'+title+'</div>';
   h+='<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:11px">';
@@ -44056,7 +44763,7 @@ var _CFG = {
   'ageing':          {title:'AR / AP Ageing',              desc:'Accounts receivable and payable ageing as at March 2026 \u2022 All figures USD',            combined:false},
   'topbalances':     {title:'Taxes & Other Balances',      desc:'CIT & PIT provisions \u2022 Unearned revenue \u2022 Security deposits \u2022 Mar 2026',        combined:false},
   'openitems':       {title:'Open Item List',              desc:'Committed obligations, CAPEX pipeline and payment forecast \u2022 All figures USD',            combined:false},
-  'bank':            {title:'Bank Account Activities',     desc:'MBI & BOJ transaction activity \u2022 Year / Period / Company filters \u2022 All figures USD', combined:false},
+  'bank':            {title:'MBI and BOJ Account Activities',     desc:'MBI & BOJ transaction activity \u2022 Year / Period / Company filters \u2022 All figures USD', combined:false},
   'facilities':      {title:'Bank Credit Facilities',      desc:'Credit facility limits, utilized balances and available headroom \u2022 All figures USD',      combined:false},
   'loanschedule':    {title:'Loan Repayment Schedule',     desc:'Direct loan repayment schedule \u2022 Monthly obligations per facility \u2022 All figures USD',combined:false}
 };
