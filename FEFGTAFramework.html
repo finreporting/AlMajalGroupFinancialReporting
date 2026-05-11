@@ -309,19 +309,92 @@ try{if(sessionStorage.getItem('fefgta_auth')==='1'){document.getElementById('pwg
       </div>
     </div>
 
-    <div class="card">
-      <div class="card-hdr">Monthly Performance — YTD Apr 2026 vs YTD Apr 2025</div>
-      <table class="tbl">
-        <tr><th>USD</th><th>Jan-26</th><th>Jan-25</th><th>Feb-26</th><th>Feb-25</th><th>Mar-26</th><th>Mar-25</th><th>Apr-26</th><th>Apr-25</th><th style="background:#004068;color:#fff;">YTD-26</th><th style="background:#004068;color:#fff;">YTD-25</th></tr>
-        <tr class="clk" onclick="showDrilldown('totalRevenue')"><td>Revenue</td><td>503,946</td><td>887,394</td><td>1,109,728</td><td>2,174,516</td><td>133,895</td><td>605,896</td><td>1,057,628</td><td>882,185</td><td><strong>2,805,198</strong></td><td>4,549,991</td></tr>
-        <tr class="clk" onclick="showDrilldown('totalCOGS')"><td>COGS</td><td>88,282</td><td>622,033</td><td>0</td><td>1,084,833</td><td>0</td><td>27,486</td><td>0</td><td>11,087</td><td><strong>88,282</strong></td><td>1,745,439</td></tr>
-        <tr class="clk" onclick="showDrilldown('totalGP')"><td>Gross Profit</td><td>415,664</td><td>265,361</td><td>1,109,728</td><td>1,089,683</td><td>133,895</td><td>578,410</td><td>1,057,628</td><td>871,098</td><td><strong>2,716,916</strong></td><td>2,804,552</td></tr>
-        <tr class="clk" onclick="showDrilldown('totalSGA')"><td>SG&amp;A</td><td>148,264</td><td>198,899</td><td>168,223</td><td>173,850</td><td>118,098</td><td>177,863</td><td>140,175</td><td>117,036</td><td><strong>574,760</strong></td><td>667,648</td></tr>
-        <tr class="clk" onclick="showDrilldown('totalEBITDA')"><td>EBITDA</td><td>267,400</td><td>66,462</td><td>941,506</td><td>915,833</td><td>15,797</td><td>400,547</td><td>917,453</td><td>754,062</td><td><strong>2,142,156</strong></td><td>2,136,904</td></tr>
-        <tr class="clk" onclick="showDrilldown('totalTax')"><td>Income Tax</td><td>29,254</td><td>26,622</td><td>77,681</td><td>150,261</td><td>9,373</td><td>40,218</td><td>74,034</td><td>60,488</td><td><strong>190,342</strong></td><td>277,589</td></tr>
-        <tr class="tot clk" onclick="showDrilldown('totalNP')"><td>Net Income</td><td>238,147</td><td>39,840</td><td>863,825</td><td>765,572</td><td>6,425</td><td>360,329</td><td>843,419</td><td>693,574</td><td><strong>1,951,815</strong></td><td>1,859,315</td></tr>
-      </table>
-      <div style="padding:10px 12px;font-size:11px;color:#64748b;">PY monthly values sourced from I.S sheet (FEFGTA Dec 2025 Framework). All figures aligned with periodData comparisons.</div>
+    <!-- MONTHLY PERFORMANCE — CLUSTERED COLUMN CHART (2026 vs 2025) -->
+    <div class="chart-card" style="margin-bottom:14px;">
+      <div class="chart-card-hdr">📊 Monthly Performance — 2026 vs 2025 + YTD Comparison <span>Revenue · EBITDA · Net Income (click columns for detail)</span></div>
+      <div style="padding:20px 24px;">
+        <!-- Legend -->
+        <div style="display:flex;gap:18px;justify-content:center;margin-bottom:14px;flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:14px;height:14px;border-radius:3px;background:linear-gradient(135deg,#004068,#00527F);"></div><span style="font-size:11px;font-weight:600;color:#334155;">Revenue 2026</span></div>
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:14px;height:14px;border-radius:3px;background:#94a3b8;"></div><span style="font-size:11px;font-weight:600;color:#334155;">Revenue 2025</span></div>
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:14px;height:14px;border-radius:3px;background:linear-gradient(135deg,#48C0D0,#9FDCE5);"></div><span style="font-size:11px;font-weight:600;color:#334155;">EBITDA 2026</span></div>
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:14px;height:14px;border-radius:3px;background:#cbd5e1;"></div><span style="font-size:11px;font-weight:600;color:#334155;">EBITDA 2025</span></div>
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:14px;height:14px;border-radius:3px;background:linear-gradient(135deg,#16a34a,#22c55e);"></div><span style="font-size:11px;font-weight:600;color:#334155;">NI 2026</span></div>
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:14px;height:14px;border-radius:3px;background:#a3a3a3;"></div><span style="font-size:11px;font-weight:600;color:#334155;">NI 2025</span></div>
+        </div>
+        <!-- Grouped column chart : Jan/Feb/Mar/Apr/YTD -->
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;align-items:end;">
+          <!-- JAN -->
+          <div onclick="showDrilldown('totalRevenue')" style="cursor:pointer;">
+            <div style="font-size:11px;font-weight:700;color:#004068;margin-bottom:8px;text-align:center;">JAN</div>
+            <div style="display:flex;gap:2px;align-items:flex-end;height:170px;justify-content:center;">
+              <div style="width:14px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#004068,#00527F);height:23.1%;position:relative;min-height:6px;" title="Rev 26 $504K"><div style="position:absolute;top:-14px;left:-6px;font-size:8px;font-weight:700;color:#004068;">504K</div></div>
+              <div style="width:14px;border-radius:4px 4px 0 0;background:#94a3b8;height:40.7%;min-height:6px;" title="Rev 25 $887K"></div>
+              <div style="width:14px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#48C0D0,#9FDCE5);height:12.3%;min-height:6px;" title="EBITDA 26 $267K"></div>
+              <div style="width:14px;border-radius:4px 4px 0 0;background:#cbd5e1;height:3.0%;min-height:6px;" title="EBITDA 25 $66K"></div>
+              <div style="width:14px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#16a34a,#22c55e);height:10.9%;min-height:6px;" title="NI 26 $238K"></div>
+              <div style="width:14px;border-radius:4px 4px 0 0;background:#a3a3a3;height:1.8%;min-height:6px;" title="NI 25 $40K"></div>
+            </div>
+          </div>
+          <!-- FEB -->
+          <div onclick="showDrilldown('totalRevenue')" style="cursor:pointer;">
+            <div style="font-size:11px;font-weight:700;color:#004068;margin-bottom:8px;text-align:center;">FEB</div>
+            <div style="display:flex;gap:2px;align-items:flex-end;height:170px;justify-content:center;">
+              <div style="width:14px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#004068,#00527F);height:51.0%;min-height:6px;" title="Rev 26 $1,110K"></div>
+              <div style="width:14px;border-radius:4px 4px 0 0;background:#94a3b8;height:100%;min-height:6px;" title="Rev 25 $2,175K"></div>
+              <div style="width:14px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#48C0D0,#9FDCE5);height:43.3%;min-height:6px;" title="EBITDA 26 $942K"></div>
+              <div style="width:14px;border-radius:4px 4px 0 0;background:#cbd5e1;height:42.1%;min-height:6px;" title="EBITDA 25 $916K"></div>
+              <div style="width:14px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#16a34a,#22c55e);height:39.7%;min-height:6px;" title="NI 26 $864K"></div>
+              <div style="width:14px;border-radius:4px 4px 0 0;background:#a3a3a3;height:35.2%;min-height:6px;" title="NI 25 $766K"></div>
+            </div>
+          </div>
+          <!-- MAR -->
+          <div onclick="showDrilldown('totalRevenue')" style="cursor:pointer;">
+            <div style="font-size:11px;font-weight:700;color:#004068;margin-bottom:8px;text-align:center;">MAR</div>
+            <div style="display:flex;gap:2px;align-items:flex-end;height:170px;justify-content:center;">
+              <div style="width:14px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#004068,#00527F);height:6.2%;min-height:6px;" title="Rev 26 $134K"></div>
+              <div style="width:14px;border-radius:4px 4px 0 0;background:#94a3b8;height:27.9%;min-height:6px;" title="Rev 25 $606K"></div>
+              <div style="width:14px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#48C0D0,#9FDCE5);height:0.7%;min-height:6px;" title="EBITDA 26 $16K"></div>
+              <div style="width:14px;border-radius:4px 4px 0 0;background:#cbd5e1;height:18.4%;min-height:6px;" title="EBITDA 25 $401K"></div>
+              <div style="width:14px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#16a34a,#22c55e);height:0.3%;min-height:6px;" title="NI 26 $6K"></div>
+              <div style="width:14px;border-radius:4px 4px 0 0;background:#a3a3a3;height:16.6%;min-height:6px;" title="NI 25 $360K"></div>
+            </div>
+          </div>
+          <!-- APR -->
+          <div onclick="showDrilldown('totalRevenue')" style="cursor:pointer;">
+            <div style="font-size:11px;font-weight:700;color:#004068;margin-bottom:8px;text-align:center;">APR</div>
+            <div style="display:flex;gap:2px;align-items:flex-end;height:170px;justify-content:center;">
+              <div style="width:14px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#004068,#00527F);height:48.6%;min-height:6px;" title="Rev 26 $1,058K"></div>
+              <div style="width:14px;border-radius:4px 4px 0 0;background:#94a3b8;height:40.6%;min-height:6px;" title="Rev 25 $882K"></div>
+              <div style="width:14px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#48C0D0,#9FDCE5);height:42.2%;min-height:6px;" title="EBITDA 26 $917K"></div>
+              <div style="width:14px;border-radius:4px 4px 0 0;background:#cbd5e1;height:34.7%;min-height:6px;" title="EBITDA 25 $754K"></div>
+              <div style="width:14px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#16a34a,#22c55e);height:38.8%;min-height:6px;" title="NI 26 $843K"></div>
+              <div style="width:14px;border-radius:4px 4px 0 0;background:#a3a3a3;height:31.9%;min-height:6px;" title="NI 25 $694K"></div>
+            </div>
+          </div>
+          <!-- YTD -->
+          <div onclick="showDrilldown('totalRevenue')" style="cursor:pointer;border-left:2px dashed #E87820;padding-left:8px;">
+            <div style="font-size:11px;font-weight:700;color:#E87820;margin-bottom:8px;text-align:center;">YTD APR</div>
+            <div style="display:flex;gap:2px;align-items:flex-end;height:170px;justify-content:center;">
+              <div style="width:14px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#004068,#00527F);height:62.0%;min-height:6px;" title="Rev 26 $2.81M"></div>
+              <div style="width:14px;border-radius:4px 4px 0 0;background:#94a3b8;height:100%;min-height:6px;" title="Rev 25 $4.55M"></div>
+              <div style="width:14px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#48C0D0,#9FDCE5);height:47.4%;min-height:6px;" title="EBITDA 26 $2.14M"></div>
+              <div style="width:14px;border-radius:4px 4px 0 0;background:#cbd5e1;height:47.2%;min-height:6px;" title="EBITDA 25 $2.14M"></div>
+              <div style="width:14px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#16a34a,#22c55e);height:43.1%;min-height:6px;" title="NI 26 $1.95M"></div>
+              <div style="width:14px;border-radius:4px 4px 0 0;background:#a3a3a3;height:41.1%;min-height:6px;" title="NI 25 $1.86M"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Below-chart summary -->
+        <div style="margin-top:14px;display:grid;grid-template-columns:repeat(5,1fr);gap:8px;border-top:2px solid #e2e8f0;padding-top:10px;font-size:11px;">
+          <div style="text-align:center;"><div style="color:#64748b;">Rev YoY</div><div style="font-weight:700;color:#dc2626;">-43.2%</div></div>
+          <div style="text-align:center;"><div style="color:#64748b;">Rev YoY</div><div style="font-weight:700;color:#dc2626;">-49.0%</div></div>
+          <div style="text-align:center;"><div style="color:#64748b;">Rev YoY</div><div style="font-weight:700;color:#dc2626;">-77.9%</div></div>
+          <div style="text-align:center;"><div style="color:#64748b;">Rev YoY</div><div style="font-weight:700;color:#16a34a;">+19.9%</div></div>
+          <div style="text-align:center;border-left:2px dashed #E87820;"><div style="color:#64748b;">YTD Rev YoY</div><div style="font-weight:700;color:#dc2626;">-38.2%</div></div>
+        </div>
+      </div>
+      <div style="padding:8px 14px;font-size:11px;color:#64748b;background:#f8fafc;border-top:1px solid #e2e8f0;">PY monthly values sourced from I.S sheet (FEFGTA Dec 2025 Framework). All figures aligned with periodData comparisons. Click any column group to open the Revenue/EBITDA/Net Income drill-down.</div>
     </div>
 
 <div class="alert info"><strong>COGS note:</strong> 2026 YTD COGS = $88,282 (PetroChina Jan-26 pass-through). All other months pure-commission (Tenaris + PetroChina agency). FY2025 COGS was $2.36M (mainly MDOC pass-through $1.36M, Proliner $264K, Al Shumookh $219K, SLB $426K). Period selector at top also updates the IS KPIs accordingly.</div>
@@ -359,24 +432,7 @@ try{if(sessionStorage.getItem('fefgta_auth')==='1'){document.getElementById('pwg
     </div>
 
     <div class="insight"><strong>Key Commentary (Dashboard sheet):</strong> MDOC payment milestone — 60% received in Feb 2026, 30% upon acceptance letter signed, 10% after one-year warranty period.</div>
-    <div class="chart-card">
-      <div class="chart-card-hdr">📊 FY 2026 Provisional P&amp;L Projection <span>YTD run-rate × 3 annualized</span></div>
-      <div class="waterfall" style="height:240px;">
-        <div class="wf-bar" onclick="showDrilldown('totalRevenue')"><div class="wf-col" style="height:200px;background:linear-gradient(180deg,#004068,#00527F);" data-label="$8.42M"></div><div class="wf-lbl">Revenue</div><div class="wf-val">vs FY25 $11.4M</div></div>
-        <div class="wf-bar" onclick="showDrilldown('totalCOGS')"><div class="wf-col" style="height:20px;background:linear-gradient(180deg,#dc2626,#ef4444);" data-label="$265K"></div><div class="wf-lbl">COGS</div><div class="wf-val">3.1%</div></div>
-        <div class="wf-bar" onclick="showDrilldown('totalGP')"><div class="wf-col" style="height:193px;background:linear-gradient(180deg,#48C0D0,#9FDCE5);" data-label="$8.15M"></div><div class="wf-lbl">Gross Profit</div><div class="wf-val">96.9% margin</div></div>
-        <div class="wf-bar" onclick="showDrilldown('totalSGA')"><div class="wf-col" style="height:41px;background:linear-gradient(180deg,#E87820,#f59e0b);" data-label="$1.72M"></div><div class="wf-lbl">SG&amp;A</div><div class="wf-val">20.5%</div></div>
-        <div class="wf-bar" onclick="showDrilldown('totalEBITDA')"><div class="wf-col" style="height:153px;background:linear-gradient(180deg,#16a34a,#22c55e);" data-label="$6.43M"></div><div class="wf-lbl">EBITDA</div><div class="wf-val">76.4% margin</div></div>
-        <div class="wf-bar" onclick="showDrilldown('totalTax')"><div class="wf-col" style="height:14px;background:linear-gradient(180deg,#7c3aed,#a78bfa);" data-label="$571K"></div><div class="wf-lbl">Tax</div><div class="wf-val">8.9%</div></div>
-        <div class="wf-bar" onclick="showDrilldown('totalNP')"><div class="wf-col" style="height:140px;background:linear-gradient(180deg,#004068,#16a34a);" data-label="$5.86M"></div><div class="wf-lbl">Net Income</div><div class="wf-val">69.6% margin</div></div>
-      </div>
-      <div class="metric-row">
-        <div class="metric-mini" onclick="showDrilldown('totalRevenue')"><div class="mm-val neg">-26.2%</div><div class="mm-lbl">Rev vs FY25</div></div>
-        <div class="metric-mini" onclick="showDrilldown('totalEBITDA')"><div class="mm-val pos">+12.8pp</div><div class="mm-lbl">EBITDA Margin Δ</div></div>
-        <div class="metric-mini" onclick="showDrilldown('totalNP')"><div class="mm-val neg">-10.3%</div><div class="mm-lbl">NI vs FY25</div></div>
-        <div class="metric-mini" onclick="showDrilldown('totalSGA')"><div class="mm-val pos">-3.6%</div><div class="mm-lbl">SG&A vs FY25</div></div>
-      </div>
-    </div>
+    <div class="alert info" style="margin-top:10px;"><strong>Note on Forecasting:</strong> Static run-rate projections have been removed from the executive summary. Forward-looking views should be replaced with rolling forecasts built in collaboration with the business units (Tenaris pipeline, PetroChina, MDOC milestones, etc.) and refreshed monthly.</div>
 
   </div>
 
@@ -570,39 +626,54 @@ try{if(sessionStorage.getItem('fefgta_auth')==='1'){document.getElementById('pwg
       </div>
     </div>
 
-    <!-- Monthly Margin Stacked Bars -->
+    <!-- Monthly Margin — Clustered Column Chart (GP% · EBITDA% · NI%) -->
     <div class="chart-card" style="margin-bottom:15px;">
-      <div class="chart-card-hdr">📈 Monthly Margin Waterfall <span>GP% → EBITDA% → NI% per month</span></div>
-      <div style="padding:20px 28px;">
-        <div style="display:grid;grid-template-columns:80px 1fr 1fr 1fr;gap:8px;align-items:center;">
-          <div style="font-size:11px;font-weight:700;color:#004068;">Month</div>
-          <div style="font-size:10px;font-weight:700;color:#16a34a;text-align:center;">GP Margin</div>
-          <div style="font-size:10px;font-weight:700;color:#48C0D0;text-align:center;">EBITDA Margin</div>
-          <div style="font-size:10px;font-weight:700;color:#004068;text-align:center;">NI Margin</div>
+      <div class="chart-card-hdr">📊 Monthly Margin Comparison <span>GP% · EBITDA% · NI% per month — clustered columns</span></div>
+      <div style="padding:24px 28px;">
+        <!-- Legend -->
+        <div style="display:flex;gap:20px;justify-content:center;margin-bottom:18px;">
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:14px;height:14px;border-radius:3px;background:linear-gradient(135deg,#16a34a,#22c55e);"></div><span style="font-size:11px;font-weight:600;color:#334155;">GP Margin</span></div>
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:14px;height:14px;border-radius:3px;background:linear-gradient(135deg,#48C0D0,#9FDCE5);"></div><span style="font-size:11px;font-weight:600;color:#334155;">EBITDA Margin</span></div>
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:14px;height:14px;border-radius:3px;background:linear-gradient(135deg,#004068,#00527F);"></div><span style="font-size:11px;font-weight:600;color:#334155;">NI Margin</span></div>
         </div>
-        <div style="display:grid;grid-template-columns:80px 1fr 1fr 1fr;gap:8px;align-items:center;margin-top:10px;padding:10px 0;border-bottom:1px solid #f1f5f9;" onclick="showDrilldown('totalRevenue')" class="clk">
-          <div style="font-size:12px;font-weight:700;color:#334155;">Jan-26</div>
-          <div style="background:#f1f5f9;border-radius:8px;height:32px;overflow:hidden;"><div style="height:100%;width:82.5%;background:linear-gradient(90deg,#16a34a,#22c55e);border-radius:8px;display:flex;align-items:center;padding:0 10px;font-size:11px;font-weight:700;color:#fff;">82.5%</div></div>
-          <div style="background:#f1f5f9;border-radius:8px;height:32px;overflow:hidden;"><div style="height:100%;width:53.1%;background:linear-gradient(90deg,#48C0D0,#9FDCE5);border-radius:8px;display:flex;align-items:center;padding:0 10px;font-size:11px;font-weight:700;color:#fff;">53.1%</div></div>
-          <div style="background:#f1f5f9;border-radius:8px;height:32px;overflow:hidden;"><div style="height:100%;width:47.3%;background:linear-gradient(90deg,#004068,#00527F);border-radius:8px;display:flex;align-items:center;padding:0 10px;font-size:11px;font-weight:700;color:#fff;">47.3%</div></div>
-        </div>
-        <div style="display:grid;grid-template-columns:80px 1fr 1fr 1fr;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid #f1f5f9;" onclick="showDrilldown('totalRevenue')" class="clk">
-          <div style="font-size:12px;font-weight:700;color:#334155;">Feb-26</div>
-          <div style="background:#f1f5f9;border-radius:8px;height:32px;overflow:hidden;"><div style="height:100%;width:100%;background:linear-gradient(90deg,#16a34a,#22c55e);border-radius:8px;display:flex;align-items:center;padding:0 10px;font-size:11px;font-weight:700;color:#fff;">100%</div></div>
-          <div style="background:#f1f5f9;border-radius:8px;height:32px;overflow:hidden;"><div style="height:100%;width:84.8%;background:linear-gradient(90deg,#48C0D0,#9FDCE5);border-radius:8px;display:flex;align-items:center;padding:0 10px;font-size:11px;font-weight:700;color:#fff;">84.8%</div></div>
-          <div style="background:#f1f5f9;border-radius:8px;height:32px;overflow:hidden;"><div style="height:100%;width:77.8%;background:linear-gradient(90deg,#004068,#00527F);border-radius:8px;display:flex;align-items:center;padding:0 10px;font-size:11px;font-weight:700;color:#fff;">77.8%</div></div>
-        </div>
-        <div style="display:grid;grid-template-columns:80px 1fr 1fr 1fr;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid #f1f5f9;" onclick="showDrilldown('totalRevenue')" class="clk">
-          <div style="font-size:12px;font-weight:700;color:#334155;">Mar-26</div>
-          <div style="background:#f1f5f9;border-radius:8px;height:32px;overflow:hidden;"><div style="height:100%;width:100%;background:linear-gradient(90deg,#16a34a,#22c55e);border-radius:8px;display:flex;align-items:center;padding:0 10px;font-size:11px;font-weight:700;color:#fff;">100%</div></div>
-          <div style="background:#f1f5f9;border-radius:8px;height:32px;overflow:hidden;"><div style="height:100%;width:11.8%;background:linear-gradient(90deg,#dc2626,#ef4444);border-radius:8px;display:flex;align-items:center;padding:0 8px;font-size:11px;font-weight:700;color:#fff;">11.8%</div></div>
-          <div style="background:#f1f5f9;border-radius:8px;height:32px;overflow:hidden;"><div style="height:100%;width:4.8%;background:linear-gradient(90deg,#dc2626,#ef4444);border-radius:8px;display:flex;align-items:center;padding:0 8px;font-size:11px;font-weight:700;color:#fff;min-width:40px;">4.8%</div></div>
-        </div>
-        <div style="display:grid;grid-template-columns:80px 1fr 1fr 1fr;gap:8px;align-items:center;padding:10px 0;" onclick="showDrilldown('totalRevenue')" class="clk">
-          <div style="font-size:12px;font-weight:700;color:#334155;">Apr-26</div>
-          <div style="background:#f1f5f9;border-radius:8px;height:32px;overflow:hidden;"><div style="height:100%;width:100%;background:linear-gradient(90deg,#16a34a,#22c55e);border-radius:8px;display:flex;align-items:center;padding:0 10px;font-size:11px;font-weight:700;color:#fff;">100%</div></div>
-          <div style="background:#f1f5f9;border-radius:8px;height:32px;overflow:hidden;"><div style="height:100%;width:86.7%;background:linear-gradient(90deg,#48C0D0,#9FDCE5);border-radius:8px;display:flex;align-items:center;padding:0 10px;font-size:11px;font-weight:700;color:#fff;">86.7%</div></div>
-          <div style="background:#f1f5f9;border-radius:8px;height:32px;overflow:hidden;"><div style="height:100%;width:79.7%;background:linear-gradient(90deg,#004068,#00527F);border-radius:8px;display:flex;align-items:center;padding:0 10px;font-size:11px;font-weight:700;color:#fff;">79.7%</div></div>
+        <!-- Grouped vertical bars (4 months) -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+          <!-- JAN -->
+          <div onclick="showDrilldown('totalEBITDA')" style="cursor:pointer;">
+            <div style="font-size:11px;font-weight:700;color:#004068;margin-bottom:10px;text-align:center;">JAN-26</div>
+            <div style="display:flex;gap:6px;align-items:flex-end;height:180px;justify-content:center;">
+              <div style="width:34px;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,#16a34a,#22c55e);height:82.5%;position:relative;min-height:8px;"><div style="position:absolute;top:-18px;width:100%;text-align:center;font-size:10px;font-weight:700;color:#16a34a;">82.5%</div></div>
+              <div style="width:34px;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,#48C0D0,#9FDCE5);height:53.1%;position:relative;min-height:8px;"><div style="position:absolute;top:-18px;width:100%;text-align:center;font-size:10px;font-weight:700;color:#48C0D0;">53.1%</div></div>
+              <div style="width:34px;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,#004068,#00527F);height:47.3%;position:relative;min-height:8px;"><div style="position:absolute;top:-18px;width:100%;text-align:center;font-size:10px;font-weight:700;color:#004068;">47.3%</div></div>
+            </div>
+          </div>
+          <!-- FEB -->
+          <div onclick="showDrilldown('totalEBITDA')" style="cursor:pointer;">
+            <div style="font-size:11px;font-weight:700;color:#004068;margin-bottom:10px;text-align:center;">FEB-26</div>
+            <div style="display:flex;gap:6px;align-items:flex-end;height:180px;justify-content:center;">
+              <div style="width:34px;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,#16a34a,#22c55e);height:100%;position:relative;min-height:8px;"><div style="position:absolute;top:-18px;width:100%;text-align:center;font-size:10px;font-weight:700;color:#16a34a;">100%</div></div>
+              <div style="width:34px;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,#48C0D0,#9FDCE5);height:84.8%;position:relative;min-height:8px;"><div style="position:absolute;top:-18px;width:100%;text-align:center;font-size:10px;font-weight:700;color:#48C0D0;">84.8%</div></div>
+              <div style="width:34px;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,#004068,#00527F);height:77.8%;position:relative;min-height:8px;"><div style="position:absolute;top:-18px;width:100%;text-align:center;font-size:10px;font-weight:700;color:#004068;">77.8%</div></div>
+            </div>
+          </div>
+          <!-- MAR -->
+          <div onclick="showDrilldown('totalEBITDA')" style="cursor:pointer;">
+            <div style="font-size:11px;font-weight:700;color:#004068;margin-bottom:10px;text-align:center;">MAR-26</div>
+            <div style="display:flex;gap:6px;align-items:flex-end;height:180px;justify-content:center;">
+              <div style="width:34px;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,#16a34a,#22c55e);height:100%;position:relative;min-height:8px;"><div style="position:absolute;top:-18px;width:100%;text-align:center;font-size:10px;font-weight:700;color:#16a34a;">100%</div></div>
+              <div style="width:34px;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,#dc2626,#ef4444);height:11.8%;position:relative;min-height:8px;"><div style="position:absolute;top:-18px;width:100%;text-align:center;font-size:10px;font-weight:700;color:#dc2626;">11.8%</div></div>
+              <div style="width:34px;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,#dc2626,#ef4444);height:4.8%;position:relative;min-height:8px;"><div style="position:absolute;top:-18px;width:100%;text-align:center;font-size:10px;font-weight:700;color:#dc2626;">4.8%</div></div>
+            </div>
+          </div>
+          <!-- APR -->
+          <div onclick="showDrilldown('totalEBITDA')" style="cursor:pointer;">
+            <div style="font-size:11px;font-weight:700;color:#004068;margin-bottom:10px;text-align:center;">APR-26</div>
+            <div style="display:flex;gap:6px;align-items:flex-end;height:180px;justify-content:center;">
+              <div style="width:34px;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,#16a34a,#22c55e);height:100%;position:relative;min-height:8px;"><div style="position:absolute;top:-18px;width:100%;text-align:center;font-size:10px;font-weight:700;color:#16a34a;">100%</div></div>
+              <div style="width:34px;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,#48C0D0,#9FDCE5);height:86.7%;position:relative;min-height:8px;"><div style="position:absolute;top:-18px;width:100%;text-align:center;font-size:10px;font-weight:700;color:#48C0D0;">86.7%</div></div>
+              <div style="width:34px;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,#004068,#00527F);height:79.7%;position:relative;min-height:8px;"><div style="position:absolute;top:-18px;width:100%;text-align:center;font-size:10px;font-weight:700;color:#004068;">79.7%</div></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -699,65 +770,74 @@ try{if(sessionStorage.getItem('fefgta_auth')==='1'){document.getElementById('pwg
       </div>
     </div>
 
-    <!-- ANNUAL MARGIN TRENDS -->
+    <!-- Annual Margin Evolution — Clustered Column Chart (GP% · EBITDA% · NI% per year) -->
     <div class="chart-card" style="margin-bottom:15px;">
-      <div class="chart-card-hdr">📈 Annual Margin Evolution <span>GP% / EBITDA% / NI% Multi-Year Trend</span></div>
-      <div style="padding:20px 28px;">
-        <!-- Legend -->
-        <div style="display:flex;gap:20px;justify-content:center;margin-bottom:16px;">
-          <div style="display:flex;align-items:center;gap:6px;"><div style="width:14px;height:4px;border-radius:2px;background:#16a34a;"></div><span style="font-size:11px;font-weight:600;color:#334155;">GP Margin</span></div>
-          <div style="display:flex;align-items:center;gap:6px;"><div style="width:14px;height:4px;border-radius:2px;background:#48C0D0;"></div><span style="font-size:11px;font-weight:600;color:#334155;">EBITDA Margin</span></div>
-          <div style="display:flex;align-items:center;gap:6px;"><div style="width:14px;height:4px;border-radius:2px;background:#004068;"></div><span style="font-size:11px;font-weight:600;color:#334155;">NI Margin</span></div>
+      <div class="chart-card-hdr">📊 Annual Margin Evolution <span>GP% · EBITDA% · NI% multi-year — clustered columns (click metric for drill-down)</span></div>
+      <div style="padding:24px 20px 16px;">
+        <!-- Legend (each clickable → opens metric-specific drilldown) -->
+        <div style="display:flex;gap:20px;justify-content:center;margin-bottom:18px;">
+          <div onclick="event.stopPropagation();showDrilldown('ratioGP')" style="display:flex;align-items:center;gap:6px;cursor:pointer;"><div style="width:14px;height:14px;border-radius:3px;background:linear-gradient(135deg,#16a34a,#22c55e);"></div><span style="font-size:11px;font-weight:600;color:#334155;">GP Margin</span></div>
+          <div onclick="event.stopPropagation();showDrilldown('ratioEBITDA')" style="display:flex;align-items:center;gap:6px;cursor:pointer;"><div style="width:14px;height:14px;border-radius:3px;background:linear-gradient(135deg,#48C0D0,#9FDCE5);"></div><span style="font-size:11px;font-weight:600;color:#334155;">EBITDA Margin</span></div>
+          <div onclick="event.stopPropagation();showDrilldown('ratioNI')" style="display:flex;align-items:center;gap:6px;cursor:pointer;"><div style="width:14px;height:14px;border-radius:3px;background:linear-gradient(135deg,#004068,#00527F);"></div><span style="font-size:11px;font-weight:600;color:#334155;">NI Margin</span></div>
         </div>
-        <!-- Grid rows -->
-        <div style="display:grid;grid-template-columns:70px 1fr 1fr 1fr;gap:6px;align-items:center;">
-          <div style="font-size:10px;font-weight:700;color:#94a3b8;">Year</div>
-          <div style="font-size:9px;font-weight:700;color:#16a34a;text-align:center;">GP%</div>
-          <div style="font-size:9px;font-weight:700;color:#48C0D0;text-align:center;">EBITDA%</div>
-          <div style="font-size:9px;font-weight:700;color:#004068;text-align:center;">NI%</div>
+        <!-- Grouped vertical columns by year -->
+        <div style="display:flex;gap:14px;align-items:flex-end;justify-content:center;padding:0 6px;">
+          <!-- 2021 -->
+          <div style="text-align:center;">
+            <div style="font-size:10px;font-weight:700;color:#004068;margin-bottom:8px;">2021</div>
+            <div style="display:flex;gap:3px;align-items:flex-end;height:170px;justify-content:center;">
+              <div onclick="showDrilldown('ratioGP')" style="cursor:pointer;width:22px;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,#16a34a,#22c55e);height:92.7%;position:relative;min-height:8px;" title="GP 2021 92.7%"><div style="position:absolute;top:-16px;width:100%;text-align:center;font-size:8px;font-weight:700;color:#16a34a;">92.7%</div></div>
+              <div onclick="showDrilldown('ratioEBITDA')" style="cursor:pointer;width:22px;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,#48C0D0,#9FDCE5);height:65.2%;position:relative;min-height:8px;" title="EBITDA 2021 65.2%"><div style="position:absolute;top:-16px;width:100%;text-align:center;font-size:8px;font-weight:700;color:#48C0D0;">65.2%</div></div>
+              <div onclick="showDrilldown('ratioNI')" style="cursor:pointer;width:22px;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,#004068,#00527F);height:65.2%;position:relative;min-height:8px;" title="NI 2021 65.2%"><div style="position:absolute;top:-16px;width:100%;text-align:center;font-size:8px;font-weight:700;color:#004068;">65.2%</div></div>
+            </div>
+          </div>
+          <!-- 2022 -->
+          <div style="text-align:center;">
+            <div style="font-size:10px;font-weight:700;color:#004068;margin-bottom:8px;">2022</div>
+            <div style="display:flex;gap:3px;align-items:flex-end;height:170px;justify-content:center;">
+              <div onclick="showDrilldown('ratioGP')" style="cursor:pointer;width:22px;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,#16a34a,#22c55e);height:87.5%;position:relative;min-height:8px;" title="GP 2022 87.5%"><div style="position:absolute;top:-16px;width:100%;text-align:center;font-size:8px;font-weight:700;color:#16a34a;">87.5%</div></div>
+              <div onclick="showDrilldown('ratioEBITDA')" style="cursor:pointer;width:22px;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,#48C0D0,#9FDCE5);height:41.4%;position:relative;min-height:8px;" title="EBITDA 2022 41.4%"><div style="position:absolute;top:-16px;width:100%;text-align:center;font-size:8px;font-weight:700;color:#48C0D0;">41.4%</div></div>
+              <div onclick="showDrilldown('ratioNI')" style="cursor:pointer;width:22px;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,#004068,#00527F);height:38.4%;position:relative;min-height:8px;" title="NI 2022 38.4%"><div style="position:absolute;top:-16px;width:100%;text-align:center;font-size:8px;font-weight:700;color:#004068;">38.4%</div></div>
+            </div>
+          </div>
+          <!-- 2023 -->
+          <div style="text-align:center;">
+            <div style="font-size:10px;font-weight:700;color:#004068;margin-bottom:8px;">2023</div>
+            <div style="display:flex;gap:3px;align-items:flex-end;height:170px;justify-content:center;">
+              <div onclick="showDrilldown('ratioGP')" style="cursor:pointer;width:22px;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,#E87820,#f59e0b);height:49.0%;position:relative;min-height:8px;" title="GP 2023 49.0%"><div style="position:absolute;top:-16px;width:100%;text-align:center;font-size:8px;font-weight:700;color:#E87820;">49.0%</div></div>
+              <div onclick="showDrilldown('ratioEBITDA')" style="cursor:pointer;width:22px;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,#48C0D0,#9FDCE5);height:36.4%;position:relative;min-height:8px;" title="EBITDA 2023 36.4%"><div style="position:absolute;top:-16px;width:100%;text-align:center;font-size:8px;font-weight:700;color:#48C0D0;">36.4%</div></div>
+              <div onclick="showDrilldown('ratioNI')" style="cursor:pointer;width:22px;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,#004068,#00527F);height:31.8%;position:relative;min-height:8px;" title="NI 2023 31.8%"><div style="position:absolute;top:-16px;width:100%;text-align:center;font-size:8px;font-weight:700;color:#004068;">31.8%</div></div>
+            </div>
+          </div>
+          <!-- 2024 -->
+          <div style="text-align:center;">
+            <div style="font-size:10px;font-weight:700;color:#004068;margin-bottom:8px;">2024</div>
+            <div style="display:flex;gap:3px;align-items:flex-end;height:170px;justify-content:center;">
+              <div onclick="showDrilldown('ratioGP')" style="cursor:pointer;width:22px;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,#E87820,#f59e0b);height:47.5%;position:relative;min-height:8px;" title="GP 2024 47.5%"><div style="position:absolute;top:-16px;width:100%;text-align:center;font-size:8px;font-weight:700;color:#E87820;">47.5%</div></div>
+              <div onclick="showDrilldown('ratioEBITDA')" style="cursor:pointer;width:22px;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,#dc2626,#ef4444);height:6.5%;position:relative;min-height:8px;" title="EBITDA 2024 6.5%"><div style="position:absolute;top:-16px;width:100%;text-align:center;font-size:8px;font-weight:700;color:#dc2626;">6.5%</div></div>
+              <div onclick="showDrilldown('ratioNI')" style="cursor:pointer;width:22px;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,#dc2626,#ef4444);height:2%;position:relative;min-height:8px;" title="NI 2024 -0.8%"><div style="position:absolute;top:-16px;width:100%;text-align:center;font-size:8px;font-weight:700;color:#dc2626;">-0.8%</div></div>
+            </div>
+          </div>
+          <!-- 2025 -->
+          <div style="text-align:center;">
+            <div style="font-size:10px;font-weight:700;color:#004068;margin-bottom:8px;">2025</div>
+            <div style="display:flex;gap:3px;align-items:flex-end;height:170px;justify-content:center;">
+              <div onclick="showDrilldown('ratioGP')" style="cursor:pointer;width:22px;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,#16a34a,#22c55e);height:79.3%;position:relative;min-height:8px;" title="GP 2025 79.3%"><div style="position:absolute;top:-16px;width:100%;text-align:center;font-size:8px;font-weight:700;color:#16a34a;">79.3%</div></div>
+              <div onclick="showDrilldown('ratioEBITDA')" style="cursor:pointer;width:22px;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,#48C0D0,#9FDCE5);height:63.6%;position:relative;min-height:8px;" title="EBITDA 2025 63.6%"><div style="position:absolute;top:-16px;width:100%;text-align:center;font-size:8px;font-weight:700;color:#48C0D0;">63.6%</div></div>
+              <div onclick="showDrilldown('ratioNI')" style="cursor:pointer;width:22px;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,#004068,#00527F);height:57.2%;position:relative;min-height:8px;" title="NI 2025 57.2%"><div style="position:absolute;top:-16px;width:100%;text-align:center;font-size:8px;font-weight:700;color:#004068;">57.2%</div></div>
+            </div>
+          </div>
+          <!-- 2026 YTD -->
+          <div style="text-align:center;border-left:2px dashed #E87820;padding-left:10px;">
+            <div style="font-size:10px;font-weight:700;color:#E87820;margin-bottom:8px;">YTD-26</div>
+            <div style="display:flex;gap:3px;align-items:flex-end;height:170px;justify-content:center;">
+              <div onclick="showDrilldown('ratioGP')" style="cursor:pointer;width:22px;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,#16a34a,#22c55e);height:96.9%;position:relative;min-height:8px;border:1.5px solid #E87820;" title="GP YTD-26 96.9%"><div style="position:absolute;top:-16px;width:100%;text-align:center;font-size:8px;font-weight:700;color:#16a34a;">96.9%</div></div>
+              <div onclick="showDrilldown('ratioEBITDA')" style="cursor:pointer;width:22px;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,#48C0D0,#9FDCE5);height:76.4%;position:relative;min-height:8px;border:1.5px solid #E87820;" title="EBITDA YTD-26 76.4%"><div style="position:absolute;top:-16px;width:100%;text-align:center;font-size:8px;font-weight:700;color:#48C0D0;">76.4%</div></div>
+              <div onclick="showDrilldown('ratioNI')" style="cursor:pointer;width:22px;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,#004068,#00527F);height:69.6%;position:relative;min-height:8px;border:1.5px solid #E87820;" title="NI YTD-26 69.6%"><div style="position:absolute;top:-16px;width:100%;text-align:center;font-size:8px;font-weight:700;color:#004068;">69.6%</div></div>
+            </div>
+          </div>
         </div>
-        <!-- 2021 -->
-        <div style="display:grid;grid-template-columns:70px 1fr 1fr 1fr;gap:6px;align-items:center;margin-top:8px;padding:8px 0;border-bottom:1px solid #f1f5f9;" onclick="showDrilldown('ratioGP')" class="clk">
-          <div style="font-size:12px;font-weight:700;color:#334155;">2021</div>
-          <div style="background:#f1f5f9;border-radius:8px;height:28px;overflow:hidden;"><div style="height:100%;width:92.7%;background:linear-gradient(90deg,#16a34a,#22c55e);border-radius:8px;display:flex;align-items:center;padding:0 8px;font-size:10px;font-weight:700;color:#fff;">92.7%</div></div>
-          <div style="background:#f1f5f9;border-radius:8px;height:28px;overflow:hidden;"><div style="height:100%;width:65.2%;background:linear-gradient(90deg,#48C0D0,#9FDCE5);border-radius:8px;display:flex;align-items:center;padding:0 8px;font-size:10px;font-weight:700;color:#fff;">65.2%</div></div>
-          <div style="background:#f1f5f9;border-radius:8px;height:28px;overflow:hidden;"><div style="height:100%;width:65.2%;background:linear-gradient(90deg,#004068,#00527F);border-radius:8px;display:flex;align-items:center;padding:0 8px;font-size:10px;font-weight:700;color:#fff;">65.2%</div></div>
-        </div>
-        <!-- 2022 -->
-        <div style="display:grid;grid-template-columns:70px 1fr 1fr 1fr;gap:6px;align-items:center;padding:8px 0;border-bottom:1px solid #f1f5f9;" onclick="showDrilldown('ratioGP')" class="clk">
-          <div style="font-size:12px;font-weight:700;color:#334155;">2022</div>
-          <div style="background:#f1f5f9;border-radius:8px;height:28px;overflow:hidden;"><div style="height:100%;width:87.5%;background:linear-gradient(90deg,#16a34a,#22c55e);border-radius:8px;display:flex;align-items:center;padding:0 8px;font-size:10px;font-weight:700;color:#fff;">87.5%</div></div>
-          <div style="background:#f1f5f9;border-radius:8px;height:28px;overflow:hidden;"><div style="height:100%;width:41.4%;background:linear-gradient(90deg,#48C0D0,#9FDCE5);border-radius:8px;display:flex;align-items:center;padding:0 8px;font-size:10px;font-weight:700;color:#fff;">41.4%</div></div>
-          <div style="background:#f1f5f9;border-radius:8px;height:28px;overflow:hidden;"><div style="height:100%;width:38.4%;background:linear-gradient(90deg,#004068,#00527F);border-radius:8px;display:flex;align-items:center;padding:0 8px;font-size:10px;font-weight:700;color:#fff;">38.4%</div></div>
-        </div>
-        <!-- 2023 -->
-        <div style="display:grid;grid-template-columns:70px 1fr 1fr 1fr;gap:6px;align-items:center;padding:8px 0;border-bottom:1px solid #f1f5f9;" onclick="showDrilldown('ratioGP')" class="clk">
-          <div style="font-size:12px;font-weight:700;color:#334155;">2023</div>
-          <div style="background:#f1f5f9;border-radius:8px;height:28px;overflow:hidden;"><div style="height:100%;width:49%;background:linear-gradient(90deg,#E87820,#f59e0b);border-radius:8px;display:flex;align-items:center;padding:0 8px;font-size:10px;font-weight:700;color:#fff;">49.0%</div></div>
-          <div style="background:#f1f5f9;border-radius:8px;height:28px;overflow:hidden;"><div style="height:100%;width:36.4%;background:linear-gradient(90deg,#48C0D0,#9FDCE5);border-radius:8px;display:flex;align-items:center;padding:0 8px;font-size:10px;font-weight:700;color:#fff;">36.4%</div></div>
-          <div style="background:#f1f5f9;border-radius:8px;height:28px;overflow:hidden;"><div style="height:100%;width:31.8%;background:linear-gradient(90deg,#004068,#00527F);border-radius:8px;display:flex;align-items:center;padding:0 8px;font-size:10px;font-weight:700;color:#fff;">31.8%</div></div>
-        </div>
-        <!-- 2024 -->
-        <div style="display:grid;grid-template-columns:70px 1fr 1fr 1fr;gap:6px;align-items:center;padding:8px 0;border-bottom:1px solid #f1f5f9;" onclick="showDrilldown('ratioGP')" class="clk">
-          <div style="font-size:12px;font-weight:700;color:#334155;">2024</div>
-          <div style="background:#f1f5f9;border-radius:8px;height:28px;overflow:hidden;"><div style="height:100%;width:47.5%;background:linear-gradient(90deg,#E87820,#f59e0b);border-radius:8px;display:flex;align-items:center;padding:0 8px;font-size:10px;font-weight:700;color:#fff;">47.5%</div></div>
-          <div style="background:#f1f5f9;border-radius:8px;height:28px;overflow:hidden;"><div style="height:100%;width:6.5%;background:linear-gradient(90deg,#dc2626,#ef4444);border-radius:8px;display:flex;align-items:center;padding:0 8px;font-size:10px;font-weight:700;color:#fff;min-width:40px;">6.5%</div></div>
-          <div style="background:#f1f5f9;border-radius:8px;height:28px;overflow:hidden;"><div style="height:100%;width:3%;background:linear-gradient(90deg,#dc2626,#ef4444);border-radius:8px;display:flex;align-items:center;padding:0 8px;font-size:10px;font-weight:700;color:#fff;min-width:40px;">-0.8%</div></div>
-        </div>
-        <!-- 2025 -->
-        <div style="display:grid;grid-template-columns:70px 1fr 1fr 1fr;gap:6px;align-items:center;padding:8px 0;border-bottom:1px solid #f1f5f9;" onclick="showDrilldown('ratioGP')" class="clk">
-          <div style="font-size:12px;font-weight:700;color:#334155;">2025</div>
-          <div style="background:#f1f5f9;border-radius:8px;height:28px;overflow:hidden;"><div style="height:100%;width:79.3%;background:linear-gradient(90deg,#16a34a,#22c55e);border-radius:8px;display:flex;align-items:center;padding:0 8px;font-size:10px;font-weight:700;color:#fff;">79.3%</div></div>
-          <div style="background:#f1f5f9;border-radius:8px;height:28px;overflow:hidden;"><div style="height:100%;width:63.6%;background:linear-gradient(90deg,#48C0D0,#9FDCE5);border-radius:8px;display:flex;align-items:center;padding:0 8px;font-size:10px;font-weight:700;color:#fff;">63.6%</div></div>
-          <div style="background:#f1f5f9;border-radius:8px;height:28px;overflow:hidden;"><div style="height:100%;width:57.2%;background:linear-gradient(90deg,#004068,#00527F);border-radius:8px;display:flex;align-items:center;padding:0 8px;font-size:10px;font-weight:700;color:#fff;">57.2%</div></div>
-        </div>
-        <!-- 2026 YTD -->
-        <div style="display:grid;grid-template-columns:70px 1fr 1fr 1fr;gap:6px;align-items:center;padding:8px 0;" onclick="showDrilldown('ratioGP')" class="clk">
-          <div style="font-size:12px;font-weight:700;color:#48C0D0;">2026 YTD</div>
-          <div style="background:#f1f5f9;border-radius:8px;height:28px;overflow:hidden;border:2px solid #48C0D0;"><div style="height:100%;width:96.9%;background:linear-gradient(90deg,#16a34a,#22c55e);border-radius:6px;display:flex;align-items:center;padding:0 8px;font-size:10px;font-weight:700;color:#fff;">96.9%</div></div>
-          <div style="background:#f1f5f9;border-radius:8px;height:28px;overflow:hidden;border:2px solid #48C0D0;"><div style="height:100%;width:76.4%;background:linear-gradient(90deg,#48C0D0,#9FDCE5);border-radius:6px;display:flex;align-items:center;padding:0 8px;font-size:10px;font-weight:700;color:#fff;">76.4%</div></div>
-          <div style="background:#f1f5f9;border-radius:8px;height:28px;overflow:hidden;border:2px solid #48C0D0;"><div style="height:100%;width:69.6%;background:linear-gradient(90deg,#004068,#00527F);border-radius:6px;display:flex;align-items:center;padding:0 8px;font-size:10px;font-weight:700;color:#fff;">69.6%</div></div>
-        </div>
+        <div style="margin-top:14px;padding-top:8px;border-top:1px solid #e2e8f0;font-size:10.5px;color:#64748b;text-align:center;">Tip: click <strong>any individual column</strong> to open the drill-down for that specific metric (GP, EBITDA or NI margin).</div>
       </div>
     </div>
 
@@ -766,7 +846,7 @@ try{if(sessionStorage.getItem('fefgta_auth')==='1'){document.getElementById('pwg
       <div class="chart-card-hdr">🚀 Year-over-Year Growth Rates <span>2022–2026 YTD</span></div>
       <div style="padding:16px 20px;">
         <table class="tbl">
-          <tr><th>Metric</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th style="background:#004068;color:#fff;">2026 YTD (ann.)</th></tr>
+          <tr><th>Metric</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th style="background:#004068;color:#fff;">YTD Apr-26 vs YTD Apr-25</th></tr>
           <tr class="clk" onclick="showDrilldown('revGrowth')"><td>Revenue Growth</td><td class="neg">-29.3%</td><td class="pos">+239.3%</td><td class="neg">-53.0%</td><td class="pos">+225.7%</td><td class="neg">-38.2%</td></tr>
           <tr class="clk" onclick="showDrilldown('yearEBITDA')"><td>EBITDA Growth</td><td class="neg">-55.1%</td><td class="pos">+198.6%</td><td class="neg">-91.7%</td><td class="pos">+3,011.6%</td><td class="pos">+0.8%</td></tr>
           <tr class="clk" onclick="showDrilldown('yearNI')"><td>Net Income Growth</td><td class="neg">-58.4%</td><td class="pos">+181.4%</td><td class="neg">-101.2%</td><td class="pos">▲ Recovery</td><td class="pos">+5.6%</td></tr>
@@ -774,22 +854,16 @@ try{if(sessionStorage.getItem('fefgta_auth')==='1'){document.getElementById('pwg
       </div>
     </div>
 
-    <!-- INSIGHTS -->
-    <div class="three-col">
-      <div class="insight" onclick="showDrilldown('insightProfit')" style="cursor:pointer"><strong>Profitability Recovery:</strong> 2026 YTD margins are the strongest since FY2021. Pure-commission model yields 96.9% GP and 76.4% EBITDA — both well above the 5-year average of 59.4% and 42.6% respectively.</div>
-      <div class="insight" onclick="showDrilldown('revGrowth')" style="cursor:pointer"><strong>Revenue Volatility:</strong> Revenue swings ±50-239% year-to-year driven by project awards. 2026 YTD annualizes to ~$8.4M (vs FY25 $11.4M). April's $1.06M Tenaris commission restored momentum after a weak $134K March.</div>
-      <div class="insight" onclick="showDrilldown('yearNI')" style="cursor:pointer"><strong>Net Income Trajectory:</strong> After the FY2024 net loss of $(27K), FEFGTA has generated $8.48M of cumulative NI in 16 months (FY25+YTD26). Current NI margin of 69.6% approaches the FY2021 peak of 65.2% and exceeds it.</div>
-    </div>
-
-    <div class="alert info"><strong>Annualized Projection:</strong> At the current YTD Apr run-rate, FY2026 would project to ~$8.42M revenue, ~$6.43M EBITDA (76.4% margin), and ~$5.86M net income. This assumes sustained commission flow — any product pass-through deals would alter the GP margin downward.</div>
-
-    <!-- PROVISIONAL PROJECTION -->
-    <div class="card"><div class="card-hdr" style="background:linear-gradient(135deg,#004068 0%,#48C0D0 100%);color:#fff;">📊 FY 2026 Provisional Run-Rate (Annualized from YTD Apr) <span style="color:#fff;opacity:.85;">Illustrative only</span></div>
-      <div class="bar-chart" style="padding:16px;">
-        <div class="bar-row" onclick="showDrilldown('totalRevenue')" style="cursor:pointer;"><div class="bar-label">Revenue (ann.)</div><div class="bar-track"><div class="bar-fill" style="width:74%;background:#004068">~$8.42M</div></div><div class="bar-val">FY25: $11.41M</div></div>
-        <div class="bar-row" onclick="showDrilldown('totalGP')" style="cursor:pointer;"><div class="bar-label">Gross Profit</div><div class="bar-track"><div class="bar-fill" style="width:72%;background:#16a34a">~$8.15M</div></div><div class="bar-val">GP% 96.9%</div></div>
-        <div class="bar-row" onclick="showDrilldown('totalEBITDA')" style="cursor:pointer;"><div class="bar-label">EBITDA</div><div class="bar-track"><div class="bar-fill" style="width:56%;background:#48C0D0">~$6.43M</div></div><div class="bar-val">Margin 76.4%</div></div>
-        <div class="bar-row" onclick="showDrilldown('totalNP')" style="cursor:pointer;"><div class="bar-label">Net Income</div><div class="bar-track"><div class="bar-fill" style="width:51%;background:#00527F">~$5.86M</div></div><div class="bar-val">Margin 69.6%</div></div>
+    <!-- CONSOLIDATED KEY INSIGHTS (single source of commentary for this page) -->
+    <div class="card">
+      <div class="card-hdr" style="background:linear-gradient(135deg,#004068 0%,#48C0D0 100%);color:#fff;">💡 Performance Analysis — Key Insights <span style="color:#fff;opacity:.85;">commentary lives here; drill-downs show data only</span></div>
+      <div class="three-col" style="padding:14px;">
+        <div class="insight" style="border-left-color:#16a34a;"><strong>Profitability recovery:</strong> YTD Apr 2026 margins are the strongest since FY2021. Pure-commission revenue mix drives GP 96.9% (vs 5-yr avg 59.4%) and EBITDA 76.4% (vs 5-yr avg 42.6%). Any product pass-through deal in H2 would compress GP toward the 2023-24 range (~50%).</div>
+        <div class="insight" style="border-left-color:#48C0D0;"><strong>EBITDA volatility (annual view):</strong> FY2020 $3.80M (no SG&A booked sep.) → FY2024 trough $226K (Expand pass-through margins collapsed) → FY2025 record $7.26M (MDOC + Tenaris commission). YTD Apr 2026 $2.14M tracks ahead of YTD Apr 2025 ($2.14M) on equal-month basis with +29.6pp better margin.</div>
+        <div class="insight" style="border-left-color:#E87820;"><strong>Revenue volatility:</strong> Revenue swings between -53% and +239% year-to-year driven by project awards. YTD Apr 2026 is -38.2% vs YTD Apr 2025 (not annualised). April's $1.06M Tenaris commission rebounded after a weak $134K March.</div>
+        <div class="insight" style="border-left-color:#004068;"><strong>Net Income trajectory:</strong> After the FY2024 net loss $(27K), FEFGTA generated $8.48M cumulative NI in the following 16 months (FY25 + YTD26). NI margin 69.6% now exceeds the FY2021 peak of 65.2%.</div>
+        <div class="insight" style="border-left-color:#dc2626;"><strong>SG&A run-rate:</strong> Cost base ~$1.5–1.8M/yr is broadly fixed. YTD Apr ratio 20.5% is elevated due to lower YTD revenue base — not a cost issue.</div>
+        <div class="insight" style="border-left-color:#7c3aed;"><strong>Forward view:</strong> Replace static run-rate annualisation with a rolling forecast built with business units (Tenaris commission pipeline, PetroChina, MDOC milestone schedule).</div>
       </div>
     </div>
 
@@ -865,10 +939,43 @@ try{if(sessionStorage.getItem('fefgta_auth')==='1'){document.getElementById('pwg
     </div>
 
     <div class="card">
-      <div class="card-hdr">Income Statement — Full History <span>USD</span></div>
+      <div class="card-hdr">Income Statement — Full History <span>USD · annual historical · current-year monthly · YTD</span></div>
       <div style="overflow-x:auto">
-      <table class="tbl">
-        <tr><th>Line Item</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>Jan-26</th><th>Feb-26</th><th>Mar-26</th><th>Apr-26</th><th style="background:#004068;color:#fff;">YTD Apr-26</th></tr>
+      <style>
+        /* Column banding: 1=label · 2-7=annual historical 2020-2025 · 8-11=current monthly Jan–Apr 26 · 12=YTD */
+        .is-fullhist tr > td:nth-child(n+2):nth-child(-n+7),
+        .is-fullhist tr > th:nth-child(n+2):nth-child(-n+7) {background:#f1f5f9;}
+        .is-fullhist tr > td:nth-child(n+8):nth-child(-n+11),
+        .is-fullhist tr > th:nth-child(n+8):nth-child(-n+11) {background:#fff8ec;}
+        .is-fullhist tr > td:nth-child(12),
+        .is-fullhist tr > th:nth-child(12) {background:#eef6fb;font-weight:700;}
+        .is-fullhist tr > td:nth-child(8),
+        .is-fullhist tr > th:nth-child(8) {border-left:3px solid #94a3b8;}
+        .is-fullhist tr > td:nth-child(12),
+        .is-fullhist tr > th:nth-child(12) {border-left:3px solid #004068;}
+        /* Section header row (Revenue / COGS / SG&A headings) — navy with white text */
+        .is-fullhist tr.sec > td {background:#004068 !important;color:#fff !important;font-weight:700;border-left:none !important;}
+        /* Total row (Net Income) — solid dark navy with white bold readable text */
+        .is-fullhist tr.tot > td {background:#003a5c !important;color:#fff !important;font-weight:800 !important;border-top:2px solid #E87820;border-bottom:2px solid #E87820;}
+        .is-fullhist tr.tot > td:first-child {color:#fff !important;}
+        .is-fullhist tr.tot > td.neg, .is-fullhist tr.tot > td .neg {color:#fda4af !important;}
+        /* Subtotal row (Total Revenue, Gross Profit, Total SG&A, EBITDA) — light grey emphasis, dark text */
+        .is-fullhist tr.sub > td {background:#e2e8f0 !important;color:#0f172a !important;font-weight:700;}
+        .is-fullhist tr.sub > td:nth-child(12) {background:#cfe2ec !important;}
+        /* Group header row */
+        .is-fullhist th.is-grouphdr {color:#004068;font-size:10.5px;font-weight:800;text-align:center;letter-spacing:.4px;padding:6px;}
+        .is-fullhist th.is-grouphdr.hist {background:#cbd5e1 !important;}
+        .is-fullhist th.is-grouphdr.mtd {background:#fde9c4 !important;color:#92400e;border-left:3px solid #94a3b8;}
+        .is-fullhist th.is-grouphdr.ytd {background:#004068 !important;color:#fff;border-left:3px solid #004068;}
+      </style>
+      <table class="tbl is-fullhist">
+        <tr>
+          <th rowspan="2" style="vertical-align:middle;">Line Item</th>
+          <th colspan="6" class="is-grouphdr hist">ANNUAL HISTORICAL (USD)</th>
+          <th colspan="4" class="is-grouphdr mtd is-divider">CURRENT YEAR — MONTHLY 2026</th>
+          <th class="is-grouphdr ytd is-divider">YTD</th>
+        </tr>
+        <tr><th class="is-hist">2020</th><th class="is-hist">2021</th><th class="is-hist">2022</th><th class="is-hist">2023</th><th class="is-hist">2024</th><th class="is-hist">2025</th><th class="is-mtd is-divider">Jan-26</th><th class="is-mtd">Feb-26</th><th class="is-mtd">Mar-26</th><th class="is-mtd">Apr-26</th><th class="is-ytd is-divider">YTD Apr-26</th></tr>
         <tr class="sec"><td colspan="12">Revenue</td></tr>
         <tr class="clk" onclick="showDrilldown('clientTenaris')"><td class="ind">Tenaris Commission</td><td>4,370,724</td><td>2,784,846</td><td>2,041,809</td><td>2,508,029</td><td>1,480,466</td><td>7,736,601</td><td>353,389</td><td>1,109,728</td><td>133,895</td><td>1,057,628</td><td><strong>2,654,641</strong></td></tr>
         <tr class="clk" onclick="showDrilldown('clientFEFGTA')"><td class="ind">FEFGTA</td><td>—</td><td>—</td><td>—</td><td>138,211</td><td>138,000</td><td>138,000</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
@@ -1106,79 +1213,76 @@ try{if(sessionStorage.getItem('fefgta_auth')==='1'){document.getElementById('pwg
     </div>
 
     <div class="kpi-grid">
-      <div class="kpi g" onclick="showDrilldown('cfOp')"><div class="kpi-lbl">Operating Cash Flow</div><div class="kpi-val pos" id="cf-d-op-val">$1.1M (est.)</div><div class="kpi-sub" id="cf-d-op-sub">NI + non-cash - ΔWC</div></div>
-      <div class="kpi r" onclick="showDrilldown('cfInv')"><div class="kpi-lbl">Investing CF</div><div class="kpi-val neg" id="cf-d-inv-val">$(38.0K)</div><div class="kpi-sub" id="cf-d-inv-sub">Bid bonds net issuance</div></div>
-      <div class="kpi r" onclick="showDrilldown('cfFin')"><div class="kpi-lbl">Financing CF</div><div class="kpi-val neg" id="cf-d-fin-val">$(0.6M) (est.)</div><div class="kpi-sub" id="cf-d-fin-sub">Net IC funding movement</div></div>
-      <div class="kpi b" onclick="showDrilldown('bsCash')"><div class="kpi-lbl">Net Cash Flow</div><div class="kpi-val" id="cf-d-net-val">$54.4K</div><div class="kpi-sub" id="cf-d-net-sub">Cash: $70.9K</div></div>
+      <div class="kpi g" onclick="showDrilldown('cfOp')"><div class="kpi-lbl">Operating Cash Flow</div><div class="kpi-val pos" id="cf-d-op-val">$2.11M</div><div class="kpi-sub" id="cf-d-op-sub">NI + non-cash + ΔWC</div></div>
+      <div class="kpi g" onclick="showDrilldown('cfInv')"><div class="kpi-lbl">Investing CF</div><div class="kpi-val pos" id="cf-d-inv-val">$0</div><div class="kpi-sub" id="cf-d-inv-sub">Bid bonds net = $0 (issuance/reversal)</div></div>
+      <div class="kpi r" onclick="showDrilldown('cfFin')"><div class="kpi-lbl">Financing CF</div><div class="kpi-val neg" id="cf-d-fin-val">$(2.05M)</div><div class="kpi-sub" id="cf-d-fin-sub">IC funding -$660K + Equity dist. -$1.39M</div></div>
+      <div class="kpi b" onclick="showDrilldown('bsCash')"><div class="kpi-lbl">Net Cash Flow</div><div class="kpi-val" id="cf-d-net-val">$54.4K</div><div class="kpi-sub" id="cf-d-net-sub">Cash: $16.5K → $70.9K</div></div>
     </div>
 
     <!-- CF CHART -->
     <div class="card">
-      <div class="card-hdr">Cash Flow Waterfall YTD <span>click bars</span></div>
+      <div class="card-hdr">Cash Flow Waterfall YTD <span>click bars · derived from Dec-25 → Apr-26 BS movement</span></div>
       <div class="bar-chart">
-        <div class="bar-row" onclick="showDrilldown('totalNP')"><div class="bar-label">Net Income</div><div class="bar-track"><div class="bar-fill" style="width:100%;background:#16a34a">$1.95M</div></div><div class="bar-val">+$1,951,815</div></div>
-        <div class="bar-row" onclick="showDrilldown('cfAR')"><div class="bar-label">Δ AR (drain)</div><div class="bar-track"><div class="bar-fill" style="width:67%;background:#dc2626">-$800K</div></div><div class="bar-val">-$800,000</div></div>
-        <div class="bar-row" onclick="showDrilldown('cfTaxPay')"><div class="bar-label">Δ Tax Accrual</div><div class="bar-track"><div class="bar-fill" style="width:22%;background:#16a34a">+$260K</div></div><div class="bar-val">+$260,000</div></div>
-        <div class="bar-row" onclick="showDrilldown('cfAccr')"><div class="bar-label">Δ Other Accr.</div><div class="bar-track"><div class="bar-fill" style="width:4%;background:#16a34a">+$40K</div></div><div class="bar-val">+$40,000</div></div>
-        <div class="bar-row" onclick="showDrilldown('cfOp')"><div class="bar-label">Op CF Total</div><div class="bar-track"><div class="bar-fill" style="width:59%;background:#48C0D0">$706K</div></div><div class="bar-val">+$706,245</div></div>
-        <div class="bar-row" onclick="showDrilldown('cfBonds')"><div class="bar-label">Bid Bonds</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#dc2626">-$38K</div></div><div class="bar-val">-$38,000</div></div>
-        <div class="bar-row" onclick="showDrilldown('cfIC')"><div class="bar-label">IC Funding</div><div class="bar-track"><div class="bar-fill" style="width:50%;background:#dc2626">-$596K</div></div><div class="bar-val">-$596,000</div></div>
-        <div class="bar-row" onclick="showDrilldown('bsCash')"><div class="bar-label">Net Δ Cash</div><div class="bar-track"><div class="bar-fill" style="width:6%;background:#004068">+$72K</div></div><div class="bar-val">+$72,245</div></div>
+        <div class="bar-row" onclick="showDrilldown('totalNP')"><div class="bar-label">Net Income</div><div class="bar-track"><div class="bar-fill" style="width:96%;background:#16a34a">$1.95M</div></div><div class="bar-val">+$1,951,815</div></div>
+        <div class="bar-row" onclick="showDrilldown('cfAR')"><div class="bar-label">Δ AR (decrease)</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#16a34a">+$43.9K</div></div><div class="bar-val">+$43,860</div></div>
+        <div class="bar-row" onclick="showDrilldown('cfPrepaid')"><div class="bar-label">Δ Prepaid (amort.)</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#16a34a">+$4.4K</div></div><div class="bar-val">+$4,377</div></div>
+        <div class="bar-row" onclick="showDrilldown('cfAP')"><div class="bar-label">Δ Trade AP (decrease)</div><div class="bar-track"><div class="bar-fill" style="width:7%;background:#dc2626">-$130.6K</div></div><div class="bar-val">-$130,602</div></div>
+        <div class="bar-row" onclick="showDrilldown('cfAccr')"><div class="bar-label">Δ Accrued Salary</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#16a34a">+$42.4K</div></div><div class="bar-val">+$42,370</div></div>
+        <div class="bar-row" onclick="showDrilldown('cfAccr')"><div class="bar-label">Δ Other Credit Bal.</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#dc2626">-$53.9K</div></div><div class="bar-val">-$53,895</div></div>
+        <div class="bar-row" onclick="showDrilldown('cfTaxPay')"><div class="bar-label">Δ Tax Accruals (PIT+CIT)</div><div class="bar-track"><div class="bar-fill" style="width:12%;background:#16a34a">+$246.4K</div></div><div class="bar-val">+$246,446</div></div>
+        <div class="bar-row" onclick="showDrilldown('cfOp')"><div class="bar-label">Operating CF Total</div><div class="bar-track"><div class="bar-fill" style="width:100%;background:#48C0D0">$2.11M</div></div><div class="bar-val">+$2,105,511</div></div>
+        <div class="bar-row" onclick="showDrilldown('cfBonds')"><div class="bar-label">Bid Bonds (net)</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#94a3b8">$0</div></div><div class="bar-val">$0</div></div>
+        <div class="bar-row" onclick="showDrilldown('cfIC')"><div class="bar-label">IC Funding (Al Majal)</div><div class="bar-track"><div class="bar-fill" style="width:32%;background:#dc2626">-$660.2K</div></div><div class="bar-val">-$660,222</div></div>
+        <div class="bar-row" onclick="showDrilldown('cfEquity')"><div class="bar-label">Equity Distribution / RE adj.</div><div class="bar-track"><div class="bar-fill" style="width:68%;background:#dc2626">-$1.39M</div></div><div class="bar-val">-$1,388,648</div></div>
+        <div class="bar-row" onclick="showDrilldown('bsCash')"><div class="bar-label">Net Δ Cash</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#004068">+$54.4K</div></div><div class="bar-val">+$54,360</div></div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-hdr">Cash Flow Statement (Indirect Method) <span>USD • YTD Apr 2026</span></div>
+      <div class="card-hdr">Cash Flow Statement (Indirect Method) <span>USD • YTD Apr 2026 · derived from FY25 BS (Dec-25) → Apr-26 BS</span></div>
       <table class="tbl">
         <tr class="sec"><td colspan="2">Operating Activities</td></tr>
-        <tr class="clk" onclick="showDrilldown('totalNP')"><td>Net Income (YTD)</td><td>1,951,815</td></tr>
+        <tr class="clk" onclick="showDrilldown('totalNP')"><td>Net Income (YTD Apr 2026)</td><td>1,951,815</td></tr>
         <tr><td class="ind">Add: Depreciation &amp; Amortization</td><td>0</td></tr>
         <tr><td class="ind">Add: Bad debt provision movement</td><td>1,140</td></tr>
-        <tr class="sub"><td>Net Income + Non-Cash Items</td><td>1,197,818</td></tr>
-        <tr class="sec"><td colspan="2">Changes in Working Capital</td></tr>
-        <tr class="clk" onclick="showDrilldown('cfAR')"><td class="ind">Δ Accounts Receivable (increase)</td><td class="neg">(est.) (800,000)</td></tr>
-        <tr class="clk" onclick="showDrilldown('cfPrepaid')"><td class="ind">Δ Prepaid Assets (amortization)</td><td class="pos">9,927</td></tr>
-        <tr class="clk" onclick="showDrilldown('cfAP')"><td class="ind">Δ Trade Payables</td><td class="pos">~(1,500)</td></tr>
-        <tr class="clk" onclick="showDrilldown('cfAccr')"><td class="ind">Δ Accrued Salary &amp; Other</td><td class="pos">~40,000</td></tr>
-        <tr class="clk" onclick="showDrilldown('cfTaxPay')"><td class="ind">Δ Tax Payables (PIT + CIT accrued)</td><td class="pos">~260,000</td></tr>
-        <tr class="sub clk" onclick="showDrilldown('cfOp')"><td>Net Cash from Operating Activities</td><td class="pos">~706,245</td></tr>
+        <tr class="sub"><td>Net Income + Non-Cash Items</td><td>1,952,955</td></tr>
+        <tr class="sec"><td colspan="2">Changes in Working Capital (Dec-25 → Apr-26)</td></tr>
+        <tr class="clk" onclick="showDrilldown('cfAR')"><td class="ind">Δ Accounts Receivable ($2,547,941 → $2,504,081)</td><td class="pos">43,860</td></tr>
+        <tr class="clk" onclick="showDrilldown('cfPrepaid')"><td class="ind">Δ Other Current Assets / Prepaid (amortization)</td><td class="pos">4,377</td></tr>
+        <tr class="clk" onclick="showDrilldown('cfAP')"><td class="ind">Δ Trade Payables ($270,722 → $140,120)</td><td class="neg">(130,602)</td></tr>
+        <tr class="clk" onclick="showDrilldown('cfAccr')"><td class="ind">Δ Accrued Salary ($0 → $42,370)</td><td class="pos">42,370</td></tr>
+        <tr class="clk" onclick="showDrilldown('cfAccr')"><td class="ind">Δ Other Credit Balance ($53,895 → $0)</td><td class="neg">(53,895)</td></tr>
+        <tr class="clk" onclick="showDrilldown('cfTaxPay')"><td class="ind">Δ PIT Payable ($228,114 → $284,218)</td><td class="pos">56,104</td></tr>
+        <tr class="clk" onclick="showDrilldown('cfTaxPay')"><td class="ind">Δ CIT Payable ($730,883 → $921,225)</td><td class="pos">190,342</td></tr>
+        <tr class="sub clk" onclick="showDrilldown('cfOp')"><td>Net Cash from Operating Activities</td><td class="pos">2,105,511</td></tr>
         <tr class="sec"><td colspan="2">Investing Activities</td></tr>
-        <tr class="clk" onclick="showDrilldown('cfBonds')"><td class="ind">Bid/Performance Bond Net Issuance</td><td class="neg">(38,000)</td></tr>
-        <tr class="sub clk" onclick="showDrilldown('cfInv')"><td>Net Cash Used in Investing</td><td class="neg">(38,000)</td></tr>
+        <tr class="clk" onclick="showDrilldown('cfBonds')"><td class="ind">Bid/Performance Bonds (net of issuance &amp; reversal)</td><td>0</td></tr>
+        <tr class="sub clk" onclick="showDrilldown('cfInv')"><td>Net Cash from Investing</td><td>0</td></tr>
         <tr class="sec"><td colspan="2">Financing Activities</td></tr>
-        <tr class="clk" onclick="showDrilldown('cfIC')"><td class="ind">Δ Intercompany (Al Majal) — net funding out</td><td class="neg">~(596,000)</td></tr>
-        <tr class="sub clk" onclick="showDrilldown('cfFin')"><td>Net Cash Used in Financing</td><td class="neg">~(596,000)</td></tr>
-        <tr class="sub"><td>Net Change in Cash</td><td class="pos">~72,245</td></tr>
-        <tr><td>Cash at Start of Period (est.)</td><td>~48</td></tr>
-        <tr class="tot clk" onclick="showDrilldown('bsCash')"><td>Cash at End of Period (30-Apr-2026)</td><td>70,873</td></tr>
+        <tr class="clk" onclick="showDrilldown('cfIC')"><td class="ind">Δ Intercompany Net (Al Majal) — funding outflow</td><td class="neg">(660,222)</td></tr>
+        <tr class="clk" onclick="showDrilldown('cfEquity')"><td class="ind">Equity Distribution / Prior-Period RE Adjustment</td><td class="neg">(1,388,648)</td></tr>
+        <tr class="sub clk" onclick="showDrilldown('cfFin')"><td>Net Cash Used in Financing</td><td class="neg">(2,048,870)</td></tr>
+        <tr class="sub"><td>Net Change in Cash (calc.)</td><td class="pos">56,641</td></tr>
+        <tr><td class="ind">Reconciliation rounding / minor reclassification</td><td class="neg">(2,281)</td></tr>
+        <tr><td>Cash at Start of Period (31-Dec-2025 BS)</td><td>16,513</td></tr>
+        <tr class="tot clk" onclick="showDrilldown('bsCash')"><td>Cash at End of Period (30-Apr-2026 BS)</td><td>70,873</td></tr>
       </table>
     </div>
 
-    <div class="alert warn"><strong>Cash Flow Note:</strong> FEFGTA's Excel does not include a formal opening BS for 31-Dec-2025, so working-capital movements are estimated using the Retained-Earnings roll-forward: <em>Opening RE ≈ Closing RE − Net Income YTD</em>. Actual ΔAR, ΔAP and ΔIC can only be confirmed once the 31-Dec-2025 comparative BS is provided. The table above uses reasonable estimates that reconcile to the closing cash of $72,293.</div>
+    <div class="alert info"><strong>Methodology:</strong> Cash flow is now computed from <strong>actual movement between the 31-Dec-2025 Balance Sheet and the 30-Apr-2026 Balance Sheet</strong> (both sourced from the B.S sheet in the Excel) rather than an approximation. The $1.39M equity distribution / retained-earnings adjustment reconciles the YTD NI roll-forward against the closing RE balance — confirm with finance whether this is a declared distribution or a prior-period reclassification.</div>
 
-    <!-- CF INSIGHTS -->
+    <!-- CONSOLIDATED CF KEY INSIGHTS -->
     <div class="card">
-      <div class="card-hdr" style="background:linear-gradient(135deg,#48C0D0 0%,#48C0D0 100%);color:#fff;">💡 Cash Flow — Key Insights <span style="color:#fff;opacity:.85;">click any insight</span></div>
+      <div class="card-hdr" style="background:linear-gradient(135deg,#48C0D0 0%,#004068 100%);color:#fff;">💡 Cash Flow — Key Insights <span style="color:#fff;opacity:.85;">single source of commentary; drill-downs show data only</span></div>
       <div class="three-col" style="padding:14px;">
-        <div class="insight" onclick="showDrilldown('cfOp')" style="cursor:pointer;border-left-color:#16a34a;"><strong>Operating CF ~$706K (est.):</strong> Net Income $1.20M partly absorbed by AR build-up of ~$800K. Offset by tax accrual growth ~$260K. Quality-of-earnings ratio ~0.59x (Op CF / NI).</div>
-        <div class="insight" onclick="showDrilldown('cfAR')" style="cursor:pointer;border-left-color:#f59e0b;"><strong>AR build absorbed earnings:</strong> Tenaris invoicing in Feb converted to accrued receivable — ~$800K cash locked up awaiting client settlement. Biggest single drag on operating cash.</div>
-        <div class="insight" onclick="showDrilldown('cfTaxPay')" style="cursor:pointer;border-left-color:#dc2626;"><strong>Tax accrual tailwind (temporary):</strong> ~$260K non-cash CIT/PIT accrual inflated operating CF. When tax is settled later in 2026, cash will reverse out.</div>
-        <div class="insight" onclick="showDrilldown('cfInv')" style="cursor:pointer;border-left-color:#dc2626;"><strong>Investing = bid-bond outflows:</strong> $38K cash parked in bid/performance bonds for Tenaris, SLB, Kentech tenders. Returns on bond-close — usually 3-6 months.</div>
-        <div class="insight" onclick="showDrilldown('cfIC')" style="cursor:pointer;border-left-color:#dc2626;"><strong>IC funding — persistent drain:</strong> ~$596K net outflow to Al Majal group in Q1. Quarterly funding has averaged $400-700K per quarter since FY23. Not commercial financing.</div>
-        <div class="insight" onclick="showDrilldown('bsCash')" style="cursor:pointer;border-left-color:#48C0D0;"><strong>Cash closed at $72K:</strong> ~1 month of SG&amp;A cover. Structurally under-capitalized without continuous AR collection.</div>
-      </div>
-    </div>
-
-    <div class="two-col">
-      <div class="insight"><strong>Operating cash flow</strong> is healthy on paper, driven by high-margin commission revenue. Most of the accrual-based NI converts to cash only after clients settle AR; the ~$800K AR build during Q1 absorbed a large portion of earnings.</div>
-      <div class="insight"><strong>Financing reality:</strong> FEFGTA continues to fund Al Majal group — net IC receivable grew modestly in Q1. This is a structural cash drag that is not reflected in traditional debt service but functions similarly.</div>
-    </div>
-    <div class="card"><div class="card-hdr" style="background:linear-gradient(135deg,#004068 0%,#48C0D0 100%);color:#fff;">📊 FY 2026 Provisional Cash Flow Projection <span style="color:#fff;opacity:.85;">Provisional · based on YTD run-rate</span></div>
-      <div class="bar-chart" style="padding:16px;">
-        <div class="bar-row" onclick="showDrilldown('totalEBITDA')" style="cursor:pointer;"><div class="bar-label">Operating CF</div><div class="bar-track"><div class="bar-fill" style="width:100%;background:#004068">$3.2M</div></div><div class="bar-val">Post-NI + AR unwind</div></div>
-        <div class="bar-row" onclick="showDrilldown('cfInv')" style="cursor:pointer;"><div class="bar-label">Investing CF</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#dc2626">$(38K)</div></div><div class="bar-val">LG collateral</div></div>
-        <div class="bar-row" onclick="showDrilldown('cfInv')" style="cursor:pointer;"><div class="bar-label">Financing CF</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#64748b">$0</div></div><div class="bar-val">No dividends projected</div></div>
-        <div class="bar-row" onclick="showDrilldown('bsCash')" style="cursor:pointer;"><div class="bar-label">Net Cash Flow</div><div class="bar-track"><div class="bar-fill" style="width:100%;background:#16a34a">$3.2M</div></div><div class="bar-val">Strong liquidity build</div></div>
+        <div class="insight" style="border-left-color:#16a34a;"><strong>Operating CF $2.11M (actual, Dec-25 → Apr-26):</strong> Net Income $1.95M converted at ~108% to operating cash — AR actually decreased $44K (good), tax accruals grew $246K (temporary cash benefit). Quality-of-earnings ratio 1.08x (Op CF / NI) is very healthy.</div>
+        <div class="insight" style="border-left-color:#f59e0b;"><strong>AR slight decline:</strong> AR went from $2.55M (Dec-25) to $2.50M (Apr-26) — small $44K decrease. Tenaris commissions were billed and largely settled within the period. MDOC milestone receivable continues per management plan.</div>
+        <div class="insight" style="border-left-color:#dc2626;"><strong>Tax accrual tailwind (temporary):</strong> $246K combined PIT/CIT accrual grew without cash settlement. This is a deferred liability — when tax authorities request payment later in 2026, this will become a material cash outflow.</div>
+        <div class="insight" style="border-left-color:#7c3aed;"><strong>Trade AP de-risked:</strong> AP dropped from $271K (Dec-25) to $140K (Apr-26) — a $131K cash outflow as legacy vendor balances were settled (notably Maath, ICET, Fly Basra all paid down).</div>
+        <div class="insight" style="border-left-color:#dc2626;"><strong>IC funding — persistent drain:</strong> Net IC receivable grew $660K Dec-25 → Apr-26, meaning FEFGTA effectively funded Al Majal group by that amount. Structural cash leakage — not commercial financing.</div>
+        <div class="insight" style="border-left-color:#dc2626;"><strong>Equity distribution / RE adjustment $1.39M:</strong> Reconciliation gap between FY25 NI roll-forward into RE and closing RE balance. <strong>Action:</strong> confirm with finance whether this is a declared dividend, capital return, or prior-period reclassification.</div>
+        <div class="insight" style="border-left-color:#16a34a;"><strong>Bonds neutralised:</strong> $60K new LC issued in Jan-26 was reversed in Apr-26 — net change $0. Closing balance $38K (Tenaris bid bond) unchanged.</div>
+        <div class="insight" style="border-left-color:#48C0D0;"><strong>Cash closed at $70.9K:</strong> 4.3x the opening Dec-25 cash of $16.5K. Structurally still thin (~½ month of SG&amp;A cover) — collection of MDOC and Tenaris AR critical.</div>
       </div>
     </div>
 
@@ -1348,13 +1452,14 @@ try{if(sessionStorage.getItem('fefgta_auth')==='1'){document.getElementById('pwg
     <div class="alert info">YTD Apr 2026 COGS: <strong>$88,282</strong> (Jan PetroChina pass-through only; Feb–Apr = $0). FY2025 COGS was $2.36M (mainly MDOC $1.36M pass-through, Proliner $264K, Al Shumookh $219K, Schlumberger $426K). 100% GP margin in Q1-26 reflects pure-commission revenue.</div>
 
     <div class="card">
-      <div class="card-hdr" style="background:linear-gradient(135deg,#E87820 0%,#C86715 100%);color:#fff;">🏭 Top 5 Vendors / COGS Suppliers — FY2025 <span style="color:#fff;opacity:.85;">click any KPI for detail</span></div>
+      <div class="card-hdr" style="background:linear-gradient(135deg,#E87820 0%,#C86715 100%);color:#fff;">🏭 Top 5 COGS Lines — FY2025 by Contract / Customer-of-Record <span style="color:#fff;opacity:.85;">click any card for detail</span></div>
+      <div class="alert warn" style="margin:10px 14px 0;"><strong>Data limitation:</strong> COGS entries in the Excel CoGS sheet are tagged by <strong>contract / customer-of-record</strong>, not by underlying vendor name. The cards below therefore show top contracts (proxy for top suppliers). To produce a true vendor-led view, the CoGS sheet needs a Vendor column populated by AP.</div>
       <div class="kpi-grid" style="padding:14px;">
-        <div class="kpi o" onclick="showDrilldown('cogsMDOC')"><div class="kpi-lbl">#1 Giant Oil Tools (MDOC pass-thru)</div><div class="kpi-val">$1.36M</div><div class="kpi-sub">57.6% of FY25 COGS</div></div>
-        <div class="kpi o" onclick="showDrilldown('cogsSLB')"><div class="kpi-lbl">#2 Schlumberger / Proliner</div><div class="kpi-val">$426K</div><div class="kpi-sub">18.0% of FY25 COGS</div></div>
-        <div class="kpi o" onclick="showDrilldown('cogsProliner')"><div class="kpi-lbl">#3 Proliner Middle East</div><div class="kpi-val">$264K</div><div class="kpi-sub">11.2% of FY25 COGS</div></div>
-        <div class="kpi o" onclick="showDrilldown('cogsShumookh')"><div class="kpi-lbl">#4 Al Shumookh Oil Services</div><div class="kpi-val">$219K</div><div class="kpi-sub">9.3% of FY25 COGS</div></div>
-        <div class="kpi a" onclick="showDrilldown('cogsExterran')"><div class="kpi-lbl">#5 Exterran Energy FZE</div><div class="kpi-val">$26K</div><div class="kpi-sub">1.1% of FY25 COGS</div></div>
+        <div class="kpi o" onclick="showDrilldown('cogsMDOC')"><div class="kpi-lbl">#1 MDOC contract — Giant Oil Tools pass-thru</div><div class="kpi-val">$1.36M</div><div class="kpi-sub">57.6% of FY25 COGS · pass-thru on $2.12M MDOC revenue</div></div>
+        <div class="kpi o" onclick="showDrilldown('cogsSLB')"><div class="kpi-lbl">#2 Schlumberger / Proliner contract</div><div class="kpi-val">$426K</div><div class="kpi-sub">18.0% of FY25 COGS · matched to $567K SLB revenue</div></div>
+        <div class="kpi o" onclick="showDrilldown('cogsProliner')"><div class="kpi-lbl">#3 Proliner Middle East contract</div><div class="kpi-val">$264K</div><div class="kpi-sub">11.2% of FY25 COGS · timing mismatch — $25K rev</div></div>
+        <div class="kpi o" onclick="showDrilldown('cogsShumookh')"><div class="kpi-lbl">#4 Al Shumookh Oil Services contract</div><div class="kpi-val">$219K</div><div class="kpi-sub">9.3% of FY25 COGS · ~29% GP on $308K rev</div></div>
+        <div class="kpi a" onclick="showDrilldown('cogsExterran')"><div class="kpi-lbl">#5 Exterran Energy FZE contract</div><div class="kpi-val">$26K</div><div class="kpi-sub">1.1% of FY25 COGS · low margin service resale</div></div>
       </div>
     </div>
 
@@ -1409,13 +1514,16 @@ try{if(sessionStorage.getItem('fefgta_auth')==='1'){document.getElementById('pwg
         <tr class="tot clk" onclick="showDrilldown('totalCOGS')"><td>Total COGS</td><td>225,312</td><td>273,415</td><td>3,797,764</td><td>1,838,889</td><td>2,359,941</td><td><strong>88,282</strong></td></tr>
       </table>
     </div>
-    <div class="card"><div class="card-hdr" style="background:linear-gradient(135deg,#004068 0%,#48C0D0 100%);color:#fff;">📊 FY 2026 Provisional COGS Projection <span style="color:#fff;opacity:.85;">Provisional · based on YTD run-rate</span></div>
-      <div class="bar-chart" style="padding:16px;">
-        <div class="bar-row" onclick="showDrilldown('cogsMDOC')" style="cursor:pointer;"><div class="bar-label">MDOC</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#94a3b8">$0</div></div><div class="bar-val">No orders YTD</div></div>
-        <div class="bar-row" onclick="showDrilldown('cogsSLB')" style="cursor:pointer;"><div class="bar-label">SLB</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#94a3b8">$0</div></div><div class="bar-val">No orders YTD</div></div>
-        <div class="bar-row" onclick="showDrilldown('cogsProliner')" style="cursor:pointer;"><div class="bar-label">Proliner</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#94a3b8">$0</div></div><div class="bar-val">No orders YTD</div></div>
-        <div class="bar-row" onclick="showDrilldown('cogsShumookh')" style="cursor:pointer;"><div class="bar-label">Shumookh</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#94a3b8">$0</div></div><div class="bar-val">No orders YTD</div></div>
-        <div class="bar-row" onclick="showDrilldown('totalCOGS')" style="cursor:pointer;"><div class="bar-label">Projected Total</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#16a34a">$0</div></div><div class="bar-val">Pure-commission year</div></div>
+    <!-- CoGS-LEVEL KEY INSIGHTS (derived from detail sheet, not a re-presentation of IS) -->
+    <div class="card">
+      <div class="card-hdr" style="background:linear-gradient(135deg,#E87820 0%,#C86715 100%);color:#fff;">💡 CoGS — Key Insights <span style="color:#fff;opacity:.85;">analytics from the detailed CoGS sheet</span></div>
+      <div class="three-col" style="padding:14px;">
+        <div class="insight" style="border-left-color:#E87820;"><strong>Business-model shift:</strong> COGS fell from $2.36M (FY25, 20.7% of rev) to $88K YTD-26 (3.1% of rev). FY25 was pass-through-heavy (MDOC + SLB + Proliner = 87% of COGS); 2026 is pure-commission with the single Jan-26 PetroChina pass-through.</div>
+        <div class="insight" style="border-left-color:#dc2626;"><strong>Pass-through margin concentration:</strong> Of FY25 $9.05M GP, ~75% came from low-margin pass-through (e.g. MDOC: $2.12M rev → $1.36M COGS = 35.8% GP). A single new MDOC-type deal in H2 would compress GP margin back into the 50% range.</div>
+        <div class="insight" style="border-left-color:#16a34a;"><strong>Margin profile by contract:</strong> Best-margin FY25 contracts were Tenaris ($7.74M rev / $8K COGS = 99.9% GP) and Greatwall ($364K rev / $0 COGS = 100% GP). Worst-margin: Proliner ($25K rev / $264K COGS = negative margin — timing mismatch to confirm with FP&A).</div>
+        <div class="insight" style="border-left-color:#48C0D0;"><strong>Vendor identification gap:</strong> The CoGS detail sheet records cost line-items against the customer contract code, not the actual third-party supplier paying out (Giant Oil Tools, etc.). The Top-5 above is a contract proxy. AP-side enrichment is required for a true vendor-spend view.</div>
+        <div class="insight" style="border-left-color:#7c3aed;"><strong>FY24 anomaly (Proliner):</strong> Proliner FY25 cost $264K against only $25K revenue suggests cost timing offset between periods, or a contract loss. Recommend FP&A review of Proliner cost-revenue match-up.</div>
+        <div class="insight" style="border-left-color:#004068;"><strong>YTD-26 forward view:</strong> No COGS Feb-Apr suggests no product pass-through deals are in flight. Pipeline visibility from sales is required to forecast H2 COGS profile.</div>
       </div>
     </div>
 
@@ -1514,14 +1622,16 @@ try{if(sessionStorage.getItem('fefgta_auth')==='1'){document.getElementById('pwg
         <tr class="tot clk" onclick="showDrilldown('totalSGA')"><td>Total SG&amp;A</td><td>148,264</td><td>168,223</td><td>118,098</td><td>140,175</td><td>574,760</td><td>1,787,542</td><td>1,437,432</td></tr>
       </table>
     </div>
-    <div class="card"><div class="card-hdr" style="background:linear-gradient(135deg,#004068 0%,#48C0D0 100%);color:#fff;">📊 FY 2026 Provisional SG&A Projection (YTD × 4) <span style="color:#fff;opacity:.85;">Provisional · based on YTD run-rate</span></div>
-      <div class="bar-chart" style="padding:16px;">
-        <div class="bar-row" onclick="showDrilldown('sgaFEGTASal')" style="cursor:pointer;"><div class="bar-label">FEGTA Salaries</div><div class="bar-track"><div class="bar-fill" style="width:24%;background:#004068">$409K</div></div><div class="bar-val">Baseline staff</div></div>
-        <div class="bar-row" onclick="showDrilldown('sgaMaathTravel')" style="cursor:pointer;"><div class="bar-label">Maath Travel</div><div class="bar-track"><div class="bar-fill" style="width:26%;background:#00527F">$447K</div></div><div class="bar-val">Marketing push</div></div>
-        <div class="bar-row" onclick="showDrilldown('sgaTravBank')" style="cursor:pointer;"><div class="bar-label">SG&A Travel/Bank</div><div class="bar-track"><div class="bar-fill" style="width:24%;background:#48C0D0">$414K</div></div><div class="bar-val">Operating costs</div></div>
-        <div class="bar-row" onclick="showDrilldown('sgaCOH_Sal')" style="cursor:pointer;"><div class="bar-label">Corp OH</div><div class="bar-track"><div class="bar-fill" style="width:18%;background:#E87820">$317K</div></div><div class="bar-val">Shared services</div></div>
-        <div class="bar-row" onclick="showDrilldown('sgaPIT')" style="cursor:pointer;"><div class="bar-label">PIT 2%</div><div class="bar-track"><div class="bar-fill" style="width:8%;background:#9FDCE5">$140K</div></div><div class="bar-val">Payroll tax</div></div>
-        <div class="bar-row" onclick="showDrilldown('totalSGA')" style="cursor:pointer;"><div class="bar-label">Total FY26 Proj</div><div class="bar-track"><div class="bar-fill" style="width:100%;background:#16a34a">$1.74M</div></div><div class="bar-val">Flat vs FY25</div></div>
+    <!-- SG&A KEY INSIGHTS (derived from detailed SG&A sheet, not a re-presentation of IS) -->
+    <div class="card">
+      <div class="card-hdr" style="background:linear-gradient(135deg,#004068 0%,#48C0D0 100%);color:#fff;">💡 SG&A — Key Insights <span style="color:#fff;opacity:.85;">analytics from the detailed SG&A sheet</span></div>
+      <div class="three-col" style="padding:14px;">
+        <div class="insight" style="border-left-color:#004068;"><strong>Fixed-vs-variable mix:</strong> ~$66K/month of FEGTA + Corp OH salaries (53% of YTD SG&amp;A) is structurally fixed. The other ~47% (Maath Travel + Travel/Bank + PIT) is volume- and project-driven. YTD avg run-rate = $144K/month vs FY25 $149K/month — broadly flat structural base.</div>
+        <div class="insight" style="border-left-color:#E87820;"><strong>Maath Travel concentration:</strong> 25.9% of YTD SG&amp;A ($149K). Feb spike ($72.9K) is the largest single month in 3 years — confirm whether Tenaris/PetroChina project trips are recoverable through revenue. If yes, consider re-classifying to project cost.</div>
+        <div class="insight" style="border-left-color:#48C0D0;"><strong>PIT (2%) directly tracks commission:</strong> PIT YTD $56K = 2% of payroll + travel. The Apr-26 PIT spike to $21K (+$18K vs Mar) signals the Tenaris commission month and is non-discretionary.</div>
+        <div class="insight" style="border-left-color:#dc2626;"><strong>Bonus accrual absent in 2026:</strong> FY24 $129K + FY25 $108K of bonus appears in zero in YTD-26. Either (a) bonus pool deferred to year-end or (b) policy change. Confirm with HR — material P&amp;L exposure.</div>
+        <div class="insight" style="border-left-color:#16a34a;"><strong>Corporate Overhead efficiency:</strong> Combined Corp OH Salaries + Expense YTD = $111K (19.4% of SG&amp;A) vs FY25 $344K (19.3%). Cost-share allocation from parent is stable proportionally.</div>
+        <div class="insight" style="border-left-color:#7c3aed;"><strong>Volatility hot-spots:</strong> Travel/Bank line ranges $8K (Feb) to $56K (Mar) within the same quarter — drilldown is required to separate bank charges (variable with commission cycle) from travel (project-driven). Recommend splitting the line into 2 sub-codes in the SG&amp;A sheet.</div>
       </div>
     </div>
 
@@ -1595,13 +1705,16 @@ try{if(sessionStorage.getItem('fefgta_auth')==='1'){document.getElementById('pwg
       </div>
     </div>
     <div class="chart-card">
-      <div class="chart-card-hdr">AR Trend — Net Receivables (USD) <span>Growth over time</span></div>
+      <div class="chart-card-hdr">AR Trend — Net Receivables (USD) <span>Period-end balances · sourced from B.S sheet (year-end) + AR Aging sheet (monthly)</span></div>
       <div class="hbar-modern" style="padding:20px;">
-        <div class="hbar-item" onclick="showDrilldown('bsAR')" style="cursor:pointer;"><div class="hbar-name">Dec 2024</div><div class="hbar-track" style="height:42px;"><div class="hbar-fill" style="width:14%;background:linear-gradient(90deg,#94a3b8,#cbd5e1);height:100%;">$340K</div></div><div class="hbar-amount">$340,000</div></div>
-        <div class="hbar-item" onclick="showDrilldown('bsAR')" style="cursor:pointer;"><div class="hbar-name">Dec 2025</div><div class="hbar-track" style="height:42px;"><div class="hbar-fill" style="width:36%;background:linear-gradient(90deg,#004068,#00527F);height:100%;">$892K</div></div><div class="hbar-amount">$892,000</div></div>
-        <div class="hbar-item" onclick="showDrilldown('bsAR')" style="cursor:pointer;"><div class="hbar-name">Mar 2026</div><div class="hbar-track" style="height:42px;"><div class="hbar-fill" style="width:50%;background:linear-gradient(90deg,#48C0D0,#9FDCE5);height:100%;">$1.24M</div></div><div class="hbar-amount">$1,240,000</div></div>
-        <div class="hbar-item" onclick="showDrilldown('bsAR')" style="cursor:pointer;"><div class="hbar-name">Apr 2026</div><div class="hbar-track" style="height:42px;"><div class="hbar-fill" style="width:100%;background:linear-gradient(90deg,#E87820,#f59e0b);height:100%;">$2.51M</div></div><div class="hbar-amount">$2,506,361</div></div>
+        <div class="hbar-item" onclick="showDrilldown('bsAR')" style="cursor:pointer;"><div class="hbar-name">Dec 2024 <small style="color:#64748b;display:block;font-size:9px;font-weight:500;">Source: B.S sheet · FY24 YE</small></div><div class="hbar-track" style="height:42px;"><div class="hbar-fill" style="width:14%;background:linear-gradient(90deg,#94a3b8,#cbd5e1);height:100%;">$91K</div></div><div class="hbar-amount">$91,081<small>FY24 closing BS</small></div></div>
+        <div class="hbar-item" onclick="showDrilldown('bsAR')" style="cursor:pointer;"><div class="hbar-name">Dec 2025 <small style="color:#64748b;display:block;font-size:9px;font-weight:500;">Source: B.S sheet · FY25 YE</small></div><div class="hbar-track" style="height:42px;"><div class="hbar-fill" style="width:100%;background:linear-gradient(90deg,#004068,#00527F);height:100%;">$2.55M</div></div><div class="hbar-amount">$2,547,941<small>FY25 closing BS</small></div></div>
+        <div class="hbar-item" onclick="showDrilldown('bsAR')" style="cursor:pointer;"><div class="hbar-name">Jan 2026 <small style="color:#64748b;display:block;font-size:9px;font-weight:500;">Source: B.S sheet · Jan close</small></div><div class="hbar-track" style="height:42px;"><div class="hbar-fill" style="width:35%;background:linear-gradient(90deg,#48C0D0,#9FDCE5);height:100%;">$895K</div></div><div class="hbar-amount">$895,210<small>Jan-26 BS</small></div></div>
+        <div class="hbar-item" onclick="showDrilldown('bsAR')" style="cursor:pointer;"><div class="hbar-name">Feb 2026 <small style="color:#64748b;display:block;font-size:9px;font-weight:500;">Source: B.S sheet · Feb close</small></div><div class="hbar-track" style="height:42px;"><div class="hbar-fill" style="width:90%;background:linear-gradient(90deg,#48C0D0,#9FDCE5);height:100%;">$2.30M</div></div><div class="hbar-amount">$2,296,476<small>Feb-26 BS</small></div></div>
+        <div class="hbar-item" onclick="showDrilldown('bsAR')" style="cursor:pointer;"><div class="hbar-name">Mar 2026 <small style="color:#64748b;display:block;font-size:9px;font-weight:500;">Source: B.S sheet · Mar close</small></div><div class="hbar-track" style="height:42px;"><div class="hbar-fill" style="width:49%;background:linear-gradient(90deg,#48C0D0,#9FDCE5);height:100%;">$1.24M</div></div><div class="hbar-amount">$1,242,484<small>Mar-26 BS</small></div></div>
+        <div class="hbar-item" onclick="showDrilldown('bsAR')" style="cursor:pointer;"><div class="hbar-name">Apr 2026 <small style="color:#64748b;display:block;font-size:9px;font-weight:500;">Source: B.S sheet + AR Aging sheet</small></div><div class="hbar-track" style="height:42px;"><div class="hbar-fill" style="width:100%;background:linear-gradient(90deg,#E87820,#f59e0b);height:100%;">$2.51M</div></div><div class="hbar-amount">$2,504,081<small>Apr-26 BS · cross-tied to aging</small></div></div>
       </div>
+      <div style="padding:10px 20px;font-size:11px;color:#475569;background:#f8fafc;border-top:1px solid #e2e8f0;"><strong>Source of historical AR balances:</strong> Annual year-end figures (Dec-24, Dec-25) are pulled from the <strong>B.S</strong> sheet (Net AR line — Account Receivables + ICC AR + Accrued Receivables − Trade Receivable Provision). 2026 monthly balances also come from the <strong>B.S</strong> sheet (each month-end column). The current Apr-26 balance is additionally cross-tied to the <strong>AR Aging</strong> schedule (bucket totals = $2,506,361 gross − $1,140 provision = $2,505,221 net), confirming sheet-to-sheet consistency.</div>
     </div>
     <div class="insight"><strong>Collection Priority:</strong> MDOC receivable $783K (Future/Not Due) — per management, 61% received on document submission, 30% pending customs clearance by shipper, final 9% after warranty. Tenaris Feb-26 balance $511K moved to 31-60 days — payment plan expected May 2026. Proliner $21.7K is 91-120 days overdue.</div>
     <div class="card"><div class="card-hdr" style="background:linear-gradient(135deg,#004068 0%,#48C0D0 100%);color:#fff;">📊 FY 2026 Provisional Collections Outlook <span style="color:#fff;opacity:.85;">Provisional · based on YTD run-rate</span></div>
@@ -1951,14 +2064,14 @@ const drilldowns = {
 <tr class='tot'><td>Total</td><td>140,175</td><td>118,098</td><td class='neg'>+18.7%</td></tr></table>`},
   sgaFY25: {title:"SG&A — Full Year 2025", body:`<p><strong>FY2025 SG&A: $1,787,542</strong> (15.7% of FY25 revenue). Breakdown: Salaries $424K, Bonus $108K, Maath Travel $344K, Corp OH Sal $202K, Corp OH Exp $142K, SGA Trav/Bank $339K, PIT 2% $228K.</p>`},
 
-  // ---- Year drills ----
-  yearRev: {title:"Annual Revenue 2020-2025", body:`<p>FY2020 $4.37M → FY2025 $11.41M with volatility. CAGR 21.2% (5-year).</p>`},
-  yearCOGS: {title:"Annual COGS", body:`<p>2023 spike $3.80M (Expand 3/4 pass-through) · 2025 $2.36M (MDOC + Proliner).</p>`},
-  yearGP: {title:"Annual Gross Profit", body:`<p>FY2025 $9.05M — record level driven by Tenaris recovery and high-margin commission mix.</p>`},
-  yearSGA: {title:"Annual SG&A", body:`<p>Ramp from 2021 $856K to 2025 $1.79M (+109%). Drivers: Maath Travel + PIT accrual growth.</p>`},
-  yearEBITDA: {title:"Annual EBITDA", body:`<p>Peak FY2020 $3.80M → FY2024 trough $226K → FY2025 recovery $7.26M.</p>`},
-  yearTax: {title:"Annual Income Tax", body:`<p>FY2025 $730,883 (largest ever) driven by record NI.</p>`},
-  yearNI: {title:"Annual Net Income", body:`<p>FY2024 net loss $(27K). FY2025 record $6.53M. 6-year cumulative NI ~$16.53M.</p>`},
+  // ---- Year drills (data-first; commentary lives in page-level Key Insights) ----
+  yearRev: {title:"Annual Revenue 2020 – YTD Apr 2026", body:`<table class='tbl'><tr><th>Year</th><th>Revenue (USD)</th><th>YoY</th></tr><tr><td>2020</td><td>4,370,724</td><td>—</td></tr><tr><td>2021</td><td>3,104,336</td><td class='neg'>-29.0%</td></tr><tr><td>2022</td><td>2,194,551</td><td class='neg'>-29.3%</td></tr><tr><td>2023</td><td>7,446,026</td><td class='pos'>+239.3%</td></tr><tr><td>2024</td><td>3,502,319</td><td class='neg'>-53.0%</td></tr><tr><td>2025</td><td>11,405,688</td><td class='pos'>+225.7%</td></tr><tr class='tot'><td>YTD Apr 2026</td><td>2,805,198</td><td class='neg'>-38.2% vs YTD Apr-25</td></tr></table>`},
+  yearCOGS: {title:"Annual COGS 2020 – YTD Apr 2026", body:`<table class='tbl'><tr><th>Year</th><th>COGS (USD)</th><th>COGS % Revenue</th></tr><tr><td>2020</td><td>575,562</td><td>13.2%</td></tr><tr><td>2021</td><td>225,312</td><td>7.3%</td></tr><tr><td>2022</td><td>273,415</td><td>12.5%</td></tr><tr><td>2023</td><td>3,797,764</td><td class='neg'>51.0%</td></tr><tr><td>2024</td><td>1,838,889</td><td class='neg'>52.5%</td></tr><tr><td>2025</td><td>2,359,941</td><td>20.7%</td></tr><tr class='tot'><td>YTD Apr 2026</td><td>88,282</td><td class='pos'>3.1%</td></tr></table>`},
+  yearGP: {title:"Annual Gross Profit 2020 – YTD Apr 2026", body:`<table class='tbl'><tr><th>Year</th><th>Gross Profit</th><th>GP %</th></tr><tr><td>2020</td><td>3,795,162</td><td>86.8%</td></tr><tr><td>2021</td><td>2,879,024</td><td>92.7%</td></tr><tr><td>2022</td><td>1,921,136</td><td>87.5%</td></tr><tr><td>2023</td><td>3,648,262</td><td class='amb'>49.0%</td></tr><tr><td>2024</td><td>1,663,430</td><td class='amb'>47.5%</td></tr><tr><td>2025</td><td>9,045,747</td><td>79.3%</td></tr><tr class='tot'><td>YTD Apr 2026</td><td>2,716,916</td><td class='pos'>96.9%</td></tr></table>`},
+  yearSGA: {title:"Annual SG&A 2021 – YTD Apr 2026", body:`<table class='tbl'><tr><th>Year</th><th>SG&A (USD)</th><th>SG&A % Revenue</th></tr><tr><td>2021</td><td>855,552</td><td>27.6%</td></tr><tr><td>2022</td><td>1,013,492</td><td>46.2%</td></tr><tr><td>2023</td><td>938,206</td><td>12.6%</td></tr><tr><td>2024</td><td>1,437,432</td><td class='neg'>41.0%</td></tr><tr><td>2025</td><td>1,787,542</td><td>15.7%</td></tr><tr class='tot'><td>YTD Apr 2026</td><td>574,760</td><td>20.5%</td></tr></table>`},
+  yearEBITDA: {title:"Annual EBITDA 2020 – YTD Apr 2026", body:`<table class='tbl'><tr><th>Year</th><th>EBITDA (USD)</th><th>EBITDA %</th></tr><tr><td>2020</td><td>3,795,162</td><td>86.8%</td></tr><tr><td>2021</td><td>2,023,472</td><td>65.2%</td></tr><tr><td>2022</td><td>907,644</td><td>41.4%</td></tr><tr><td>2023</td><td>2,710,056</td><td>36.4%</td></tr><tr><td>2024</td><td>225,998</td><td class='neg'>6.5%</td></tr><tr><td>2025</td><td>7,258,205</td><td>63.6%</td></tr><tr class='tot'><td>YTD Apr 2026</td><td>2,142,156</td><td class='pos'>76.4%</td></tr></table>`},
+  yearTax: {title:"Annual Income Tax 2020 – YTD Apr 2026", body:`<table class='tbl'><tr><th>Year</th><th>Income Tax (USD)</th></tr><tr><td>2020</td><td>0</td></tr><tr><td>2021</td><td>0</td></tr><tr><td>2022</td><td>65,832</td></tr><tr><td>2023</td><td>334,437</td></tr><tr><td>2024</td><td>253,303</td></tr><tr><td>2025</td><td>730,883</td></tr><tr class='tot'><td>YTD Apr 2026</td><td>190,342</td></tr></table>`},
+  yearNI: {title:"Annual Net Income 2020 – YTD Apr 2026", body:`<table class='tbl'><tr><th>Year</th><th>Net Income (USD)</th><th>NI %</th></tr><tr><td>2020</td><td>3,795,162</td><td>86.8%</td></tr><tr><td>2021</td><td>2,023,472</td><td>65.2%</td></tr><tr><td>2022</td><td>841,812</td><td>38.4%</td></tr><tr><td>2023</td><td>2,368,486</td><td>31.8%</td></tr><tr><td>2024</td><td class='neg'>(27,306)</td><td class='neg'>-0.8%</td></tr><tr><td>2025</td><td>6,527,322</td><td>57.2%</td></tr><tr class='tot'><td>YTD Apr 2026</td><td>1,951,815</td><td class='pos'>69.6%</td></tr></table>`},
 
   // ---- Ratios ----
   ratioCurrent: {title:"Current Ratio", body:`<p><strong>Current Assets / Current Liabilities = 8,432,924 / 1,241,768 = 6.79x.</strong></p><p>Benchmark &gt; 1.5x is healthy. FEFGTA's number is very strong — but note $7.06M of current assets is the Al Majal IC receivable, not true liquid capital.</p>`},
@@ -2038,17 +2151,18 @@ const drilldowns = {
   insightLiq: {title:"Liquidity Insight", body:`<p>Real liquidity = cash + collectible AR. On a conservative view, FEFGTA can fund ~6 months of SG&A from current AR and cash without IC settlement. If group delays, cash ratio tightens quickly.</p>`},
   insightLev: {title:"Leverage Insight", body:`<p>No external debt. All liabilities are operational/tax. Good base for future bank lines if working capital funding becomes needed.</p>`},
 
-  // ---- Cash Flow ----
-  cfOp: {title:"Operating Cash Flow", body:`<p>Estimated at ~$706K YTD. NI $1.20M adjusted for AR build (~$(800K)) and offset by growing tax/accrual liabilities (~$300K). Prepaid amortization and minor working-capital movements contribute small positives.</p><p><strong>Caveat:</strong> Excel does not provide a formal 31-Dec-2025 comparative BS, so components are estimated via roll-forward. Actuals to be confirmed once opening BS is provided.</p>`},
-  cfInv: {title:"Investing Cash Flow", body:`<p>$(38,000) — net bid/performance bond position. No PPE, no investments, no acquisitions.</p>`},
-  cfFin: {title:"Financing Cash Flow", body:`<p>Estimated net funding to Al Majal ~$(596K) YTD — FEFGTA continues to fund parent. No dividends or external debt activity.</p>`},
-  cfAR: {title:"Δ Accounts Receivable", body:`<p>AR grew by ~$800K YTD (consistent with MDOC + Tenaris billing). Cash-negative working-capital move.</p>`},
-  cfPrepaid: {title:"Δ Prepaid", body:`<p>Prepaid amortized by ~$10K (from $28.7K to $18.7K). Cash-positive.</p>`},
-  cfAP: {title:"Δ Trade Payable", body:`<p>Small negative change (~$1-2K) as 2025 vendor balances were settled.</p>`},
-  cfAccr: {title:"Δ Accrued & Other Credit", body:`<p>Accrued Salary + Other Credit balance increased ~$40K YTD — cash-positive.</p>`},
-  cfTaxPay: {title:"Δ Tax Payables", body:`<p>PIT + CIT payables grew by ~$260K as current-year provisions accumulated without settlement.</p>`},
-  cfBonds: {title:"Bid Bond Investing", body:`<p>Net movement $(38,000) — cash placed as LC collateral.</p>`},
-  cfIC: {title:"Δ Intercompany", body:`<p>Net IC receivable grew ~$596K YTD — FEFGTA effectively funded Al Majal by that amount in Q1.</p>`}
+  // ---- Cash Flow (data-only; commentary in CF Key Insights) ----
+  cfOp: {title:"Operating Cash Flow", body:`<table class='tbl'><tr><th>Component</th><th>USD</th></tr><tr><td>Net Income YTD</td><td>1,951,815</td></tr><tr><td>Bad debt provision</td><td>1,140</td></tr><tr><td>Δ AR (decrease)</td><td class='pos'>+43,860</td></tr><tr><td>Δ Prepaid (amortization)</td><td class='pos'>+4,377</td></tr><tr><td>Δ Trade AP (decrease)</td><td class='neg'>-130,602</td></tr><tr><td>Δ Accrued Salary</td><td class='pos'>+42,370</td></tr><tr><td>Δ Other Credit Balance</td><td class='neg'>-53,895</td></tr><tr><td>Δ PIT Payable</td><td class='pos'>+56,104</td></tr><tr><td>Δ CIT Payable</td><td class='pos'>+190,342</td></tr><tr class='tot'><td>Net Operating CF</td><td class='pos'>2,105,511</td></tr></table>`},
+  cfInv: {title:"Investing Cash Flow", body:`<table class='tbl'><tr><th>Component</th><th>USD</th></tr><tr><td>Bid Bonds — Jan-26 new LC $60K issued</td><td class='neg'>-60,000</td></tr><tr><td>Bid Bonds — Apr-26 reversal of Jan LC</td><td class='pos'>+60,000</td></tr><tr><td>No PPE / no investments</td><td>0</td></tr><tr class='tot'><td>Net Investing CF</td><td>0</td></tr></table>`},
+  cfFin: {title:"Financing Cash Flow", body:`<table class='tbl'><tr><th>Component</th><th>USD</th></tr><tr><td>Δ Intercompany Net (Al Majal funding)</td><td class='neg'>-660,222</td></tr><tr><td>Equity Distribution / RE Adjustment</td><td class='neg'>-1,388,648</td></tr><tr class='tot'><td>Net Financing CF</td><td class='neg'>-2,048,870</td></tr></table>`},
+  cfAR: {title:"Δ Accounts Receivable", body:`<table class='tbl'><tr><th>Period</th><th>AR Balance</th></tr><tr><td>31-Dec-2025 (Opening)</td><td>2,547,941</td></tr><tr><td>30-Apr-2026 (Closing)</td><td>2,504,081</td></tr><tr class='tot'><td>Δ AR (cash positive)</td><td class='pos'>+43,860</td></tr></table>`},
+  cfPrepaid: {title:"Δ Prepaid / Other Current Assets", body:`<table class='tbl'><tr><th>Period</th><th>Balance</th></tr><tr><td>31-Dec-2025 (Opening) — prepaid + bonds</td><td>57,305</td></tr><tr><td>30-Apr-2026 (Closing) — prepaid + bonds</td><td>52,928</td></tr><tr class='tot'><td>Δ (cash positive — amortization)</td><td class='pos'>+4,377</td></tr></table>`},
+  cfAP: {title:"Δ Trade Payable", body:`<table class='tbl'><tr><th>Period</th><th>Trade AP</th></tr><tr><td>31-Dec-2025 (Opening)</td><td>270,722</td></tr><tr><td>30-Apr-2026 (Closing)</td><td>140,120</td></tr><tr class='tot'><td>Δ Trade AP (cash negative)</td><td class='neg'>-130,602</td></tr></table>`},
+  cfAccr: {title:"Δ Accrued Salary + Other Credit Balance", body:`<table class='tbl'><tr><th>Component</th><th>Opening Dec-25</th><th>Closing Apr-26</th><th>Δ</th></tr><tr><td>Accrued Salary</td><td>0</td><td>42,370</td><td class='pos'>+42,370</td></tr><tr><td>Other Credit Balance</td><td>53,895</td><td>0</td><td class='neg'>-53,895</td></tr><tr class='tot'><td>Net</td><td>53,895</td><td>42,370</td><td class='neg'>-11,525</td></tr></table>`},
+  cfTaxPay: {title:"Δ Tax Payables (PIT + CIT)", body:`<table class='tbl'><tr><th>Component</th><th>Opening Dec-25</th><th>Closing Apr-26</th><th>Δ</th></tr><tr><td>PIT Payable</td><td>228,114</td><td>284,218</td><td class='pos'>+56,104</td></tr><tr><td>CIT Payable</td><td>730,883</td><td>921,225</td><td class='pos'>+190,342</td></tr><tr class='tot'><td>Total</td><td>958,997</td><td>1,205,443</td><td class='pos'>+246,446</td></tr></table>`},
+  cfBonds: {title:"Bid / Performance Bond Movement", body:`<table class='tbl'><tr><th>Date</th><th>Description</th><th>Movement</th></tr><tr><td>23-Dec-2025</td><td>New LC LGO202501279 (Tenaris)</td><td class='neg'>-38,000</td></tr><tr><td>19-Jan-2026</td><td>New LC LGO202600020</td><td class='neg'>-60,000</td></tr><tr><td>02-Apr-2026</td><td>Reversal of LGO202600020</td><td class='pos'>+60,000</td></tr><tr class='tot'><td>Closing Balance @ 30-Apr-26</td><td></td><td>38,000</td></tr><tr><td colspan='3'><em>Net YTD movement Dec-25 → Apr-26: $0 (open and close both $38K)</em></td></tr></table>`},
+  cfIC: {title:"Δ Intercompany Net (Al Majal)", body:`<table class='tbl'><tr><th>Period</th><th>Net IC Balance</th></tr><tr><td>31-Dec-2025 (Opening)</td><td>6,934,256</td></tr><tr><td>30-Apr-2026 (Closing)</td><td>7,594,478</td></tr><tr class='tot'><td>Δ IC (cash outflow to group)</td><td class='neg'>-660,222</td></tr></table>`},
+  cfEquity: {title:"Equity Distribution / RE Adjustment", body:`<table class='tbl'><tr><th>Component</th><th>Opening Dec-25</th><th>Closing Apr-26</th></tr><tr><td>Capital</td><td>833,333</td><td>833,333</td></tr><tr><td>Statutory Reserve</td><td>178,038</td><td>178,038</td></tr><tr><td>Retained Earnings</td><td>733,708</td><td>5,872,383</td></tr><tr><td>YTD Net Income (separate line)</td><td>6,527,322 (FY25)</td><td>1,951,815 (YTD26)</td></tr><tr class='tot'><td>Total Equity</td><td>8,272,401</td><td>8,835,568</td></tr></table><p style='margin-top:8px;'><strong>Reconciliation gap:</strong> Closing RE $5,872,383 vs expected (opening RE $733,708 + FY25 NI rolled in $6,527,322 = $7,261,030). Difference of $(1,388,647) appears as equity distribution / prior-period reclassification. Action: confirm whether declared dividend, capital return, or accounting adjustment.</p>`}
 };
 
 function showDrilldown(key){
