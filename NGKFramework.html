@@ -1037,13 +1037,28 @@ window.addEventListener('load', function(){
       </div>
     </div>
     <div class="card">
-      <div class="card-hdr">Brand Composition Pie <span>Click for detail</span></div>
-      <div class="card-body" style="padding:14px;text-align:center;">
-        <div style="width:220px;height:220px;margin:0 auto;border-radius:50%;background:conic-gradient(#1B3D6E 0 98.0%,#0369a1 98.0% 99.9%,#00B5B8 99.9% 100%);box-shadow:0 4px 20px rgba(0,0,0,.15);cursor:pointer;" onclick="showDrilldown('stockBrandMix')" title="Click for brand detail"></div>
-        <div style="margin-top:14px;font-size:11.5px;text-align:left;line-height:2.2;">
-          <div style="cursor:pointer;" onclick="showDrilldown('stockNGK')"><span style="display:inline-block;width:14px;height:14px;background:#1B3D6E;margin-right:8px;border-radius:2px;"></span><strong>NGK</strong> · 98.02% · $2,874,987</div>
-          <div style="cursor:pointer;" onclick="showDrilldown('stockYulim')"><span style="display:inline-block;width:14px;height:14px;background:#0369a1;margin-right:8px;border-radius:2px;"></span><strong>Yulim</strong> · 1.86% · $54,562</div>
-          <div style="cursor:pointer;" onclick="showDrilldown('stockBando')"><span style="display:inline-block;width:14px;height:14px;background:#00B5B8;margin-right:8px;border-radius:2px;"></span><strong>Bando</strong> · 0.12% · $3,537</div>
+      <div class="card-hdr">Brand Composition Pie <span>Click slices for detail</span></div>
+      <div class="card-body" style="padding:18px;text-align:center;">
+        <svg viewBox="0 0 220 220" style="width:220px;height:220px;display:block;margin:0 auto;filter:drop-shadow(0 4px 14px rgba(0,0,0,.18));font-family:Segoe UI,Arial,sans-serif;">
+          <defs>
+            <linearGradient id="brNGK" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3b6db5"/><stop offset="100%" stop-color="#1B3D6E"/></linearGradient>
+            <linearGradient id="brYulim" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#0369a1"/></linearGradient>
+            <linearGradient id="brBando" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4"/><stop offset="100%" stop-color="#0e7490"/></linearGradient>
+          </defs>
+          <!-- NGK 98.02% from -90deg to -90+98.02*3.6 = 262.87deg -->
+          <path d="M 110 110 L 110 15 A 95 95 0 1 1 98.21 14.27 Z" fill="url(#brNGK)" stroke="#fff" stroke-width="2.5" style="cursor:pointer;transition:opacity .15s,transform .15s;transform-origin:110px 110px;" onclick="showDrilldown('stockNGK')" onmouseover="this.style.opacity=.85;this.style.transform='scale(1.03)';" onmouseout="this.style.opacity=1;this.style.transform='scale(1)';"><title>NGK: $2,874,987 (98.02%)</title></path>
+          <!-- Yulim 1.86% from 262.87 to 269.57 -->
+          <path d="M 110 110 L 98.21 14.27 A 95 95 0 0 1 108.0 14.94 Z" fill="url(#brYulim)" stroke="#fff" stroke-width="2.5" style="cursor:pointer;transition:opacity .15s,transform .15s;transform-origin:110px 110px;" onclick="showDrilldown('stockYulim')" onmouseover="this.style.opacity=.85;this.style.transform='scale(1.08)';" onmouseout="this.style.opacity=1;this.style.transform='scale(1)';"><title>Yulim: $54,562 (1.86%)</title></path>
+          <!-- Bando 0.12% from 269.57 to 270 -->
+          <path d="M 110 110 L 108.0 14.94 A 95 95 0 0 1 110 15 Z" fill="url(#brBando)" stroke="#fff" stroke-width="2.5" style="cursor:pointer;transition:opacity .15s,transform .15s;transform-origin:110px 110px;" onclick="showDrilldown('stockBando')" onmouseover="this.style.opacity=.85;this.style.transform='scale(1.12)';" onmouseout="this.style.opacity=1;this.style.transform='scale(1)';"><title>Bando: $3,537 (0.12%)</title></path>
+          <!-- NGK label (center-ish) -->
+          <text x="110" y="115" text-anchor="middle" font-size="22" font-weight="800" fill="#fff" style="pointer-events:none;text-shadow:0 1px 3px rgba(0,0,0,.5);">98.0%</text>
+          <text x="110" y="135" text-anchor="middle" font-size="10" font-weight="700" fill="#fff" style="pointer-events:none;text-shadow:0 1px 2px rgba(0,0,0,.4);">NGK</text>
+        </svg>
+        <div style="margin-top:14px;font-size:11.5px;text-align:left;line-height:2;">
+          <div style="cursor:pointer;padding:5px 8px;border-radius:5px;" onclick="showDrilldown('stockNGK')" onmouseover="this.style.background='#f1f5f9';" onmouseout="this.style.background='transparent';"><span style="display:inline-block;width:14px;height:14px;background:#1B3D6E;margin-right:8px;border-radius:2px;vertical-align:middle;"></span><strong>NGK:</strong> $2,874,987 <span style="color:#64748b;">(98.02%)</span></div>
+          <div style="cursor:pointer;padding:5px 8px;border-radius:5px;" onclick="showDrilldown('stockYulim')" onmouseover="this.style.background='#f1f5f9';" onmouseout="this.style.background='transparent';"><span style="display:inline-block;width:14px;height:14px;background:#0369a1;margin-right:8px;border-radius:2px;vertical-align:middle;"></span><strong>Yulim:</strong> $54,562 <span style="color:#64748b;">(1.86%)</span></div>
+          <div style="cursor:pointer;padding:5px 8px;border-radius:5px;" onclick="showDrilldown('stockBando')" onmouseover="this.style.background='#f1f5f9';" onmouseout="this.style.background='transparent';"><span style="display:inline-block;width:14px;height:14px;background:#0e7490;margin-right:8px;border-radius:2px;vertical-align:middle;"></span><strong>Bando:</strong> $3,537 <span style="color:#64748b;">(0.12%)</span></div>
         </div>
       </div>
     </div>
@@ -1074,18 +1089,47 @@ window.addEventListener('load', function(){
       </div>
     </div>
     <div class="card">
-      <div class="card-hdr">Aging Pie <span>Click for breakdown</span></div>
-      <div class="card-body" style="padding:14px;text-align:center;">
-        <div style="width:220px;height:220px;margin:0 auto;border-radius:50%;background:conic-gradient(#16a34a 0 78.1%,#22c55e 78.1% 80.4%,#f59e0b 80.4% 96.5%,#e2e8f0 96.5% 96.8%,#ea580c 96.8% 99.1%,#dc2626 99.1% 100%);box-shadow:0 4px 20px rgba(0,0,0,.15);cursor:pointer;" onclick="showDrilldown('stockAging')" title="Click for aging breakdown"></div>
-        <div style="margin-top:14px;font-size:11.5px;text-align:left;line-height:2.2;">
-          <div style="cursor:pointer;" onclick="showDrilldown('stockNotDue')"><span style="display:inline-block;width:12px;height:12px;background:#16a34a;margin-right:6px;border-radius:2px;"></span>Not Due · 78.1%</div>
-          <div style="cursor:pointer;" onclick="showDrilldown('stock030')"><span style="display:inline-block;width:12px;height:12px;background:#22c55e;margin-right:6px;border-radius:2px;"></span>0–30 · 2.3%</div>
-          <div style="cursor:pointer;" onclick="showDrilldown('stock3160')"><span style="display:inline-block;width:12px;height:12px;background:#f59e0b;margin-right:6px;border-radius:2px;"></span>31–60 · 16.1%</div>
-          <div style="cursor:pointer;" onclick="showDrilldown('stock6190')"><span style="display:inline-block;width:12px;height:12px;background:#e2e8f0;margin-right:6px;border-radius:2px;"></span>61–90 · 0.3%</div>
-          <div style="cursor:pointer;" onclick="showDrilldown('stock91120')"><span style="display:inline-block;width:12px;height:12px;background:#ea580c;margin-right:6px;border-radius:2px;"></span>91–120 · 2.3%</div>
-          <div style="cursor:pointer;" onclick="showDrilldown('stock360')"><span style="display:inline-block;width:12px;height:12px;background:#dc2626;margin-right:6px;border-radius:2px;"></span>360+ · 0.9%</div>
-        </div>
+      <div class="card-hdr">Aging Pie <span>Click any slice for the bucket detail</span></div>
+      <div class="card-body" style="padding:18px;text-align:center;">
+        <svg viewBox="0 0 220 220" style="width:220px;height:220px;display:block;margin:0 auto;filter:drop-shadow(0 4px 14px rgba(0,0,0,.18));font-family:Segoe UI,Arial,sans-serif;" id="svgStockAging"></svg>
+        <div style="margin-top:14px;font-size:11.5px;text-align:left;line-height:2;" id="legendStockAging"></div>
       </div>
+      <script>(function(){
+        var slices = [
+          {l:'Not Due',    v:2289940, c:'#15803d', drill:'stockNotDue'},
+          {l:'0–30 d',v:68505,   c:'#22c55e', drill:'stock030'},
+          {l:'31–60 d',v:472917, c:'#d97706', drill:'stock3160'},
+          {l:'61–90 d',v:7357,   c:'#94a3b8', drill:'stock6190'},
+          {l:'91–120 d',v:68258, c:'#ea580c', drill:'stock91120'},
+          {l:'360+ d',     v:26108,   c:'#991b1b', drill:'stock360'}
+        ];
+        var total = slices.reduce(function(s,x){return s+x.v;},0);
+        var cx=110, cy=110, r=95;
+        var svg = '', startA=-90;
+        for(var i=0;i<slices.length;i++){
+          var p = slices[i].v/total*100;
+          if(p<0.05) continue;
+          var endA = startA + (p/100)*360;
+          var sa = startA*Math.PI/180, ea = endA*Math.PI/180;
+          var x1 = (cx+r*Math.cos(sa)).toFixed(2), y1 = (cy+r*Math.sin(sa)).toFixed(2);
+          var x2 = (cx+r*Math.cos(ea)).toFixed(2), y2 = (cy+r*Math.sin(ea)).toFixed(2);
+          var large = p>50?1:0;
+          svg += '<path d="M'+cx+','+cy+' L'+x1+','+y1+' A'+r+','+r+' 0 '+large+' 1 '+x2+','+y2+' Z" fill="'+slices[i].c+'" stroke="#fff" stroke-width="2.5" style="cursor:pointer;transition:opacity .15s,transform .15s;transform-origin:'+cx+'px '+cy+'px;" onclick="showDrilldown(\''+slices[i].drill+'\')" onmouseover="this.style.opacity=.82;this.style.transform=\'scale(1.04)\';" onmouseout="this.style.opacity=1;this.style.transform=\'scale(1)\';"><title>'+slices[i].l+': $'+slices[i].v.toLocaleString()+' ('+p.toFixed(1)+'%)</title></path>';
+          if(p>=3){
+            var midA = (startA+endA)/2, ma=midA*Math.PI/180;
+            var lx=(cx+(r*0.62)*Math.cos(ma)).toFixed(1), ly=(cy+(r*0.62)*Math.sin(ma)).toFixed(1);
+            svg += '<text x="'+lx+'" y="'+ly+'" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="800" fill="#fff" style="pointer-events:none;text-shadow:0 1px 3px rgba(0,0,0,.55);">'+p.toFixed(1)+'%</text>';
+          }
+          startA=endA;
+        }
+        document.getElementById('svgStockAging').innerHTML = svg;
+        var leg='';
+        for(var i=0;i<slices.length;i++){
+          var p = slices[i].v/total*100;
+          leg += '<div style="cursor:pointer;padding:4px 8px;border-radius:5px;transition:background .15s;" onclick="showDrilldown(\''+slices[i].drill+'\')" onmouseover="this.style.background=\'#f1f5f9\';" onmouseout="this.style.background=\'transparent\';"><span style="display:inline-block;width:12px;height:12px;background:'+slices[i].c+';margin-right:8px;border-radius:2px;vertical-align:middle;"></span><strong>'+slices[i].l+':</strong> $'+slices[i].v.toLocaleString()+' <span style="color:#64748b;">('+p.toFixed(1)+'%)</span></div>';
+        }
+        document.getElementById('legendStockAging').innerHTML = leg;
+      })();</script>
     </div>
   </div>
 
@@ -1730,8 +1774,24 @@ function showDrilldown(key) {
       html: '<table class="modal-table"><thead><tr><th style="text-align:left;">Year</th><th>SG&A</th><th>% of Rev</th><th>Trend</th></tr></thead><tbody><tr><td>2022</td><td>$433,600</td><td>6.3%</td><td style="color:#16a34a;">Efficient</td></tr><tr class="alt"><td>2023</td><td>$630,750</td><td>10.3%</td><td style="color:#dc2626;">+45%</td></tr><tr><td>2024</td><td>$734,710</td><td>10.5%</td><td style="color:#dc2626;">Growing</td></tr><tr class="alt"><td>2025</td><td>$693,422</td><td>10.9%</td><td style="color:#f59e0b;">Stable</td></tr><tr style="background:#1B3D6E;color:#fff;"><td style="font-weight:700;">YTD 2026</td><td style="font-weight:700;">$128,217</td><td style="font-weight:700;">10.6%</td><td style="font-weight:700;">Stable</td></tr></tbody></table>'
     },
     sgaTotal: {
-      title: 'Total SG&A + Shared Expenses',
-      html: '<table class="modal-table"><thead><tr><th style="text-align:left;">Component</th><th>Jan-26</th><th>Feb-26</th><th>Mar-26</th><th>YTD</th></tr></thead><tbody><tr><td style="font-weight:700;">NGK SG&A</td><td>$36,277</td><td>$54,413</td><td>$37,527</td><td style="font-weight:700;">$128,217</td></tr><tr class="alt"><td>Corp OH Salaries</td><td>$8,396</td><td>$7,377</td><td>$7,118</td><td>$22,891</td></tr><tr><td>Corp OH Expenses</td><td>$3,290</td><td>$5,033</td><td>$5,856</td><td>$14,179</td></tr><tr style="background:#1B3D6E;color:#fff;"><td style="font-weight:700;">TOTAL</td><td style="font-weight:700;">$47,963</td><td style="font-weight:700;">$66,823</td><td style="font-weight:700;">$50,501</td><td style="font-weight:700;">$165,287</td></tr></tbody></table><div class="insight-box"><div class="insight-box-hdr">Total SG&A Analysis</div><div class="insight-box-txt">Total SG&A (incl. shared) is $165.3K YTD (13.7% of revenue). NGK-specific expenses represent 77.6% of total. Shared corporate allocation is $37.1K YTD (~22.4% of total SG&A). The shared overhead is relatively stable at ~$12-13K/month. Mar normalized the run-rate after Feb marketing spike.</div></div>'
+      title: 'Total SG&A — Jan to Apr 2026',
+      html: '<table class="modal-table"><thead><tr><th style="text-align:left;">Component</th><th style="text-align:right;">Jan-26</th><th style="text-align:right;">Feb-26</th><th style="text-align:right;">Mar-26</th><th style="text-align:right;">Apr-26</th><th style="text-align:right;background:#e0f2fe;">YTD Apr 2026</th></tr></thead><tbody>'+
+            '<tr><td style="font-weight:700;">Revenue</td><td style="text-align:right;">$622,170</td><td style="text-align:right;">$262,822</td><td style="text-align:right;">$319,182</td><td style="text-align:right;">$528,940</td><td style="text-align:right;font-weight:700;background:#f0f9ff;">$1,733,115</td></tr>'+
+            '<tr class="alt"><td style="font-weight:700;color:#92400e;">Total SG&A</td><td style="text-align:right;color:#92400e;">$36,277</td><td style="text-align:right;color:#92400e;">$54,413</td><td style="text-align:right;color:#92400e;">$37,527</td><td style="text-align:right;color:#92400e;">$37,838</td><td style="text-align:right;font-weight:700;color:#92400e;background:#f0f9ff;">$166,056</td></tr>'+
+            '<tr><td>SG&A % of Revenue</td><td style="text-align:right;">5.8%</td><td style="text-align:right;color:#dc2626;font-weight:700;">20.7% ⚠</td><td style="text-align:right;">11.8%</td><td style="text-align:right;color:#16a34a;font-weight:700;">7.2%</td><td style="text-align:right;font-weight:700;background:#f0f9ff;">9.6%</td></tr>'+
+            '<tr class="alt" style="background:#1B3D6E;color:#fff;"><td style="font-weight:700;">EBITDA (after SG&A)</td><td style="text-align:right;font-weight:700;">$62,310</td><td style="text-align:right;font-weight:700;color:#fca5a5;">($9,035)</td><td style="text-align:right;font-weight:700;">$32,410</td><td style="text-align:right;font-weight:700;">$69,596</td><td style="text-align:right;font-weight:800;font-size:13px;">$155,281</td></tr>'+
+            '<tr style="background:#e0f2fe;"><td style="font-weight:700;">EBITDA Margin %</td><td style="text-align:right;font-weight:700;color:#16a34a;">10.0%</td><td style="text-align:right;font-weight:700;color:#dc2626;">-3.4%</td><td style="text-align:right;font-weight:700;color:#16a34a;">10.2%</td><td style="text-align:right;font-weight:700;color:#16a34a;font-size:13px;">13.2%</td><td style="text-align:right;font-weight:800;color:#16a34a;font-size:13px;">9.0%</td></tr>'+
+            '</tbody></table>'+
+            '<table class="modal-table" style="margin-top:14px;"><thead><tr><th style="text-align:left;">Same-Period YoY Comparison</th><th style="text-align:right;">YTD Apr 2026</th><th style="text-align:right;">FY 2025</th><th style="text-align:right;">FY 2024</th><th style="text-align:right;">3-yr trend</th></tr></thead><tbody>'+
+            '<tr><td>Total SG&A ($)</td><td style="text-align:right;font-weight:700;">$166,056</td><td style="text-align:right;">$693,422</td><td style="text-align:right;">$734,710</td><td style="text-align:right;color:#16a34a;font-weight:700;">declining ▼</td></tr>'+
+            '<tr class="alt"><td>SG&A % of Revenue</td><td style="text-align:right;font-weight:700;color:#16a34a;">9.6%</td><td style="text-align:right;color:#dc2626;">10.9%</td><td style="text-align:right;color:#dc2626;">10.5%</td><td style="text-align:right;color:#16a34a;font-weight:700;">−130 bps ✓</td></tr>'+
+            '</tbody></table>'+
+            '<div class="insight-box"><div class="insight-box-hdr">Total SG&A Analysis — Jan to Apr 2026</div><div class="insight-box-txt">'+
+            '<strong>YTD Total SG&A: $166,056</strong> (9.6% of $1.73M revenue) — the best SG&A intensity in 3+ years, beating FY25 (10.9%) by 130 bps.<br><br>'+
+            '<strong>Monthly pattern:</strong> Jan $36.3K (5.8% — most efficient month) → <strong>Feb $54.4K (20.7% — anomaly, marketing spike on low revenue)</strong> → Mar $37.5K (11.8%) → Apr $37.8K (7.2%). Excluding Feb, three of four months ran below 12% of revenue.<br><br>'+
+            '<strong>Bottom-line impact:</strong> SG&A discipline delivered $155.3K YTD EBITDA (9.0% margin) — up +31.8% YoY despite revenue decline of −16.5%. April was the highest-margin month at 13.2% EBITDA.<br><br>'+
+            '<strong>Action:</strong> Investigate Feb cost spike to ensure it stays one-off. Maintain Mar/Apr run-rate of ~$37.5–37.8K/month to keep full-year SG&A under $475K (vs $693K FY25).'+
+            '</div></div>'
     },
     sgaSalaries: {
       title: 'Admin Salaries Detail',
