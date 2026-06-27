@@ -866,6 +866,178 @@ if(document.readyState!=='loading'){
 /* Axis / grid lines in charts rendered via canvas match brand */
 canvas { image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; }
 </style>
+
+<style>
+/* ═══════════════════════════════════════════════════════════════════
+   AL MAJAL DASHBOARD — MOBILE & TABLET OPTIMIZATION
+   Breakpoints: 1024 (small desktop) · 900 (tablet) · 640 (mobile) · 480 (phone)
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── TABLET / SMALL DESKTOP ────────────────────────────────────── */
+@media (max-width: 1024px) {
+  /* Reduce inline-styled multi-column grids to 2 columns */
+  [style*="grid-template-columns:repeat(auto-fit,minmax(460px"],
+  [style*="grid-template-columns:repeat(auto-fit,minmax(380px"],
+  [style*="grid-template-columns:repeat(auto-fit, minmax(460px"],
+  [style*="grid-template-columns:repeat(auto-fit, minmax(380px"],
+  [style*="grid-template-columns:repeat(3,1fr)"],
+  [style*="grid-template-columns:repeat(3, 1fr)"],
+  [style*="grid-template-columns:repeat(4,1fr)"],
+  [style*="grid-template-columns:repeat(4, 1fr)"],
+  [style*="grid-template-columns:1fr 1fr 1fr 1fr"],
+  [style*="grid-template-columns:1fr 1fr 1fr"] {
+    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+  }
+  /* Hide some heavy sidebar UI */
+  .content { padding: 16px !important; }
+}
+
+/* ── TABLET PORTRAIT ──────────────────────────────────────────── */
+@media (max-width: 900px) {
+  /* Force ALL inline-styled multi-column grids to single column */
+  [style*="grid-template-columns:repeat(auto-fit,minmax(460px"],
+  [style*="grid-template-columns:repeat(auto-fit,minmax(420px"],
+  [style*="grid-template-columns:repeat(auto-fit,minmax(380px"],
+  [style*="grid-template-columns:repeat(auto-fit,minmax(320px"],
+  [style*="grid-template-columns:repeat(auto-fit,minmax(300px"],
+  [style*="grid-template-columns:repeat(auto-fit,minmax(280px"],
+  [style*="grid-template-columns:repeat(auto-fit, minmax"],
+  [style*="grid-template-columns:repeat(auto-fill,minmax"],
+  [style*="grid-template-columns:repeat(auto-fill, minmax"],
+  [style*="grid-template-columns:1fr 1fr"],
+  [style*="grid-template-columns: 1fr 1fr"],
+  [style*="grid-template-columns:repeat(2,minmax(0,1fr))"],
+  [style*="grid-template-columns:repeat(2, minmax(0, 1fr))"],
+  [style*="grid-template-columns:repeat(2,1fr)"],
+  [style*="grid-template-columns:repeat(2, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+  /* Side-by-side AR | AP panels stack on tablets */
+  [style*="grid-template-columns:1fr 1fr;gap:24px"] { grid-template-columns: 1fr !important; }
+  /* KPI strips shrink */
+  .kpi-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+/* ── MOBILE ───────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  /* Tighter content padding */
+  .content { padding: 12px !important; }
+  .main { margin-left: 0 !important; padding-top: 56px !important; }
+
+  /* Force single-column on ALL inline grids regardless of definition */
+  div[style*="display:grid"][style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Tables — make them horizontally scrollable */
+  table { font-size: 11px !important; }
+  table th, table td { padding: 6px 8px !important; white-space: nowrap; }
+  /* Wrap fixed-width tables in scrollable container — emulate by setting parent overflow */
+  div:has(> table) { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* KPI strips — single column */
+  .kpi-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
+  .kpi-card { padding: 14px 16px !important; }
+  .kpi-card .kpi-value, .kpi-card .kpi-val { font-size: 18px !important; }
+  .kpi-card .kpi-label, .kpi-card .kpi-lab { font-size: 10px !important; }
+
+  /* Chart containers — shrink */
+  .chart-container { height: 220px !important; }
+  div[style*="height:380px"], div[style*="height: 380px"],
+  div[style*="height:400px"], div[style*="height: 400px"],
+  div[style*="height:420px"], div[style*="height: 420px"],
+  div[style*="height:440px"], div[style*="height: 440px"],
+  div[style*="height:480px"], div[style*="height: 480px"],
+  div[style*="height:680px"], div[style*="height: 680px"] {
+    height: 280px !important;
+  }
+  div[style*="height:320px"], div[style*="height: 320px"] { height: 240px !important; }
+
+  /* Filter row — stack dropdowns vertically */
+  [style*="display:flex"][style*="flex-wrap:wrap"] > * { flex: 1 1 100% !important; }
+  select { width: 100% !important; min-width: 0 !important; max-width: 100% !important; }
+  /* Filter chip rows — single row scroll */
+  [style*="display:flex"][style*="gap:8px"] { gap: 6px !important; }
+
+  /* Section headers shrink */
+  .section-header h2 { font-size: 16px !important; }
+  .section-header p { font-size: 11px !important; }
+  h2, h3 { font-size: 16px !important; }
+
+  /* Filter bar collapsible */
+  .filter-bar { padding: 8px 10px !important; gap: 6px !important; }
+  .filter-bar > * { flex: 1 1 100% !important; }
+  .filter-select { font-size: 12px !important; min-width: 0 !important; width: 100% !important; }
+
+  /* Inline padding shrink for major sections */
+  div[style*="padding:24px 28px"], div[style*="padding: 24px 28px"] { padding: 14px 16px !important; }
+  div[style*="padding:24px 32px"], div[style*="padding: 24px 32px"] { padding: 14px 16px !important; }
+  div[style*="padding:28px 32px"], div[style*="padding: 28px 32px"] { padding: 14px 16px !important; }
+  div[style*="padding:22px 28px"], div[style*="padding: 22px 28px"] { padding: 14px 16px !important; }
+  div[style*="padding:20px 24px"], div[style*="padding: 20px 24px"] { padding: 14px 16px !important; }
+  div[style*="padding:18px 22px"], div[style*="padding: 18px 22px"] { padding: 12px 14px !important; }
+  div[style*="padding:16px 22px"], div[style*="padding: 16px 22px"] { padding: 12px 14px !important; }
+
+  /* Topbar */
+  .topbar { padding-left: 56px !important; padding-right: 12px !important; height: 52px !important; }
+  .page-title { font-size: 13px !important; }
+  .topbar-right { gap: 6px !important; }
+  .topbar-right > *:not(.essential) { display: none !important; }
+
+  /* Drilldown modals fit phone */
+  #dd-modal, #fac-modal-content, #ln-modal-content,
+  div[style*="max-width:900px"], div[style*="max-width: 900px"],
+  div[style*="max-width:1000px"], div[style*="max-width: 1000px"],
+  div[style*="max-width:1340px"], div[style*="max-width: 1340px"] {
+    max-width: 96vw !important; width: 96vw !important;
+  }
+
+  /* Insight cards shrink padding */
+  [style*="border-left:4px solid"] { padding: 12px 14px !important; }
+}
+
+/* ── PHONE PORTRAIT ───────────────────────────────────────────── */
+@media (max-width: 480px) {
+  body { font-size: 13px; }
+  .kpi-card .kpi-value, .kpi-card .kpi-val { font-size: 16px !important; }
+  .chart-container { height: 180px !important; }
+  div[style*="height:380px"], div[style*="height: 380px"],
+  div[style*="height:400px"], div[style*="height: 400px"],
+  div[style*="height:420px"], div[style*="height: 420px"],
+  div[style*="height:440px"], div[style*="height: 440px"],
+  div[style*="height:480px"], div[style*="height: 480px"] { height: 240px !important; }
+  h2, h3 { font-size: 14px !important; }
+  /* Large absolute font sizes scaled down */
+  div[style*="font-size:28px"], div[style*="font-size: 28px"],
+  div[style*="font-size:32px"], div[style*="font-size: 32px"] { font-size: 22px !important; }
+  div[style*="font-size:22px"], div[style*="font-size: 22px"] { font-size: 18px !important; }
+}
+
+/* ── TOUCH TARGETS ────────────────────────────────────────────── */
+@media (max-width: 900px) and (pointer: coarse) {
+  button, select, .nav-item, [onclick] {
+    min-height: 40px;
+    touch-action: manipulation;
+  }
+  button, select { padding: 10px 14px !important; }
+}
+
+/* ── HORIZONTAL SCROLL HINT FOR TABLES ───────────────────────── */
+@media (max-width: 900px) {
+  /* Wrap any table parent with overflow-x scroll */
+  div[style*="overflow-x:auto"], div[style*="overflow-x: auto"] {
+    -webkit-overflow-scrolling: touch;
+  }
+  /* All tables get a scroll wrapper hint */
+  table { min-width: 0 !important; }
+}
+
+/* ── SAFE LANDSCAPE TWEAKS ───────────────────────────────────── */
+@media (max-width: 900px) and (orientation: landscape) {
+  .chart-container { height: 240px !important; }
+}
+</style>
+
 </head>
 <body>
 <div id="amg-pw-overlay" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:linear-gradient(135deg,#0a1628 0%,#1F2D5A 40%,#2d4a9e 100%);z-index:99999;display:flex;align-items:center;justify-content:center;font-family:'Segoe UI',Arial,sans-serif">
